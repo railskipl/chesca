@@ -1,0 +1,18 @@
+%h1 Listing Images
+%table.data
+  %tr
+    %th Name
+    %th Image
+    %th Url
+    %th{:colspan => '3'}
+  - for image in @imagepages
+    %tr
+      %td= h image.name
+      %td= image_tag image.image.url(:thumbnail), :alt => image.name rescue ''
+      %td
+        %b= link_to root_url_app + image.image.url, image.image.url
+      %td= link_to "Show", admin_imagepage_path(image)
+      %td= link_to "Edit", edit_admin_imagepage_path(image)
+      %td= link_to "Delete", admin_imagepage_path(image), :confirm => 'Are you sure?', :method => :delete
+%br/
+%p= link_to "New Image", new_admin_imagepage_path

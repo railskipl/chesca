@@ -1,0 +1,167 @@
+%table.form
+  %tr
+    %th
+      = form.label :department_id, 'Category'
+    %td
+      - selected = @product.department.id.to_i rescue selected =nil
+      - options = collection_level(@departments,selected).to_s
+      = form.select :department_id,options.html_safe
+  %tr
+    %th
+      = form.label :style_id, 'Boutique'
+    %td
+      - selected = @product.style.id.to_i rescue selected =nil
+      - options = collection_level(@styles,selected).to_s
+      = form.select :style_id,options.html_safe, :include_blank => true
+  %tr
+    %th
+      = form.label :look_id, 'Looks we Love'
+    %td
+      -looks = @product.looks.map{|l| l.id} rescue looks = []
+      - if looks.empty?
+        - options = "<option value = \"\" selected = \"selected\"></option>"
+      - else
+        - options = "<option value = \"\"></option>"
+      - options += collection_level(@looks,looks).to_s
+      %select{:multiple=>'multiple', :id => 'product_look_ids', :name => 'product[look_ids][]'}
+        =options.html_safe
+  %tr
+    %th
+      = form.label :designers
+    %td
+      = form.select :designer_id,@designers.collect{|p| [p.name,p.id]}, :include_blank =>true
+  %tr
+    %th
+      = form.label :name
+    %td
+      = form.text_field :name
+  %tr
+    %th
+      = form.label :code
+    %td
+      = form.text_field :code
+  %tr
+    %th
+      = form.label :price
+    %td
+      = form.text_field :price
+  %tr
+    %th
+      = form.label :old_price
+    %td
+      = form.text_field :old_price
+  %tr
+    %th
+      = form.label :stock_level
+    %td
+      = form.text_field :stock_level
+  %tr
+    %th
+      = form.label :visible
+    %td
+      = form.check_box :visible
+  %tr
+    %th
+      = form.label :available
+    %td
+      = form.check_box :available
+  %tr
+    %th
+      = form.label :composition
+    %td
+      = form.text_field :composition
+  %tr
+    %th
+      = form.label :washing_instrucions
+    %td
+      = form.text_field :washing_instructions
+  %tr
+    %th{:colspan => "2"}
+      = form.label :description
+  %tr
+    %td{:colspan => "2"}
+      = form.text_area :description
+  - if @product
+    %tr
+      %th{:colspan => "2"}
+        %label You may also Like
+    %tr
+      %td{:colspan => "2"}
+        .products_by_department
+          - @all_other_products.group_by(&:department).each do |department, products|
+            .department_products
+              %span.department_name
+                - if department.nil?
+                  Other
+                - else
+                  = department.name
+              %br
+                - products.each do |product|
+                  = check_box_tag 'product[related_product_ids][]', product.id, @product.related_products.include?(product)
+                  = product.name
+                  %br
+    %tr
+      %th{:colspan => "2"}
+        %label Complete the look
+    %tr
+      %td{:colspan => "2"}
+        .products_by_department
+          - @all_other_products.group_by(&:department).each do |department, products|
+            .department_products
+              %span.department_name
+                - if department.nil?
+                  Other
+                - else
+                  = department.name
+              %br
+                - products.each do |product|
+                  = check_box_tag 'product[complete_outfit_ids][]', product.id, @product.complete_outfits.include?(product)
+                  = product.name
+                  %br
+
+  - if !@sizes.empty? && !@colors.empty?
+    %tr
+      %th
+        %b Colors, Sizes & Stock level
+    %tr
+      %td
+        .products_by_department
+          %table
+            %tr
+              %th
+                %b Sizes\Colors
+              - @colors.each do |c|
+                %th
+                  = image_tag c.image.url(:square), :alt => c.name
+            - @sizes.each do |s|
+              %tr
+                %td
+                  = s.name
+                - @colors.each do |c|
+                  - stock = ProductSize.find_by_color_id_and_size_id_and_product_id(c.id,s.id,@product.id).stock_level rescue stock = ''
+                  %td= text_field_tag "size_stock[#{s.id}][#{c.id}]", stock, :size => '5'
+    %tr
+      %th
+        %b Add Images
+
+    %tr
+      %td
+        .products_by_department
+          - unless @product.product_sizes.empty?
+            %table
+              %tr
+                %th Size
+                %th color
+                %th
+              - @product.product_sizes.each do |color_size|
+                %tr
+                  %td= h color_size.size.name
+                  %td{:style => 'text_align: center;'}= image_tag color_size.color.image.url(:square), :alt => color_size.color.name
+                  %td= link_to 'Add images',addimages_admin_products_path(:locals => {:product => @product.id, :color => color_size.color_id, :size => color_size.size_id})
+
+
+          - else
+            Add Sizes & Colors
+
+
+

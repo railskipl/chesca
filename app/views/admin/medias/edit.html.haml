@@ -1,0 +1,11 @@
+%h1 Edit Media
+%h2= @media.type_media
+- if @media.icon
+  %h3 Icon
+- else
+  %h3 Section
+- form_for ([:admin,@media]), :html => {:multipart => true} do |f|
+  =render :partial => 'form', :object => f
+= link_to 'Show', admin_media_path(@media) |
+= link_to 'Back', :back
+

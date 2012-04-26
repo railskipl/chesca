@@ -1,0 +1,13 @@
+%table.data
+  %tr
+    %th media
+    %th Active
+    %th{:colspan => '3'}
+  - for media in object
+    %tr
+      %td= image_tag media.media.url(:tiny) rescue ''
+      %td= h media.active
+      %td= link_to "Show", admin_media_path(media)
+      %td= link_to "Edit", edit_admin_media_path(media)
+      %td= link_to "Delete", admin_media_path(media), :confirm => 'Are you sure?', :method => :delete
+

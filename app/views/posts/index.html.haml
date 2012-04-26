@@ -1,0 +1,32 @@
+%table{:border => "0", :width => "756"}
+  %tr
+    %td{:width => "252"}
+      .DarkGreyBold{:align => "center"}
+        = link_to 'EDITORS NEWSLETTER', editor_newsletter_posts_path, :class => 'DarkGreyBold'
+    %td{:width => "252"}
+      .DarkGreyBold{:align => "center"}
+        = link_to 'CHESCA TREND REPORT', chesca_trends_posts_path, :class => 'DarkGreyBold'
+    %td{:width => "252"}
+      .DarkGreyBold{:align => "center"}
+        = link_to 'ARCHIVED LOOKS', archived_looks_posts_path, :class => 'DarkGreyBold'
+  %tr
+    %td{:width => "252"}
+      %div{:align => "center"}
+        %a{:href => "CDFinalMockA_FashionNews_Newsletter.html"}
+          = link_to image_tag('fashion_news/EditorsNewsletter.jpg', :alt => "Editors Newsletter Chesca", :border => "0", :height => "349", :width => "236"), editor_newsletter_posts_path
+    %td{:width => "252"}
+      %div{:align => "center"}
+        %a{:href => "CDFinalMockA_FashionNews_ChescaTrendsHP.html"}
+          = link_to image_tag('fashion_news/TrendReport.jpg', :alt => "Chesca Trend Report", :border => "0", :height => "349", :width => "238"), chesca_trends_posts_path
+    %td{:width => "252"}
+      %div{:align => "center"}
+        = link_to image_tag('fashion_news/ArchivedLooks.jpg', :alt => "Chesca Archived Looks", :border => "0", :height => "349", :width => "238"), archived_looks_posts_path
+= render :partial => 'left'
+#posts-wrapper
+  %h2 Fashion news
+  - @posts.each do |post|
+    .post
+      %h3.date-and-title== #{post.created_on} &ndash; #{post.title}
+      .content= post.content
+= will_paginate @posts, :previous_label => 'PREV', :next_label => 'NEXT'
+

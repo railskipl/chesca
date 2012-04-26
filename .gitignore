@@ -1,0 +1,17 @@
+config/seed_data/product_images/*
+db/development.sqlite3
+db/schema.rb
+db/test.sqlite3
+log/development.log log/test.log
+public/stylesheets/*.css
+public/system/
+public/images/pages/*
+tmp/
+log/*
+nbproject/*
+*.swp
+*.un~
+*.swo
+.rvmrc
+*.DS_Store
+config/database.yml

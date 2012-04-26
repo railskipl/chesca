@@ -1,0 +1,132 @@
+#cart-items-wrapper
+  .main_cart
+    .header_cart
+      .left
+        %h2
+          Review your Shopping Bag:
+          -#%span== (#{current_cart.cart_items_count} #{(current_cart.cart_items_count == 1) ? 'item' : 'items'})
+      .right
+        %h2
+          Print this page
+    - if current_cart.cart_items_count.zero?
+      %p Your cart is currently empty.
+    - else
+      %div{:class => "cart-item-header"}
+        %span.item_header Item
+        %span.color Color
+        %span.size Size
+        %span.quantity Qty
+        %span.price Price
+        %span.subtotal Total
+        %span.remove Remove
+      - for item in current_cart.cart_items
+        %div{ :class => "cart-item #{cycle('odd', 'even')}" }
+          -image = ProductSize.image_main(item.color,item.size,item.product_id)
+          - if image
+            = link_to image_tag(image.image.url(:square)), product_path(item.product_id)
+          - else
+            = link_to(image_tag('square/missing.png'), product_path(item.product_id))
+
+          = link_to h(item.product_name), product_path(item.product_id)
+          %span.color= item.color
+          %span.size= item.size
+          %span.price
+            = number_to_currency(item.product_price, :unit => '&pound;')
+          %span.quantity
+            -#= text_field_tag '', item.quantity, :size => '2'
+            =item.quantity
+          %span.subtotal
+            = number_to_currency(item.subtotal, :unit => '&pound;')
+          %span.remove= link_to 'Remove', item, :confirm => 'Are you sure?', :method => :delete
+          #update_item
+            Changed quantities or removed an item?
+            =link_to 'UPDATE BAG',nil, :id=> 'button_update', :style=> 'color: #FFFFFF;'
+      .content_down
+        .content_left
+          %table.table_product
+            %tr
+              %th{:colspan => '3'}YOU MAY ALSO LIKE
+            %tr
+              %td
+                .product_table
+                  .image_table
+                  .color
+                    %p color:
+                  .name
+                    %p aaaaaaaa a a aaaa a a aa a
+                  .price
+                    %p $precio
+                  .size
+                    %p select
+                  .color_select
+                    %p select
+                  .qty
+                    =text_field_tag 'qty',nil,:class => 'qty'
+                  .button
+                    botton
+              %td
+                product2
+              %td
+                product3
+        .content_right
+          #first_box
+            .cart_item
+              - form_tag(select_delivery_option_cart_item_path(current_cart),:style=> "display:inline-block") do
+                %label{:style=>"padding-left:12px;"}
+                  %b SHIPPING TO:
+                %select{:name=>"delivery_option",:id=>"delivery_option_select",:onchange=>"this.form.submit();", :class => 'select_country'}
+                  - if current_cart.free_delivery?
+                    - selected = current_cart.selected_delivery_option == Cart.free_delivery ? {:selected=>"selected"} : {}
+                    %option{selected.merge({:value=>Cart.free_delivery[:id]})}
+                      = "#{Cart.free_delivery[:description]} - #{number_to_currency(Cart.free_delivery[:price], :unit => '&pound;')}"
+                  - else
+                  - Cart.delivery_options.each do |opt|
+                    - selected = current_cart.selected_delivery_option == opt ? {:selected=>"selected"} : {}
+                    %option{selected.merge({:value=>opt[:id]})}
+                      = "#{opt[:description]} - #{number_to_currency(opt[:price], :unit => '&pound;')}"
+
+            #cart-total
+              %span.total SUBTOTAL
+              %span.value= current_cart.selected_delivery_option.blank? ? "" : number_to_currency(current_cart.selected_delivery_option[:price], :unit => '&pound;')
+              %br
+              %span.total DISCOUNT
+              %span.value
+                \-
+                = number_to_currency(current_cart.discount, :unit => '&pound;')
+              - unless current_cart.voucher.nil?
+                %span.link
+                  =link_to 'disjoin', :controller => 'cart_items', :action => 'disjoin_voucher'
+              %br
+              %span.total TOTAL
+              %span.value= number_to_currency(current_cart.total, :unit => '&pound;')
+          %br
+          %br
+          #second_box
+            - if current_cart.voucher.nil?
+              #voucher
+                %p
+                  %b Promotional Code?
+                %p Got a promo code? Enter it below
+                - form_tag(add_voucher_cart_item_path(current_cart)) do
+                  = text_field_tag :code,nil, :class =>  'input_cart', :id => 'input_cart_voucher'
+                  = submit_tag 'APPLY', :class => 'button_cart', :id => 'cart_voucher'
+                - if params[:action] == 'add_voucher' && @voucher.nil?
+                  %span.error Invalid code!
+            #voucher
+              %p
+                %b Check Gift Card Balance?
+              %p Enter card number        Verification
+              - form_tag(add_voucher_cart_item_path(current_cart)) do
+                = text_field_tag :code, nil,:class => 'input_cart', :id => 'input_cart_checkout'
+                = text_field_tag :code, nil,:class => 'input_cart', :id => 'input_cart_verification'
+                %b ?
+                = submit_tag 'CHECK', :class => 'button_cart', :id => 'cart_voucher'
+              %p Gift card and verfication numbers will be reentered at payment page where balance is applied.
+          #third_box
+            %p
+              =link_to "&#xab; CONTINUE SHOPPING", :back, :class => 'button_cart', :id => 'button_cart_continue'
+            %P
+              =link_to "CONTINUE TO CHECKOUT &#xbb", payment_path, :method=> :post, :class => 'button_cart', :id=> 'button_cart_checkout'
+
+- content_for :cart do
+  = stylesheet_link_tag 'cart'

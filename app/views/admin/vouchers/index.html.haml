@@ -1,0 +1,30 @@
+%h1 Vouchers
+
+= link_to 'New Voucher', new_admin_voucher_path, :class => 'new-link'
+
+%table.data
+  %tr
+    %th Code
+    %th Percent
+    %th Orders
+    %th Amount off
+    %th Start Date
+    %th End Date
+    %th Actions
+  - @vouchers.each do |voucher|
+    %tr
+      %td= voucher.code
+      %td= number_to_percentage(voucher.percent, :precision => 0)
+      %td= voucher.carts_count
+      %td= voucher.amount_off
+      %td
+        - if voucher.start_date_promotion
+          = voucher.start_date_promotion.to_date
+      %td
+        - if voucher.end_date_promotion
+          = voucher.end_date_promotion.to_date
+
+      %td
+        = link_to 'Edit', edit_admin_voucher_path(voucher)
+        = link_to 'Delete', admin_voucher_path(voucher), :method => :delete, :confirm => 'Are you sure?'
+

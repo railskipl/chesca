@@ -1,0 +1,15 @@
+%h1 Listing home_pages
+%table.data
+  %tr
+    %th Content
+    %th Active
+    %th{:colspan =>'2'}
+  - @home_pages.each do |home_page|
+    %tr
+      %td= h home_page.content
+      %td= h home_page.active
+      %td= link_to 'Show', admin_home_page_path(home_page)
+      %td= link_to 'Edit', edit_admin_home_page_path(home_page)
+      %td= link_to 'Delete', admin_home_page_path(home_page), :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New home_page', new_admin_home_page_path

@@ -1,0 +1,16 @@
+%h1 Listing colors
+%table.data
+  %tr
+    %th Name
+    %th Image
+    %th{:colspan => '2'}
+  - @colors.each do |color|
+    %tr
+      %td= h color.name
+      %td= image_tag color.image.url(:square), :size => '21x21'
+      %td= link_to 'Edit', edit_admin_color_path(color)
+      %td= link_to 'Delete', admin_color_path(color), :confirm => 'Delete color?', :method => :delete
+%h2 New Color
+- form_for(@new_color, :url => admin_colors_path, :html => {:multipart => true}) do |form|
+  = render :partial => 'admin/colors/form', :object => form
+  =form.submit

@@ -1,0 +1,11 @@
+%h1= @privacy_policy.name
+-if !@privacy_policy.content.nil?
+  = @privacy_policy.content.html_safe
+-else
+  empty content!!
+%p
+  = link_to "Edit", edit_admin_privacy_policy_path(@privacy_policy)
+  |
+  = link_to "Delete", admin_privacy_policy_path(@privacy_policy), :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_privacy_policies_path

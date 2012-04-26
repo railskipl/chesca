@@ -1,0 +1,40 @@
+- form_for [:admin,@voucher], :html => {:multipart => true} do |f|
+  = f.error_messages
+
+  %table.form
+    %tr
+      %th= f.label 'Code'
+      %td= f.text_field :code
+    %tr
+      %th= f.label 'Discount %'
+      %td= f.text_field :percent
+    %tr
+      %th= f.label 'Amount off'
+      %td= f.text_field :amount_off
+
+    %tr
+      %th= f.label 'Start date Promotion'
+      %td= f.date_select :start_date_promotion, :include_blank => true
+    %tr
+      %th= f.label 'End date promotion'
+      %td= f.date_select :end_date_promotion,  :include_blank => true
+    %tr
+      %th{:colspan => "2"}
+        %label Products
+    %tr
+      %td{:colspan => "2"}
+        .products_by_department
+          -productos = Product.all
+          - productos.group_by(&:department).each do |department,products|
+            .department_products
+              %span.department_name
+                - if department.nil?
+                  Other
+                - else
+                  = department.name
+                %br
+              -products.each do |product|
+                = check_box_tag 'products_voucher[product_ids][]', product.id, products.include?(product), :class=>"",:id=>"product_#{product.id}"
+                = label_tag "product_#{product.id}", product.name
+                %br
+  = f.submit 'Submit'

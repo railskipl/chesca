@@ -1,0 +1,7 @@
+<h1>Edit Category</h1>
+
+<% form_for(@department, :url => admin_department_path(@department), :method => :put) do |f| -%>
+  <%= f.error_messages %>
+  <%= render(:partial => 'admin/departments/form', :object => f) %>
+  <%= f.submit %>
+<% end -%>

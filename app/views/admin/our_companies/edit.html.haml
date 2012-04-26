@@ -1,0 +1,6 @@
+%h1 Edit Our Company
+- form_for ([:admin,@our_company]) do |f|
+  =render :partial => 'admin/our_companies/form', :object => f
+= link_to 'Show', admin_our_company_path(@our_company) |
+= link_to 'Back', :back
+

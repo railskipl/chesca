@@ -1,0 +1,25 @@
+%h1= @media.title
+%p
+  %strong Title:
+  =h @media.title
+%p
+  %strong Media:
+  =h image_tag @media.media.url(:tiny) rescue ''
+%p
+  %strong Content:
+  =h @media.content
+%p
+  %strong Type:
+  =h @media.type
+%p
+  %strong Icon:
+  =h @media.icon
+%p
+  %strong Active:
+  =h @media.active
+%p
+  = link_to "Edit", edit_admin_media_path(@media)
+  |
+  = link_to "Delete", admin_media_path(@media), :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_medias_path

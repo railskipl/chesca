@@ -1,0 +1,14 @@
+%h1 Listing Designers
+%table.data
+  %tr
+    %th Name
+    %th{:colspan =>'2'}
+  - @designers.each do |designer|
+    %tr
+      %td= h designer.name
+      %td= link_to 'Edit', edit_admin_designer_path(designer)
+      %td= link_to 'Delete', admin_designer_path(designer), :confirm => 'Are you sure?', :method => :delete
+%h2 New Designer
+- form_for(@new_designer, :url => admin_designers_path) do |form|
+  = render :partial => 'admin/designers/form', :object => form
+  =form.submit

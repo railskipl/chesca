@@ -1,0 +1,11 @@
+%h1= @our_company.name
+-if !@our_company.content.nil?
+  = @our_company.content.html_safe
+-else
+  empty content!!
+%p
+  = link_to "Edit", edit_admin_our_company_path(@our_company)
+  |
+  = link_to "Delete", admin_our_company_path(@our_company), :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_our_companies_path

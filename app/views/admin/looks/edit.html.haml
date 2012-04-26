@@ -1,0 +1,5 @@
+%h1 Editing look we love
+- form_for(@look, :url => admin_look_path(@look), :method => :put) do |f|
+  = f.error_messages
+  = render(:partial => 'admin/looks/form', :object => f)
+  = f.submit

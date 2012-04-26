@@ -1,0 +1,90 @@
+.cart_item {
+  position: relative;
+  height: 120px;
+  background: #D1D8EC;
+  margin-top: 10px;
+  color: #686C76;
+}
+
+  .cart_item img {
+    position: absolute;
+    left: 60px;
+    top: 10px;
+  }
+
+  .cart_item .quantity {
+    position: absolute;
+    left: 0px;
+    top: 0;
+    width: 50px;
+    height: 120px;
+    line-height: 120px;
+    background: #9BA0AF;
+    font-family: georgia, serif;
+    font-size: 22px;
+    color: white;
+    text-align: center;
+  }
+
+  .cart_item .name {
+    position: absolute;
+    top: 10px;
+    left: 180px;
+    font-family: arial, sans-serif;
+    font-size: 18px;
+  }
+
+    .cart_item .name a {
+      text-decoration: none;
+      color: #5A5D66;
+    }
+
+  .cart_item .size {
+    position: absolute;
+    top: 40px;
+    left: 180px;
+    font-family: arial, sans-serif;
+    font-size: 12px;
+  }
+
+  .cart_item .unit_price,
+  .cart_item .subtotal {
+    position: absolute;
+    right: 10px;
+    font-family: arial, sans-serif;
+    text-align: right;
+  }
+
+  .cart_item .unit_price {
+    top: 10px;
+    font-size: 11px;
+  }
+
+  .cart_item .subtotal {
+    bottom: 10px;
+    font-size: 16px;
+  }
+
+    .cart_item .unit_price span,
+    .cart_item .subtotal span {
+      display: block;
+      font-size: 150%;
+      font-family: georgia, serif;
+    }
+
+#cart_total {
+  font-size: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+  #cart_total .value {
+    font-family: georgia, serif;
+  }
+
+#paypal_checkout {
+  text-align: center;
+}
+
+#paypal_checkout_button {
+}

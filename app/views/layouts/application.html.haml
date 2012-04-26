@@ -1,0 +1,185 @@
+!!!
+%html{:"xmlns:fb"=>"https://www.facebook.com/2008/fbml"}
+  %head
+    %title= "#{META_DESCRIPTION} | #{@meta_title}"
+    = meta_tags
+    = stylesheet_link_tag('new_style')
+    = stylesheet_link_tag('nivo-slider')
+    - if (params[:controller]=='static' && (params[:action]=='our_company'|| params[:action] == 'privacy_policy'))|| params[:controller] == 'posts'
+      = yield :editable_css
+    = yield :layout_ask_us
+    /[if IE]
+      = stylesheet_link_tag('ie')
+    = javascript_include_tag('jquery-1.7.1.min')
+    = javascript_include_tag('rails')
+    = javascript_include_tag('slideshow')
+    = javascript_include_tag('jquery.nivo.slider.pack')
+    - if params[:controller]=="products" && params[:action]== "show"
+      = yield :slider_product
+    - if params[:controller] == 'cart_items'
+      = yield :cart
+    %link{:rel => "shortcut icon", :href => "/images/favicon.ico", :type => "image/x-icon"}
+  %body
+    #Wrapper
+      #Header
+        #logo
+          = link_to image_tag('chesca-logo.jpg', :id => 'chesca-logo', :size => '243x92'), root_url
+          %p
+            = link_to 'Accentuate your Curves 12-24',nil, :class => 'mistral24'
+          #login
+          - if admin?
+            .admin-reminder
+              You are logged in as admin.
+              %br
+              = link_to('Go to panel', admin_path)
+              |
+              = link_to('Log out &rarr;', admin_session_path, :method => :delete)
+          - else
+            = image_tag 'bag.png', :id => 'bag', :size => '30x41'
+
+            .cart
+              YOU HAVE
+              %span#cart-items= current_cart.cart_items_count
+              = (current_cart.cart_items_count == 1) ? 'ITEM' : 'ITEMS'
+              IN YOUR CART
+              %br
+              = link_to 'CHECKOUT', cart_items_path, :id => 'checkout'
+          #banner
+            #slider
+              - unless @feeds.empty?
+                - @feeds.each do |nf|
+                  =image_tag nf.media.url(:normal), :size => '250x55', :style => 'display: none;'
+              -else
+                =image_tag 'banner.jpg', :size => '250x55'
+        #adds
+          -#.news_slider
+            -# active_news_feeds.each_with_index do |feed,i|
+              %p{:id=>"feed-#{i+1}",:class=>"news_slide",:style=>"display:none;"}
+                = feed
+            -#.fb{:style => "display:none"}= facebook_like(root_url, "like")
+          -#.top-bar
+            %ul#top-links
+              -# [['new arrivals', new_arrivals_path]].each do |item|
+                -%li{ :id => "top-bar-#{item.first.parameterize}" }
+                  = link_to item.first.upcase, item.second
+      #mainContent
+        %br
+          %table{:border => "0", :width => "956"}
+            %tr
+              %td{:bgcolor => "#E8E8E8", :width => "133"}
+                .navText{:align => "center"}
+                  %div{:align => "center"}
+                    = link_to 'Shop our Looks',root_path, :class => 'greyText'
+              %td{:bgcolor => "#E8E8E8", :width => "115"}
+                .navText{:align => "center"}
+                  %div{:align => "center"}
+                    %a.greyText{:href =>''} Shop by Item
+              %td{:bgcolor => "#E8E8E8", :width => "129"}
+                .navText{:align => "center"}
+                  %div{:align => "center"}
+                    = link_to 'Designer Index', designers_path, :class => 'greyText'
+              %td{:bgcolor => "#E8E8E8", :width => "118"}
+                .navText{:align => "center"}
+                  %div{:align => "center"}
+                    = link_to 'Fashion News', posts_path, :class => 'greyText'
+              %td{:bgcolor => "#E8E8E8", :width => "116"}
+                .navText{:align => "center"}
+                  %div{:align => "center"}
+                    =link_to 'Store Locations',locations_path, :class => 'greyText'
+              %td{:bgcolor => "#E8E8E8", :width => "94"}
+                .navText{:align => "center"}
+                  %div{:align => "center"}
+                    = link_to 'Contact Us',contact_us_path, :class =>  'greyText'
+              %td{:bgcolor => "#E8E8E8", :width => "220"}
+                .navText{:align => "center"}
+                #search-wrapper
+                  - form_tag products_path, :method => :get do
+                    = text_field_tag :search, params[:search], :id => 'search', :class => 'text', :size => '10'
+                    = submit_tag 'Search', :name => nil, :class => 'button'
+        #notice
+          - if !flash.empty?
+            .notice
+              - flash.each do |key, message|
+                = message
+                %br
+        - case params[:controller]
+        - when 'posts' then
+          #mcLeft
+            =yield :mcLeft
+        - when 'designers'
+          #mcLeft
+            = render :partial => 'layouts/mcLeft_designers'
+        - when 'media'
+          #mcLeft
+            =yield :mcLeft
+        - when 'static' then
+          - case params[:action]
+            - when 'contact_us' then
+              #mcLeft
+                = render :partial => 'layouts/mcLeft'
+            - when 'locations' then
+              #mcLeft{:style => 'width:250px;'}
+                = yield :areas
+            - when 'our_company' then
+              #mcLeft
+                = render :partial => 'layouts/mcLeft_our_company'
+            - when 'ask_us' then
+              #mcLeft{:style => 'width:400px;'}
+                = yield
+        - else
+          #mcLeft
+            = render :partial => 'layouts/mcLeft'
+        - if params[:action] == 'site_map' || params[:action]== 'privacy_policy' || params[:action]== 'sizing_chart'
+          #mcRight{:style => 'width: 900px;'}
+            =yield
+        - elsif params[:controller] == 'static' && params[:action]== 'locations'
+          #mcRight{:style => 'width: 695px;'}
+            =yield
+        - elsif params[:controller]== 'static' && params[:action]== 'ask_us'
+          #mcRight{:style => 'width:545px;'}
+            =yield :mcRight
+        - else
+          #mcRight
+            = yield
+      #footer
+        .bars
+          #free-delivery
+            -# %span
+              FREE DELIVERY TO ALL EUROPE
+            /
+              &ndash;
+              = link_to 'CLICK FOR MORE INFO', '#'
+          #get-the-newsletter
+            /
+              GET THE NEWSLETTER
+        %p
+          %br
+        #upFooter
+          = image_tag 'ChescaDirectMock_e_09.jpg'
+        #lowerFooter
+          - attr = {:class => 'greyText'}
+          %p{:class => 'greyText'}
+            = link_to 'In the Media', media_path, attr
+            |
+            = link_to 'Our Company', our_company_path, attr
+            |
+            = link_to 'Events', media_path, attr
+            |
+            = link_to 'Sizing Chart', sizing_chart_path , attr
+            |
+            = link_to 'Gift Cards', nil , attr
+            |
+            = link_to 'Ask Us', ask_us_path, attr
+            |
+            =link_to 'Privacy Policy', privacy_policy_path, attr
+            |
+            =link_to 'Site Map', site_map_path, attr
+          %p
+            %br/
+    = google_analytics
+    = yield :bottom
+-#:javascript
+  -##{tracking_campaign_kissmetrics}
+-#:javascript
+  -#NewsFeedSlider.init();
+

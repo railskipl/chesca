@@ -1,0 +1,4 @@
+%h1 New Our Company Page
+- form_for(@our_company, :url=> admin_our_companies_path) do |f|
+  =render :partial => 'admin/our_companies/form', :object => f
+%p= link_to "Back to List", admin_our_companies_path

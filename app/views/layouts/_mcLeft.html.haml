@@ -1,0 +1,38 @@
+%p.bold
+  = link_to 'LOOKS WE LOVE', nil, :class =>  'black'
+%p.greyText
+- @looks.each do |look|
+  - if look.parent.nil?
+    = link_to look.name, look_path(look), :class=> 'greyText'
+    %br/
+    - if !look.children.empty?
+      - level=1
+      = render :partial => 'layouts/tree_look', :locals => {:cate => look, :level => level}
+%p.normal
+  %br/
+%p.bold
+  %a.black BOUTIQUE
+%p.greyText
+- @styles.each do |boutique|
+  - if boutique.parent.nil?
+    = link_to boutique.name, style_path(boutique), :class=> 'greyText'
+    %br
+    - if !boutique.children.empty?
+      - level=1
+      = render :partial => 'layouts/tree_boutique', :locals => {:cate => boutique, :level => level}
+%p.normal
+  %br/
+%p.bold
+  %a.black SHOP BY CATEGORY
+%p.greyText
+- @departments.each do |category|
+  - if category.parent.nil?
+    = link_to category.name, department_path(category), :class =>  'greyText'
+    %br
+    - if !category.children.empty?
+      - level=1
+      = render :partial => 'layouts/tree_category', :locals => {:cate => category, :level => level}
+%p.normal
+  %br/
+= link_to_pages
+

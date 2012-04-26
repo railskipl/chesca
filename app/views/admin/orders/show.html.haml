@@ -1,0 +1,23 @@
+%h1 show order
+
+%p
+  %h3 Buyer name
+  = @order.buyer_name
+%p
+  %h3 Buyer email
+  = @order.buyer_email
+%p
+  %h3 Order date
+  = @order.created_at.to_s(:long)
+%p
+  %h3 Products
+  - @order.cart.cart_items.each do |cart_item|
+    %p
+      = cart_item.product.name
+      x
+      = "#{cart_item.quantity} ="
+      %b= number_to_currency(cart_item.product.price * cart_item.quantity, :precision => 2, :unit => '&pound;')
+  %h3 Total Price #{number_to_currency(@order.amount, :precision => 2, :unit => '&pound;')}
+
+= link_to "Go to orders", admin_orders_path
+

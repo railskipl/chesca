@@ -1,0 +1,58 @@
+%p.bold2
+%table{:border => "0", :width => "787"}
+  %tr
+    %td.bold2{:width => "261"}
+      %div{:align => "center"}
+        =link_to 'ADVERTISING',advertising_media_path, :class => 'bold2'
+    %td.bold2{:width => "260"}
+      %div{:align => "center"}
+        =link_to 'AS SEEN IN',as_seen_in_media_path, :class => 'bold2'
+    %td.bold2{:width => "242"}
+      %div{:align => "center"}
+        =link_to 'EVENTS',events_media_path, :class => 'bold2'
+  %tr
+    %td{:bgcolor => "#EFEFEF", :width => "260", :height => '214'}
+      %div{:align => "center"}
+        - if @events
+          =link_to image_tag(@advertising.media.url(:icon), :border => "0"), advertising_media_path
+        - else
+          COMING SOON
+    %td{:bgcolor => "#EFEFEF", :width => "260"}
+      %div{:align => "center"}
+        - if @events
+          =link_to image_tag(@as_seen_in.media.url(:icon), :border => "0"), as_seen_in_media_path
+        - else
+          COMING SOON
+    %td.greyText{:bgcolor => "#EFEFEF", :width => "260"}
+      %div{:align => "center"}
+        - if @events
+          =link_to image_tag(@events.media.url(:icon), :border => "0"), events_media_path
+        - else
+          COMING SOON
+  %tr
+    %td.bold2
+      %div{:align => "center"}
+        =link_to 'VIDEOS',videos_media_path, :class => 'bold2'
+    %td.bold2
+      %div{:align => "center"}
+    %td.bold2
+      %div{:align => "center"}
+        =link_to 'PRESS',press_media_path, :class => 'bold2'
+  %tr
+    %td.bold2{:bgcolor => "#EFEFEF", :width => '214'}
+      %div{:align => "center"}
+        -if @videos
+          =link_to image_tag(@videos.media.url(:icon), :border => "0"), videos_media_path
+        -else
+          %p.greyText
+            =image_tag 'video1.jpg', :alt => "Chesca Videos Coming Soon", :height => "187", :width => "216"
+          %p.greyText COMING SOON
+    %td.bold2
+    %td.bold2{:bgcolor => "#EFEFEF"}
+      .greyText{:align => "center"}
+        -if @press
+          =link_to image_tag(@press.media.url(:icon), :border => "0"), press_media_path
+        -else
+          COMING SOON
+= render :partial => 'left'
+

@@ -1,0 +1,33 @@
+<h2>Product Images</h2>
+<h3>Product:</h3><%= @product_size.product.name  %>
+<h3>Color:</h3><%= image_tag @product_size.color.image.url(:square), :size => '21x21#' %>
+<br/>
+<br/>
+<br/>
+<% form_for(@new_product_image, :url => admin_product_product_images_path(@product_size), :html => {:multipart => true, :target => 'upload_image_container', :id => 'image_upload_form', :onsubmit => 'ProductImages.onImageSubmit()'}) do |f| -%>
+  <%= f.file_field(:image) %>
+  <%= f.hidden_field :product_size_id, :value => @product_size.id %>
+  <%= f.submit('Upload') %>
+<% end -%>
+
+<div id="images_container">
+  <%= render(:partial => 'admin/product_images/product_image', :collection => @product_size.product_images) %>
+
+</div>
+
+<iframe name="upload_image_container" style="display: none"></iframe>
+
+<% content_for(:bottom) do -%>
+  <script type="text/javascript"><!--
+    ProductImages = {
+      onImageSubmit: function() {
+        (function() { $('image_upload_form').disable().down('input[type=submit]').value = 'Uploading...'; }).defer();
+      },
+
+      loadNewImage: function(url) {
+        $('image_upload_form').enable().down('input[type=submit]').value = 'Upload';
+        new Ajax.Updater('images_container', url, {insertion: 'bottom', method: 'get'});
+      }
+    }
+  --></script>
+<% end -%>

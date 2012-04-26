@@ -1,0 +1,8 @@
+- cate.children.each do |child|
+  - level.times.each do
+    &nbsp;&nbsp;
+  = link_to child.name,style_path(child), :class =>  'greyText'
+  %br
+  - if !child.children.empty?
+    =render :partial => 'layouts/tree_boutique', :locals => {:cate => child, :level => level+1}
+

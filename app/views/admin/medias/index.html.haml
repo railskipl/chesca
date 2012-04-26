@@ -1,0 +1,52 @@
+%h1 Listing Medias
+%h2 ADVERTISING
+%h3 Icon
+= render :partial => 'table_index_icon', :object => @advertising_icon
+%p= link_to "New media", new_admin_media_path(:type=>'1', :icon => true)
+%h3 Section
+= render :partial => 'table_index', :object => @advertising
+%p= link_to "New media", new_admin_media_path(:type=>'1')
+%br/
+%br/
+
+%h2 AS SEEN IN
+%h3 Icon
+= render :partial => 'table_index_icon', :object => @as_seen_in_icon
+%p= link_to "New media", new_admin_media_path(:type=>'2', :icon => true)
+%h3 Section
+= render :partial => 'table_index', :object => @as_seen_in
+%p= link_to "New media", new_admin_media_path(:type=>'2')
+%br/
+%br/
+
+%h2 EVENTS
+%h3 Icon
+= render :partial => 'table_index_icon', :object => @events_icon
+%p= link_to "New media", new_admin_media_path(:type=>'3', :icon => true)
+%h3 Section
+= render :partial => 'table_index', :object => @events
+%p= link_to "New media", new_admin_media_path(:type=>'3')
+%br/
+%br/
+%h2 PRESS
+%h3 Icon
+= render :partial => 'table_index_icon', :object => @press_icon
+%p= link_to "New media", new_admin_media_path(:type=>'5', :icon => true)
+%h3 Section
+= render :partial => 'table_index', :object => @press
+%p= link_to "New media", new_admin_media_path(:type=>'5')
+%br/
+%br/
+
+%h2 VIDEOS
+%h3 Icon
+= render :partial => 'table_index_icon', :object => @videos_icon
+%p= link_to "New media", new_admin_media_path(:type=>'4', :icon => true)
+%h3 Section
+= render :partial => 'table_index', :object => @videos
+%p= link_to "New media", new_admin_media_path(:type=>'4')
+%br/
+%br/
+
+
+%br/

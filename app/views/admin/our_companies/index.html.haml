@@ -1,0 +1,17 @@
+%h1 Listing Our Company Pages
+%table.data
+  %tr
+    %th Name
+    %th Content
+    %th Active
+    %th{:colspan => '2'}
+  - for our_company in @our_companies
+    %tr
+      %td= h our_company.name
+      %td= h our_company.content
+      %td= h our_company.active
+      %td= link_to 'Show', admin_our_company_path(our_company)
+      %td= link_to 'Edit', edit_admin_our_company_path(our_company)
+      %td= link_to 'Delete', admin_our_company_path(our_company), :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Our Company", new_admin_our_company_path

@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %title Chesca Admin
+    %link{:href => "/stylesheets/admin.css", :rel => "stylesheet"}/
+    = stylesheet_link_tag('style')
+    = javascript_include_tag('prototype','effects','controls')
+  %body
+    #header
+      = link_to('Log out &rarr;', admin_session_path, :method => :delete)
+      = link_to('&larr; Return to website', root_path)
+    #menu
+      = link_to('Products', admin_products_path)
+      = link_to('Categories', admin_departments_path)
+      = link_to('Boutiques', admin_styles_path)
+      = link_to 'Looks we love', admin_looks_path
+      = link_to('Vouchers', admin_vouchers_path)
+      = link_to('Orders', admin_orders_path)
+      = link_to('Top 100 products', top100_admin_products_path)
+      = link_to('Fashion News', admin_posts_path)
+      = link_to('Product display order', display_order_admin_products_path)
+      = link_to('Locations', admin_locations_path)
+      = link_to('News Feeds', admin_news_feeds_path)
+      = link_to('Pages', admin_pages_path)
+    #menu
+      = link_to 'Ask Us'
+      = link_to 'Company Page', admin_company_pages_path
+      = link_to 'Home-page', admin_home_pages_path
+      = link_to 'Images', admin_imagepages_path
+      = link_to 'Our Company', admin_our_companies_path
+      = link_to 'Privacy Policy', admin_privacy_policies_path
+      = link_to'Sizes', admin_sizes_path
+      = link_to 'Colors', admin_colors_path
+      = link_to 'Designers', admin_designers_path
+      = link_to 'In The Media', admin_medias_path
+    - flash.each do |key, message|
+      .flash_message{:id => "flash_#{key}"}= message
+    #body
+      = yield
+    = yield(:bottom)

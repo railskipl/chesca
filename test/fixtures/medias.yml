@@ -1,0 +1,13 @@
+one:
+  title: MyString
+  content: MyText
+  type: MyString
+  icon: false
+  active: false
+
+two:
+  title: MyString
+  content: MyText
+  type: MyString
+  icon: false
+  active: false

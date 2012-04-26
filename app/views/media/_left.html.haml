@@ -1,0 +1,11 @@
+- content_for :mcLeft do
+  %p.bold2
+    =link_to 'IN THE MEDIA',media_path,:class => 'bold2'
+  %p.bold2
+    %br
+  %p=link_to 'Advertising',advertising_media_path, :class => 'greyText'
+  %p=link_to 'As Seen In',as_seen_in_media_path, :class => 'greyText'
+  %p=link_to 'Events',events_media_path, :class => 'greyText'
+  %p=link_to 'Press',press_media_path, :class => 'greyText'
+  %p=link_to 'Videos',videos_media_path, :class => 'greyText'
+

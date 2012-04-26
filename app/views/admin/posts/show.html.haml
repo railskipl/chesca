@@ -1,0 +1,10 @@
+= link_to 'Back to Fashion News', admin_posts_path
+
+#posts-wrapper
+  .post
+    %h3.date-and-title== #{@post.created_on} &ndash; #{@post.title}
+    %br
+    %br
+    = image_tag @post.media.url(:editor)
+    .content= @post.content
+

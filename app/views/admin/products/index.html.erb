@@ -1,0 +1,67 @@
+<h1>Products</h1>
+
+<p>
+  <% if !@departments.empty? && !@styles.empty? -%>
+    <%= link_to 'New product', new_admin_product_path, :class => 'new-link' %>
+  <% end -%>
+</p>
+
+<p>
+  <%= link_to 'Download Products CSV', :format => 'csv' %>
+</p>
+
+<table class="data" id="products">
+  <tr>
+    <th>Code</th>
+    <th style="width:20%"><%= link_to "Name",url_for(:sort_by=>'name') -%></th>
+    <th style="width:30%">Description</th>
+    <th style="width:10%">Price</th>
+    <th><%= link_to "Category",url_for(:sort_by=>'department') -%></th>
+    <th><%= link_to "Boutique",url_for(:sort_by=>'style') -%></th>
+    <th><%= link_to "Looks",url_for(:sort_by=>'look') -%></th>
+    <th>Images</th>
+    <th>Status</th>
+    <th><%= link_to "Added On",url_for(:sort_by=>'created_at') -%></th>
+    <th style="width:10%;">Edit</th>
+  </tr>
+
+  <% for product in @products -%>
+    <tr>
+      <td><%= h(product.code) %></td>
+      <td>
+        <%#= product.name #inplace_edit_field({:url=>in_place_edit_admin_products_path(:id=>product.id,:field=>'name'),:content=>{:element=>'span',:text=>product.name,:id=>"product_#{product.id}"},:ajax=>{:highlightColor=> 'transparent',:highlightEndColor=>'transparent'}})  %>
+        <%= product.name %>
+      </td>
+      <td>
+        <%#= product.description #inplace_edit_field({:url=>in_place_edit_admin_products_path(:id=>product.id,:field=>'description'),:content=>{:element=>'span',:text=>product.description,:id=>"product_desc_#{product.id}"},:ajax=>{:rows=>3,:cols=>50,:highlightColor=> 'transparent',:highlightEndColor=>'transparent'}})  %>
+        <%= product.description %>
+      </td>
+      <td>
+        <%#= product.price #inplace_edit_field({:url=>in_place_edit_admin_products_path(:id=>product.id,:field=>'price'),:content=>{:element=>'span',:text=>product.price,:id=>"product_price_#{product.id}"},:ajax=>{:highlightColor=> 'transparent',:highlightEndColor=>'transparent'}})  %>
+         <%= product.price %>
+       </td>
+      <td><%= product.department.try(:name) %></td>
+      <td><%= product.style.try(:name) %></td>
+      <td>
+        <p>
+          <%= product.looks.map{|s| s.name}.join("<span class= 'red' > - </span>") rescue '' %>
+        </p>
+      </td>
+      <td class="center"><%= product.product_images.count %></td>
+      <td><%= product.available ? 'available' : 'unavailable' %></td>
+      <td><%= product.created_at.strftime("%d %b %Y") -%></td>
+      <td>
+        <%= link_to('Edit', edit_admin_product_path(product)) %>
+        <%= link_to('Delete', admin_product_path(product), :method => :delete, :confirm => 'Delete product?') %>
+      </td>
+    </tr>
+  <% end -%>
+</table>
+
+<% if @departments.empty? -%>
+  <p>No departments exist yet. Please <%= link_to('create some departments', admin_departments_path) %> first.</p>
+<% end -%>
+<% if @styles.empty? -%>
+  <p>No styles exist yet. Please <%= link_to('create some styles', admin_styles_path) %> first.</p>
+<% end -%>
+

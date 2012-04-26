@@ -1,0 +1,6 @@
+%h1 Edit Designer
+- form_for (@designer, :url => admin_designer_path(@designer), :method => :put) do |f|
+  = f.error_messages
+  =render :partial => 'admin/designers/form', :object => f
+  = f.submit
+

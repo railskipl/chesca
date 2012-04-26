@@ -1,0 +1,6 @@
+%h1 Edit Privacy Policy
+- form_for ([:admin,@privacy_policy]) do |f|
+  =render :partial => 'admin/privacy_policies/form', :object => f
+= link_to 'Show', admin_privacy_policies_path(@privacy_policy) |
+= link_to 'Back', :back
+

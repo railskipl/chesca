@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  code: MyString
+  uses_count: 1
+  percent: 1
+  date_expired: 2010-06-24 16:44:27
+
+two:
+  code: MyString
+  uses_count: 1
+  percent: 1
+  date_expired: 2010-06-24 16:44:27

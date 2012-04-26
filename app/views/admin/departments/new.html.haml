@@ -1,0 +1,8 @@
+%h1 New Sub-folder
+%h3
+  - @parents.each do |p|
+    ="#{p} >"
+- form_for(@department, :url => admin_departments_path) do |f|
+  = f.error_messages
+  = render(:partial => 'admin/departments/form', :object => f)
+  = f.submit

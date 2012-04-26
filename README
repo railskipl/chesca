@@ -1,0 +1,66 @@
+= How to update the front page
+
+Since this doesn't happen too often the frontpage doesn't have an UI for updating,
+so it has to be manual.
+
+In general all that's needed is change a few images and URLs.
+
+In order to keep it clean, there's a special directory under:
+
+  <APP_ROOT>/public/images/homepage
+
+Which in turn contains various subdirectories, each containing the images of a
+given season.
+
+A common problem is that Nico's new images tend not to be the exact sizes as the
+previous batch, so sometimes some manual cropping or resizing needs to be done
+to fix the offset of a few pixels that tends to appear.
+
+The main (big) image has to be 579 pixels wide and 528 pixels tall.
+
+The side (small) images have to be 212 pixles wide and either 261 or 266 pixels
+tall (the sum of both make for the perfect height in the page).
+
+Make sure the images are saved in JPEG format with quality at 80-90%. Never use
+PNGs.
+
+To add new images simply create a new subdirectory under homepage/ with the
+name of the new season (try to keep names lowercase and without spaces), and
+drop the new images there.
+
+The front page view is found in:
+
+  <APP_ROOT>/app/views/main/index.html.haml
+
+To change the images open that file with a text editor. If possible, try using
+an advanced text editor that allows setting newline characters, and set them to
+UNIX format.
+
+At the top of the file there are some variable definitions. In order to change
+the banners all that needs to be edited are the values of those variables.
+
+The first variable, season_directory, is the name of the new directory you
+created for the new images. Change it accordingly.
+
+Next are 5 variables which define each banner. Each variable contains two
+values, 1) the name of the image and 2) where to link to (an URL or a
+resource).
+
+If any new resources are needed you'll have to edit the controller, found in:
+
+  <APP_ROOT>/app/controllers/main_controller.rb
+
+There you can create new resources such as styles or departments by name.
+
+Once you're done save the files. It's better if you run a local server to
+make sure your changes are correct.
+
+Finally add and commit all your changes to git (don't forget to add the new
+images), and finally deploy to the server with this command:
+
+  cap production deploy
+
+= Paypal Sandbox Test Buyer
+
+Email: pfayol_1246474462_per@gmail.com
+Password: 282613047

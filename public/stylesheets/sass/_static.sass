@@ -1,0 +1,128 @@
+#sizing-chart-wrapper
+  :padding 18px 32px 0
+  :margin-bottom 18px
+  :color #393939
+  h2
+    :margin 0
+    :font-size 23px
+  h3
+    :font-size 17px
+    :margin 30px 6px 8px
+  p
+    :font-size 13px
+  p.note
+    :margin-left 6px
+
+#locations-wrapper
+  :padding 18px 0 0 32px
+  :margin-bottom 18px
+  :color #393939
+  h2
+    :margin 0
+    :font-size 23px
+  p
+    :font-size 13px
+  .frame
+    :width 734px
+    :height 469px
+    :border 1px solid #bfbfbf
+    :position relative
+
+    #locations-by-area
+      :width 97%
+      :height 447px
+      :border 1px solid #bfbfbf
+      :top 10px
+      :left 10px
+      :overflow auto
+      :position absolute
+
+      a
+        :display block
+        :cursor pointer
+
+      .area-title
+        :height 24px
+        :line-height 24px
+        :padding-left 10px
+        :color #222
+        :background #eee
+        :font
+          :weight bold
+          :size 13px
+        :letter-spacing -1px
+
+      .location
+        :padding 4px 0 2px 10px
+        :font-size 14px
+      .location:hover
+        :background-color #EFEFEF
+
+    .info
+      :position absolute
+      :top 25px
+      :left 232px
+      :margin 0
+      #location-thumbnail
+        :border 3px solid #a0419b
+        :width 91px
+        :height 91px
+        :float left
+        :margin-right 12px
+      #location-name
+        :font
+          :size 16px
+          :weight bold
+
+    #map
+      :border 1px solid #616360
+      :width 489px
+      /
+        :height 298px
+      :height 359px
+      :position absolute
+      :right 13px
+      :bottom 26px
+
+#contact-us-wrapper
+  :padding 18px 0 0 32px
+  :margin-bottom 18px
+  :color #393939
+  h2
+    :margin 0
+    :font-size 23px
+    :float left
+  .frame
+    :border-bottom 1px solid #ccc
+    :border-right 1px solid #ccc
+    :padding-bottom 38px
+    :margin 0 0 50px
+    :width 734px
+    .row
+      :position relative
+      :width 700px
+      :margin 0 auto
+      :padding 6px 10px
+      :clear right
+      label, input, textarea
+        :float right
+        :margin-right 20px
+      label
+        :font-size 14px
+        :line-height 24px
+      input
+        :width 300px
+        :border 1px solid #ccc
+      textarea
+        :width 650px
+        :height 150px
+        :border 1px solid #ccc
+      .send
+        :width 82px
+        :height 28px
+        :background url('/images/send.jpg')
+        :border none
+        :cursor pointer
+        :color white
+        :font-weight bold
+

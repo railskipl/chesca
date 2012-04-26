@@ -1,0 +1,53 @@
+#locations-wrapper
+  .darkgrey
+    %p
+      Chesca clothes are now available in over 40 locations throughout the United Kingdom and Ireland.
+      %br
+      We are always opening new stores, so keep checking to find new Chesca stockists!
+  %br
+  %table{:border => "0", :width => "676"}
+    - @areas.each do |area|
+      - area.addresses.all.each do |address|
+        %tr
+          %td{:height => "178", :width => "338"}
+            %p.12font
+              %A{:NAME => address.name}=address.name
+            %p.greyText
+              =ln2br(address.info)
+            - if address.url
+              %p.Gold
+                =link_to 'Click for more information', address.url
+            %p.lightgrey
+              =link_to '(click to go back to the store list)', nil
+          %td{:width => "338"}
+            %div{:align => "left"}
+              -unless address.image.url. == "/images/original/missing.png"
+                = image_tag address.image.url, :height => "133", :width => "200"
+
+- content_for :areas do
+  %p.darkgrey
+    %a.darkgrey{:href => "CDFinalMockA_Stores.html"}
+      %A{:NAME => "store list"} CHESCA STORE LOCATIONS
+  %p.darkgrey Click on each location for more information
+  %p.Gold Chesca Retail locations are highlighted
+  %p
+    %br
+  %p.bold
+  - @areas.each do |area|
+    %p.darkgrey
+      %strong= area.name.upcase
+    - area.addresses.all.each do |location|
+      %p
+      - if location.retail
+        .Gold
+          %p
+            %a.greyText{:href => "#"+location.name}= location.name
+      - else
+        .greyText
+          %a.greyText{:href => "#"+location.name}= location.name
+
+    %p
+      %br
+
+
+

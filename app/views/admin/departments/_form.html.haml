@@ -1,0 +1,14 @@
+%table.form
+  %tr
+    %th= form.label :name
+    %td
+      = form.text_field :name
+  %tr
+    %th= form.label :description, "Description (SEO)"
+    %td
+      = form.text_field :description
+  %tr
+    %th= form.label :keywords, "Keywords (SEO)"
+    %td
+      = form.text_field :keywords
+      = hidden_field_tag :parent_id,@parent_id

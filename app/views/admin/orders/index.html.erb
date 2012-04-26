@@ -1,0 +1,28 @@
+<h1>Orders</h1>
+
+<table class="data">
+  <tr>
+    <th>Number</th>
+    <th>Date</th>
+    <th>Amount</th>
+    <th>Paypal Transaction ID</th>
+    <th>Payment Status</th>
+    <th>Buyer Name</th>
+    <th>Voucher Code</th>
+    <th>Source</th>
+    <th></th>
+  </tr>
+  <% for order in @orders -%>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.created_at.to_s(:short) %></td>
+      <td><%= number_to_currency(order.amount, :unit => '&pound;') %></td>
+      <td><%= order.paypal_transaction_id %></td>
+      <td><%= order.paypal_payment_status %></td>
+      <td><%= order.buyer_name %></td>
+      <td><%= order.voucher_code %></td>
+      <td><%= order.source %></td>
+      <td><%= link_to("View", admin_order_path(order)) %></td>
+    </tr>
+  <% end -%>
+</table>

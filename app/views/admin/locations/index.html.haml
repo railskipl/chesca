@@ -1,0 +1,35 @@
+%h1 Locations
+
+= link_to 'New Location', new_admin_location_path, :class => 'new-link'
+
+%table.data
+  %tr
+    %th Name
+
+    %th Area
+    %th Actions
+  - @addresses.each do |location|
+    %tr
+      %td= location.name
+
+      %td= location.location.name if location.location
+      %td
+        = link_to 'Edit', edit_admin_location_path(location, :model => "Address")
+        = link_to 'Delete', admin_location_path(location, :model => "Address"), :method => :delete, :confirm => 'Are you sure?'
+
+
+%h1 Areas
+
+= link_to 'New Area', new_admin_location_path, :class => 'new-link'
+
+%table.data
+  %tr
+    %th Name
+    %th Actions
+  - @locations.each do |location|
+    %tr
+      %td= location.name
+      %td
+        = link_to 'Edit', edit_admin_location_path(location, :model => "Location")
+        = link_to 'Delete', admin_location_path(location, :model => "Location"), :method => :delete, :confirm => 'Are you sure?'
+

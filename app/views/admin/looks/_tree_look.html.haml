@@ -1,0 +1,12 @@
+- cate.children.each do |child|
+  %tr
+    %td
+      - level.times.each do
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      = child.name
+    %td{:style => 'text-align: right;'}= Product.find_all_by_look_id(child.id).size.to_s
+    %td= link_to 'Add Sub-Folder', new_admin_look_path(:id => child.id)
+    %td= link_to('Edit', edit_admin_look_path(child))
+    %td= link_to('Delete', admin_look_path(child), :method => :delete, :confirm => 'Delete Sub-folder?')
+  - if !child.children.empty?
+    =render :partial => 'tree_look', :locals => {:cate => child, :level => level+1}

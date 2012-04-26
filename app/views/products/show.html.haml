@@ -1,0 +1,140 @@
+- if @product
+  .product
+    .images
+      -unless @product.product_sizes.empty?
+        - if params[:c].nil?
+          - color = @product.colors.uniq.first
+        -else
+          - color = Color.find(params[:c])
+        - product_color = ProductSize.find_all_by_color_id_and_product_id(color.id,@product.id)
+        - unless product_color.nil?
+          - images = []
+          - product_color.each do |pc|
+            -images += pc.product_images
+          - unless images.empty?
+            .theme-default.controlnav-thumbs
+              #nivoslider-577.nivoSlider{:style => "width: 303px; height: 498px; position: relative;"}
+                - images.each do |pc_image|
+                  - url_large = pc_image.image.url(:large)
+                  - url_square = pc_image.image.url(:square)
+                  = image_tag url_large, :rel => url_square, :style => "display=> none;", :size => "303x498"
+                .nivo_zoom
+                  = button_to 'ZOOM', nil, :class => 'nivo_zoom_button'
+    .info
+      %h2{:class => 'mistral'}= @product.name
+      %p.code
+        Product code:
+        = @product.code
+      %p.description= @product.description
+      %br
+      - if !@product.composition.blank?
+        %p.composition
+          Composition:
+          %span= @product.composition
+      %br
+      %p
+        %b
+          show in
+          = @product.colors.first.name.upcase rescue ''
+        %br
+        - @product.colors.uniq.each do |c|
+          -link_to product_path(@product,:c => c.id) do
+            =image_tag c.image.url(:square), :alt =>c.name
+      %br
+      .fb_button_chesca
+        = facebook_like(product_url(@product))
+      %br
+      - if !@product.washing_instructions.blank?
+        %p.washing-instructions
+          Washing instructions:
+          %span= @product.washing_instructions
+      .price
+        - if @product.reduced_price?
+          %span.old-price= number_to_currency(@product.old_price, :precision => 2, :unit => '&pound;')
+        %b= number_to_currency(@product.price, :precision => 2, :unit => '&pound;')
+      - if @product.available
+        %br
+        - form_for(@new_cart_item) do |f|
+          = f.hidden_field(:product_id, :value => @product.id)
+          .size-qty
+            = text_field 'cart_item', 'quantity',:size=> '1', :class =>'form_product', :value => '1'
+            = label :cart_item, :quantity, "Qty&nbsp&nbsp"
+            = collection_select 'cart_item', 'size', @product.sizes.uniq, :id, :name, {:prompt => 'Select Size'}, {:class => 'form_product'}
+            = collection_select 'cart_item', 'color', @product.colors.uniq, :id,:name, {:prompt => 'Select Color'},{:class => 'form_product'}
+            %br
+            %br
+            .button_form
+              = text_field_tag '',nil, :size => '14', :placeholder => 'Shipping/Return Info?', :class =>'form_product_input'
+              %button{ :type => 'submit',:class =>'form_product_button_1'} ADD TO BAG
+              = link_to "CHECKOUT", cart_items_path, :class => 'form_product_button_2'
+      - else
+        %span.unavailable OUT OF STOCK
+      %br
+    .message
+      -display = current_cart.cart_items.find_by_product_id @product.id rescue display = none
+      - unless display
+        -display = 'display:none'
+      .flash{:style => display}
+        %p The item has been successfully added to your shopping bag.
+  .realted_product_names
+    - if !@product.related_products.empty?
+      %span.realted1 You may also like...
+    - if !@product.complete_outfits.empty?
+      %span.realted2 Complete the look
+  - if !@product.related_products.empty?
+    #like
+      .related-products
+        - @product.related_products.each do |related_product|
+          - link_to product_path(related_product), :class => 'related-product' do
+            = image_tag main_image_for_product(related_product, :tiny), :alt => related_product.name, :title => related_product.name
+  - if !@product.complete_outfits.empty?
+    #complete{:style => 'display: none;'}
+      .related-products
+        - @product.complete_outfits.each do |outfit|
+          - link_to product_path(outfit), :class => 'related-product' do
+            = image_tag main_image_for_product(outfit, :tiny), :alt => outfit.name, :title => outfit.name
+
+:javascript
+  jQuery(window).load(function(){
+      jQuery("#nivoslider-577").nivoSlider({
+          effect:"fade",
+          slices:15,
+          boxCols:8,
+          boxRows:4,
+          animSpeed:200,
+          pauseTime:3000,
+          startSlide:0,
+          directionNav:true,
+          directionNavHide:true,
+          controlNav:true,
+          controlNavThumbs:true,
+          controlNavThumbsFromRel:true,
+          keyboardNav:true,
+          pauseOnHover:true,
+          manualAdvance:true
+      });
+  });
+  jQuery(window).load(function(){
+    var x = jQuery(".realted1");
+    x.live("click", function(){
+      var like = jQuery("#like")
+      var complete = jQuery("#complete")
+      like.show();
+      complete.hide();
+    });
+  });
+  jQuery(window).load(function(){
+    var x = jQuery(".realted2");
+    x.live("click", function(){
+      var like = jQuery("#like")
+      var complete = jQuery("#complete")
+      like.hide();
+      complete.show();
+    });
+  });
+
+- content_for :slider_product do
+  = javascript_include_tag 'slider-product'
+  = stylesheet_link_tag 'slider-product'
+
+

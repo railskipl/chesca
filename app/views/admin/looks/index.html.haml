@@ -1,0 +1,21 @@
+%h1 Looks we love
+%table.data
+  %tr
+    %th Name
+    %th #Products
+    %th{:colspan => '3'}
+  - @looks.each do |look|
+    -if look.parent.nil?
+      %tr
+        %td= h look.name
+        %td{:style => 'text-align: right;'}= Product.find_all_by_look_id(look.id).size.to_s
+        %td= link_to 'Add Sub-Folder', new_admin_look_path(:id=>look.id)
+        %td= link_to 'Edit', edit_admin_look_path(look)
+        %td= link_to 'Delete', admin_look_path(look), :confirm => 'Are you sure?', :method => :delete
+      - if !look.children.empty?
+        - level=1
+        = render :partial => 'tree_look', :locals => {:cate => look, :level => level}
+%h2 New Looks we Love
+- form_for(@new_look, :url => admin_looks_path) do |f|
+  = render(:partial => 'admin/looks/form', :object => f)
+  = f.submit

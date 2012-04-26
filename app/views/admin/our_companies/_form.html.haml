@@ -1,0 +1,25 @@
+=form.error_messages
+%p
+  = form.label :name
+  %br/
+  = form.text_field :name
+%p
+  = form.label :Content
+  %br/
+  = form.text_area :content
+%p
+  = form.label :active
+  %br/
+  = form.radio_button :active, :true
+  = form.label :yes
+  %br/
+  = form.radio_button :active, :false
+  = form.label :no
+%p
+  = form.submit 'Save'
+- content_for :bottom do
+  = javascript_include_tag 'ckeditor/ckeditor'
+  :javascript
+    CKEDITOR.replace('our_company[content]');
+
+

@@ -1,0 +1,8 @@
+- cate.children.each do |child|
+  - level.times.each do
+    &nbsp;&nbsp;
+  -# link_to child.name+"(#{Product.find_all_by_department_id(child.id).size.to_s})",department_path(child), :class =>  'greyText'
+  = link_to child.name,department_path(child), :class =>  'greyText'
+  %br
+  - if !child.children.empty?
+    =render :partial => 'layouts/tree_category', :locals => {:cate => child, :level => level+1}

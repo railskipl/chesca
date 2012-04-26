@@ -1,0 +1,279 @@
+.product-small
+  :width 185px
+  :height 260px
+  :overflow hidden
+  :float left
+  :border 1px solid #ccc
+  :margin 6px
+  :position relative
+  &:hover
+    :border 2px solid #686868
+    :margin 5px
+  img
+    :display block
+    :margin 0 auto
+  .product-name
+    :position absolute
+    :bottom 10px
+    :left 10px
+    :width 153px
+    :color white
+    :background black
+    :opacity 0
+    :font-size 12px
+    :font-weight bold
+    :padding 7px 6px
+
+.product
+  :padding 14px 13px 0 12px
+  :height 550px
+  .fb_button_chesca
+    :margin 10px 0
+  .images
+    :width 375px
+    :height 525px
+    :position relative
+    :float left
+    :margin-bottom 20px
+    #main-image-zoomer
+      :display block
+      :margin 0 auto
+      #main-image
+        :display block
+        :margin 0 auto
+    #thumbnails-wrapper
+      :position absolute
+      :left 0
+      :bottom 0
+      :width 100%
+      :height 87px
+      :text-align center
+      :opacity 0
+      .thumbnails
+        :padding 13px 13px 13px 8px
+        :position relative
+        :max-width 354px
+        :height 61px
+        :display inline-block
+        img
+          :position relative
+          :margin-left 4px
+          :float left
+        .left
+          :position absolute
+          :top 0
+          :left 0
+          :right 15px
+          :height 87px
+          :background url('/images/product-thumbnails-left.png')
+        .right
+          :position absolute
+          :top 0
+          :right 0
+          :width 15px
+          :height 87px
+          :background url('/images/product-thumbnails-right.png')
+
+  .info
+    :width 384px
+    :float right
+    h2
+      :margin 6px 0 0
+      :font-size 22px
+    .code
+      :margin 5px 0 15px
+      :font-size 12px
+      :color #666
+    .composition, .washing-instructions
+      :font-size 14px
+      :margin 6px 0 12px
+      span
+        :font-weight bold
+    .purchase
+      :height 85px
+      :position relative
+      :background url('/images/purchase-border.jpg')
+      .price, .available
+        :color #a3409b
+      .price
+        :position absolute
+        :top 5px
+        :left 15px
+        :font
+          :size 36px
+          :weight bold
+        :letter-spacing -2px
+        .old-price
+          :font-size 24px
+          :color #aaa
+          :text-decoration line-through
+      .available, .unavailable
+        :position absolute
+        :top 10px
+        :right 15px
+      .unavailable
+        :color red
+      .add-to-cart
+        :position absolute
+        :bottom 8px
+        :right 7px
+        :width 136px
+        :height 33px
+        :padding-left 32px
+        :background url('/images/add-to-cart.png')
+        :cursor pointer
+        :color white
+        :border none
+        :font
+          :weight bold
+          :size 14px
+      .size-qty
+        :position absolute
+        :bottom 8px
+        :left 12px
+        label
+          :font
+            :weight bold
+            :size 12px
+
+    .description
+      :font-size 13px
+      :line-height 20px
+
+    #tabs
+      :position relative
+      :width 384px
+      :height 192px
+      :margin-bottom 20px
+      :background url('/images/tabs-bg.jpg')
+      .buttons
+        .button
+          :width 128px
+          :height 33px
+          :line-height 33px
+          :text-align center
+          :float left
+          :font
+            :size 14px
+            :weight bold
+          :border-bottom 1px solid #6f6f6f
+          :cursor pointer
+        .delivery-info
+          :width 126px
+          :border-left 1px solid #6f6f6f
+          :border-right 1px solid #6f6f6f
+        .active
+          :height 34px
+          :border-bottom none
+      .content
+        :position absolute
+        :top 33px
+        :left 0
+        :width 384px
+        div
+          :position absolute
+          :top 0
+          :left 0
+        #send-to-a-friend
+          .row
+            :position relative
+            :width 356px
+            :padding 9px 14px
+            input, button
+              :position absolute
+              :top 9px
+              :right 14px
+            input
+              :width 249px
+              :height 23px
+              :border 1px solid #909090
+            label, p
+              :font-size 13px
+            p
+              :margin 0
+              :width 250px
+              :font-style italic
+              :line-height 13px
+            .send
+              :width 82px
+              :height 28px
+              :background url('/images/send.jpg')
+              :border none
+              :cursor pointer
+              :color white
+              :font-weight bold
+        #delivery-info, #return-policy
+          img
+            :position absolute
+            :top 40px
+            :left 10px
+          p
+            :position absolute
+            :width 270px
+            :font-size 12px
+            :margin 0
+            span
+              :display inline-block
+              :margin 6px 0
+              :font-size 14px
+        #delivery-info
+          p
+            :top 40px
+            :left 100px
+            :line-height 24px
+        #return-policy
+          p
+            :top 25px
+            :left 105px
+            :line-height 18px
+
+    .sizing-chart-wrapper
+      :width 383px
+      :height 41px
+      :position relative
+      :margin 10px 0 10px
+      :z-index 10
+      img
+        :cursor pointer
+      .sizing-chart
+        :border 5px solid #B7B7B5
+        :display none
+        :position absolute
+        :right -15px
+        :top -135px
+
+.related-products
+  :width 760px
+  :height 180px
+  :padding 10px 0 0
+  :margin 0 auto 10px
+  :border-top 1px solid #4e4e4e
+  :border-bottom 1px solid #4e4e4e
+  :overflow auto
+  :white-space nowrap
+  p
+    :color #636363
+    :margin 0 0 10px 7px
+    :font
+      :size 14px
+      :weight bold
+  .related-product
+    :width 89px
+    :height 125px
+    :display inline-block
+    :margin 0 8px
+    :border 1px solid #d9d9d9
+    img
+      :display block
+      :margin 0 auto
+
+#product-heading
+  :padding 5px
+  :text-align left
+  span
+    :font-size 11px
+  a
+    :font-size 11px
+    :text-decoration underline
+    :display inline-block
+    :padding-left 5px
