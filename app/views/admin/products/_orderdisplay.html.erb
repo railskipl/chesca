@@ -1,0 +1,30 @@
+<div id="products_order">
+<ul id="products">
+	
+  <% @products.group_by(&:department).each do |department, products| %>   
+      <% if department.nil? %>
+         Other
+      <% else %>
+         <h4><%= department.name %></h4>
+      <% end %>
+      
+      <% products.each do |product| %>
+        <% content_tag_for :li, product, :class=>"as" do %>
+           
+           <div class="product_order_box">
+           <% if !ProductSize.find_all_by_product_id(product.id).first.nil? %>
+           <div><img src=<%= ProductSize.find_all_by_product_id(product.id).first.product_images.first.image.url(:tiny) rescue "" %> class="order_img" alt=""/></div>
+           <div class="order_title"><%= link_to h(product.name), product %></div>
+           <% else %>
+           <div><img src= "/images/tiny/missing.png" class="order_img" alt=""/></div>
+           <div class="order_title"><%= link_to h(product.name), product %></div>
+           <% end %>
+           </div>
+        <% end %>           
+      <% end %>  
+  <% end %>
+  
+</ul>
+  
+   <%= sortable_element("products", :url => sort_admin_products_path, :handle => "order_img") %>
+    </div>

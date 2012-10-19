@@ -1,0 +1,6 @@
+<h1>Edit Page: <%= @page.name -%></h1>
+<%= error_messages_for :page %>
+<% form_for([:admin, @page],:html=>{:multipart => true}) do |f| -%>
+  <%= render(:partial => 'admin/pages/form', :object => f) %>
+  <%= f.submit %>
+<% end -%>

@@ -1,0 +1,16 @@
+- form_for [:admin,@news_feed], :html => {:multipart => true} do |f|
+  %table.form
+    %tr
+      %td{ :colspan => 2 }= f.label :media
+    %tr
+      %td{ :colspan => 2 }= f.file_field :media
+    %tr
+      %th{ :colspan => 2 }= f.label :Alternate_text_image
+    %tr
+      %td{ :colspan => 2 }= f.text_area :text, :colums=> '30'
+    %tr
+      %th{ :colspan => 2 }= f.label :active
+    %tr
+      %td{ :colspan => 2 }= f.check_box :active
+
+  = f.submit 'Submit post'

@@ -1,0 +1,11 @@
+<ul>
+<% for tashan in tree_category.children %>
+ <% if !tashan.nil? %>
+  <li><%= link_to tashan.name, style_path(tashan), :class=> 'greyText'%></li>
+ <% end %>
+ <% end %>
+</ul>
+ <% unless tree_category.children.empty? %>
+  <%= render(:partial => "layouts/tree_category", :collection => tree_category.children)%>
+<% end %>
+

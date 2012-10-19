@@ -1,0 +1,7 @@
+%h1 New Sub-Boutique
+%h3
+  - @parents.each do |p|
+    ="#{p} >"
+- form_for(@style, :url => admin_styles_path) do |f|
+  = render(:partial => 'admin/styles/form', :object => f)
+  = f.submit

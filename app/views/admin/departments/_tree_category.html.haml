@@ -1,0 +1,14 @@
+- cate.children.each do |child|
+  %tr
+    %td
+      - level.times.each do
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      = child.name
+    %td{:style => 'text-align: center;'}= Product.find_all_by_department_id(child.id).size.to_s
+    %td= child.keywords
+    %td= child.description
+    %td= link_to 'Add Sub-Category', new_admin_department_path(:id => child.id)
+    %td= link_to('Edit', edit_admin_department_path(child))
+    %td= link_to('Delete', admin_department_path(child), :method => :delete, :confirm => 'Delete Boutique?')
+  - if !child.children.empty?
+    =render :partial => 'tree_category', :locals => {:cate => child, :level => level+1}

@@ -1,0 +1,18 @@
+%h1 Listing Giftcards
+%table.data
+  %tr
+    %th Name
+    %th Value
+    %th Usage Count
+    %th{:colspan => '2'}
+  - @giftcards.each do |giftcard|
+    %tr
+      %td= h giftcard.name
+      %td= number_to_currency(giftcard.value, :precision => 2, :unit => '&pound;')
+      %td= giftcard.usage_count
+      %td= link_to 'Edit', edit_admin_giftcard_path(giftcard)
+      %td= link_to 'Delete', admin_giftcard_path(giftcard), :confirm => 'Delete Giftcard?', :method => :delete
+%h2 New Giftcard
+- form_for(@new_giftcard, :url => admin_giftcards_path, :html => {:multipart => true}) do |form|
+  = render :partial => 'admin/giftcards/form', :object => form
+  =form.submit

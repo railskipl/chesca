@@ -1,0 +1,6 @@
+<h1>Editing <%= h(@product.name) %></h1>
+
+<% form_for [:admin, @product], :html => {:multipart => true} do |f| -%>
+  <%= render(:partial => 'admin/products/form', :object => f) %>
+  <%= f.submit %>
+<% end -%>

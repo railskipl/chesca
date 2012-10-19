@@ -1,0 +1,4 @@
+%h1 New Privacy Policy Page
+- form_for(@privacy_policy, :url=> admin_privacy_policies_path) do |f|
+  =render :partial => 'admin/privacy_policies/form', :object => f
+%p= link_to "Back to List", admin_privacy_policies_path

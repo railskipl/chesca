@@ -1,0 +1,623 @@
+%br
+%h1.darkGreyLargeFont
+  %strong
+    %A{:NAME => "menu"} Ask Us
+%p.bold
+  %br
+%table{:cellpadding => "0", :cellspacing => "0", :width => "379"}
+  %col{:width => "117"}/
+  %col{:width => "136"}/
+  %tr
+    %td.darkgrey{:width => "161"}
+      = link_to 'ORDERING', ask_us_path(:id=>"ORDERING")
+    %td.darkgrey{:width => "147"}
+      = link_to 'CHESCA GIFT CARDS', ask_us_path(:id => "CHESCA GIFT CARDS")
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Cancelling your Order', ask_us_path(:id => "ORDERING"), :class => 'greyText'
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Checking a Gift Card Balance', ask_us_path(:id => 'CHESCA GIFT CARDS')+"#Checking a Gift Card Balance", :class => 'greyText'
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Checkout', ask_us_path(:id => 'ORDERING')+'#Checkout', :class => 'greyText'
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Purchasing a Gift Card', ask_us_path(:id => 'CHESCA GIFT CARDS')+"#Purchasing a Gift Card", :class => 'greyText'
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Emails about your Order', ask_us_path(:id => 'ORDERING')+'#Emails about your Order', :class => 'greyText'
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Redeeming a Gift Card', ask_us_path(:id => 'CHESCA GIFT CARDS')+"#Redeeming a Gift Card", :class => 'greyText'
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Order Review', ask_us_path(:id => 'ORDERING')+'#Order Review', :class => 'greyText'
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Send as a Gift Option', ask_us_path(:id => 'CHESCA GIFT CARDS')+'#Send as a Gift Option', :class => 'greyText'
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Billing and Shipping', ask_us_path(:id => 'ORDERING')+'#Billing and Shipping', :class => 'greyText'
+    %td.greyText
+      %p
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Payment Information', ask_us_path(:id => 'ORDERING')+'#Payment Information', :class => 'greyText'
+    %td.darkgrey
+      = link_to 'SAFETY & PRIVACY', ask_us_path(:id =>"SAFETY & PRIVACY")
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Promotional Codes', ask_us_path(:id => 'ORDERING')+'#Promotional Codes', :class => 'greyText'
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Terms of Use', ask_us_path(:id => 'SAFETY & PRIVACY')+'#Terms of Use', :class => 'greyText'
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Redeeming a Gift Card', ask_us_path(:id => 'ORDERING')+'#Redeeming a Gift Card', :class => 'greyText'
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Privacy Policy', ask_us_path(:id => 'SAFETY & PRIVACY')+'#Privacy Policy', :class => 'greyText'
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Shopping Cart', ask_us_path(:id => 'ORDERING')+"#Shopping Cart", :class => 'greyText'
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Web Security', ask_us_path(:id => 'SAFETY & PRIVACY')+'#Web Security', :class => 'greyText'
+  %tr
+    %td.greyText
+      %p
+        %br
+  %tr
+    %td.greyText
+    %td.darkgrey
+      = link_to 'COMPANY INFORMATION', ask_us_path(:id => 'COMPANY INFORMATION')
+  %tr
+    %td.darkgrey
+      = link_to 'SHIPPING', ask_us_path(:id => 'SHIPPING')
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Store Locater', ask_us_path(:id => 'COMPANY INFORMATION')+'#Store Locater', :class => 'greyText'
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Shipping Methods', ask_us_path(:id => 'SHIPPING')+'#Shipping Methods', :class => 'greyText'
+    %td.greyText
+      %ul
+        %li
+          = link_to 'About Chesca', ask_us_path(:id => 'COMPANY INFORMATION')+'#About Chesca', :class => 'greyText'
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Item Availability', ask_us_path(:id => 'SHIPPING')+'#Item Availability', :class => 'greyText'
+    %td.greyText
+  %tr
+    %td.greyText
+    %td.darkgrey
+      =link_to 'CONTACT US', contact_us_path
+  %tr
+    %td.darkgrey
+      = link_to 'RETURNS', ask_us_path(:id => 'RETURNS')
+    %td.greyText
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Return Policy', ask_us_path(:id => 'RETURNS')+'#Return Policy', :class => 'greyText'
+    %td.darkgrey
+      = link_to 'FAQs', ask_us_path(:id => 'Frequently Asked Questions')
+  %tr
+    %td.greyText
+      %ul
+        %li
+          = link_to 'Exchanges & Price Adjustments', ask_us_path(:id => 'RETURNS')+'#Exchanges & Price Adjustments', :class => 'greyText'
+    %td.greyText
+- content_for :layout_ask_us do
+  = stylesheet_link_tag('ask_us')
+- if params[:id] == 'ORDERING'
+  - content_for :mcRight do
+    #mcRight2
+      %p.bold &nbsp;
+      %p.darkGreyLargeFont
+        %a{:name => "ORDERING"} ORDERING
+      %p.darkgreyBold
+        %a{:name => "cancelling"} Cancelling your Order
+      %p.bold &nbsp;
+      %p.greyText If you would like to cancel your order after you have pressed the &quot;Submit Order&quot; button, you have a 45 minute window in which you may do so. During this time, send an email to ordercancel@Chesca1424.co.uk stating which items you would like to cancel from your order.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Checkout"} Checkout
+      %p.darkgrey &nbsp;
+      %p.greyText Once you have finished adding all of your items to the cart, please go to your basket and simply press the &quot;Checkout&quot; button. This will take you to a Paypal page. Please note that you do NOT have to have a paypal account to shop with us. Review your order summary and add in your personal information, as instructed on the page. Once you are done, please click the &quot;Continue&quot; button. If you are having trouble, please contact us at 020 76093434.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Emails about your Order"} Emails about your Order
+      %p.bold &nbsp;
+      %p.greyText After you place your order, you will receive emails about your order. Below are examples of emails you might receive:
+      %p.greyText &nbsp;
+      %p.greyText
+        %span.darkgrey Order Confirmation:
+        This email confirms that we have received your order. It includes your order number. Keep this email for your records.
+      %p.greyText &nbsp;
+      %p.greyText
+        %span.darkgrey Back-Order Notice:
+        This email informs you that an item from your order is not available for immediate shipment and will ship when it is available. Please keep this email for your records.
+      %p.greyText &nbsp;
+      %p.darkgrey
+        Return Confirmation and Credit:
+        %span.greyText We will email you once your return has been received and processed.
+      %p.darkgrey &nbsp;
+      %p.darkgrey
+        Other.
+        %span.greyText There are a few other reasons why you would receive an email, including: difficulty in processing your order, inability to ship to the address provided, issues with credit card or cancellation of order. Should you receive a notice like this and have questions, please contact us at 020 76093434.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Order Review"} Order Review
+      %p.greyText On the Order Review page, you can review your entire order, including your shipping address.
+      %p.greyText Please ensure that you have selected the correct shipping destination.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Billing and Shipping"} Billing and Shipping
+      %p.greyText Please be sure that your billing address matches the address on your credit card statement to avoid any delay in the authorization process. If entering a new address you will be prompted to do so. Please make sure that the correct  shipping address is selected if your billing and shipping addresses are different.
+      %p.greyText &nbsp;
+      %p.greyText Please note that the shipping price differs based on your shipping destination.
+      %p.greyText UK: £6.00
+      %p.greyText Ireland: £11.00
+      %p.greyText Europe: £15.00
+      %p.greyText Rest of World: £30.00
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Payment Information"} Payment Information
+      %p.greyText Chesca accepts the following forms of payment:
+      %p.greyText Mastercard/Eurocard
+      %p.greyText Visa/Delta/Electron
+      %p.greyText Discover
+      %p.greyText American Express
+      %p.greyText Switch/Maestro
+      %p.greyText Solo
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Promotional Codes"} Promotional Codes
+      %p.greyText Steps for Redeeming a Promotional Code:
+      %p.greyText &nbsp;
+      %p.greyText In the Shopping Cart page, enter the code exactly as it appears in the field provided. Codes are case sensitive.
+      %p.greyText &nbsp;
+      %ul
+        %li.greyText Click &quot;Press to Validate Voucher&quot;
+        %li.greyText If the code is valid, your order total will be adjusted prior to shipment and will be displayed in the discount summaries below and on the Payment page.
+      %p.greyText &nbsp;
+      %p.greyText Only one Promotional code per order will be accepted.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Redeeming a Gift Card"} Redeeming a Gift Card
+      %p.greyText Coming soon.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Shopping Cart"} Shopping Cart
+      %p.greyText The Shopping Cart holds products you wish to purchase while you shop. Items you place in your Shopping Cart will remain there  only for the session, unless they are purchased, removed, or inventory is no longer available.
+      %p.greyText &nbsp;
+      %p.greyText
+        Options in the Shopping Bag:
+        %br/
+      %p.greyText Remove an Item from Your Shopping Bag. To remove an item, check the big red circle with a white &quot;x&quot; on it.
+      %p.greyText &nbsp;
+      %p.greyText Continue Shopping. If you wish to continue shopping on our site, the items saved in your bag will remain there during your session. Click on &quot;Shop by Item&quot; to search the site for additional items. At any time during your shopping experience, you can return to your Shopping Cart by clicking on &quot;Shopping Cart&quot; in the top right corner.
+      %p.greyText
+        Proceed to Checkout. When you are ready to purchase your item(s), click on &quot;Continue to Checkout.&quot; Our checkout process is fast, easy and secure. For more information on our secure shopping guarantee,
+        %a{:href => "#"}
+          CLICK HERE.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText &nbsp;
+- elsif params[:id]== 'SHIPPING'
+  - content_for :mcRight do
+    #mcRight2
+      %p.bold &nbsp;
+      %p.darkGreyLargeFont SHIPPING
+      %p.greyText &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Shipping Methods"} Shipping Methods
+      %p.greyText Coming Soon.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.bold &nbsp;
+      %p.bold &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Item Availability"} Item Availability
+      %p.darkgrey Instock Items:
+      %p.greyText Most orders for items currently in stock begin the order process as soon as your online purchase is completed. Your in-stock item will be shipped once the item is located in stock, your payment is approved and the receiving addresses are verified.
+      %p.greyText &nbsp;
+      %p.darkgrey Back-Ordered or Pre-Ordered Items:
+      %p.greyText Back-ordered or preordered items are items that are not yet in stock, but available for advanced purchase on our site. Such an item will be processed for shipment once it is in stock. You will be notified of the status of your back-ordered item via email.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText &nbsp;
+      %p.darkgreyBold &nbsp;
+- elsif params[:id=> 'RETURNS']
+  - content_for :mcRight do
+    #mcRight2
+      %p.bold &nbsp;
+      %p.darkGreyLargeFont RETURNS
+      %p.greyText &nbsp;
+      %p.darkgreyBold
+        %a{:name => "Return Policy"} Return Policy
+      %p.greyText If you're not absolutely delighted with your Chesca purchase, we make it easy for you to return it.
+      %p.greyText We accept unworn merchandise with the receipt and original tags attached within 14 days of purchase. Refunds will be issued in the same tender as the purchase. Please note, processing of online returns may take up to five business days. Depending on your credit card company, the credit should appear on your statement within two billing cycles.
+      %p.greyText &nbsp;
+      %p.greyText Your return should include the paypal packing slip. If you do not have the packing slip, provide the following information with your return: name, address, email address, phone number and order number, if available. Please be sure to ship the package with a carrier that can provide tracking and insurance. Chesca cannot replace packages lost during return shipment if proof of tracking is not available.
+      %p.greyText &nbsp;
+      %p.greyText Merchandise returned after 14 days will be issued a Chesca Gift Card in the amount of the current selling price.
+      %p.greyText &nbsp;
+      %p.greyText We regret that postage incurred is not refundable.
+      %p.greyText &nbsp;
+      %p.greyText Contact us on our &quot;Contact Us&quot; page for more information.
+      %p &nbsp;
+      %p.greyText
+        Please send returns to:
+        %br/
+        Chesca
+      %p.greyText 192 Hornsey Road
+      %p.greyText London N7 7 Ln
+      %p.greyText &nbsp;
+      %p.greyText Damaged or Defective Items:
+      %p.greyText If your merchandise was damaged in transit, save the original packaging and contact our Customer Service Department before returning. The Customer Service Team may be reached at +44 020 76093434 via email at info@chesca1424.co.uk.
+      %p.greyText &nbsp;
+      %p.greyText
+        You may also return items to a Chesca Retail Store. Please visit our
+        %a.darkgrey{:href => "CDFinalMockA_StoreLocator_B.html"} Store Locator
+        page or call +44 020 76093434. Refunds will be issued in the same tender as the purchase.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText &nbsp;
+      %p.greyText
+        %a.darkgreyBold{:name => "Exchanges &amp; Price Adjustments"} Exchanges &amp; Price Adjustments
+      %p.greyText Coming Soon.
+      %p.greyText &nbsp;
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+-elsif params[:id] == "CHESCA GIFT CARDS"
+  - content_for :mcRight do
+    #mcRight2
+      %p.bold  
+      %p.darkGreyLargeFont CHESCA GIFT CARDS
+      %p.greyText  
+      %p.darkgreyBold
+        %A{:NAME => "Checking a Gift Card Balance"} Checking a Gift Card Balance
+      %p.greyText Coming Soon.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText  
+      %p.darkgreyBold
+        %A{:NAME => "Purchasing a Gift Card"} Purchasing a Gift Card
+      %p.greyText Coming Soon.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText  
+      %p.darkgreyBold
+        %A{:NAME => "Redeeming a Gift card"} Redeeming a Gift card
+      %p.greyText Coming Soon.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p  
+      %p.darkgreyBold
+        %A{:NAME => "Send as a Gift Option"} Send as a Gift Option
+      %p
+        %span.greyText Coming Soon.
+      %p
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+
+-elsif params[:id] == "SAFETY & PRIVACY"
+  -content_for :mcRight do
+    #mcRight2
+      %p.bold  
+      %p.darkGreyLargeFont SAFETY & PRIVACY
+      %p  
+      %p.darkgreyBold
+        %A{:NAME => "Terms of Use"} Terms of Use
+      %p.greyText We hope you find your online experience at our website enjoyable. Please take a few moments to review the following terms and conditions, as well as our privacy policy, which govern your use of our website.
+      %p.greyText  
+      %p.greyText Your use of our website is considered to be your acceptance of these terms as well as those provided in the privacy policy. Due to circumstances, which are beyond our control, we may need to change these terms or the privacy policy from time to time without notice. Your use of our website after such changes are made and provided on our website constitutes your acceptance of the new terms.
+      %p.greyText  
+      %p.greyText All content and material contained in our website is protected by copyright, trademark and other intellectual property rights. Our content and materials may not be copied, recorded, published, broadcast, posted, modified, transmitted, displayed, distributed or downloaded unless you have received our prior written permission. Of course, you may make copies of our website as necessary incidental acts during your viewing of it, and you may print pages of our website for your private purposes. However, you may not "mirror" any of our website's content or materials on any other server.
+      %p.greyText  
+      %p.greyText To the extent you provide any information, data, suggestions or ideas to us via our website, you agree that it will not violate any right of any third party, including copyright, trademark, privacy or other personal or proprietary rights. Also, any information, data, suggestions or ideas you provide shall not contain libelous or otherwise unlawful, abusive, defamatory or obscene material. We must reserve the right to delete any information, data, suggestions or ideas you provide that we deem libelous, abusive, defamatory, obscene or in violation of any copyright or trademark laws, or any other laws.
+      %p.greyText  
+      %p.greyText Although we do not promote, or represent the quality of, the services or products of any other businesses on our website, you may encounter occasional links to other websites. Please know that we are not and cannot be responsible for the privacy policies or content of such other websites. We encourage you to be aware of, and to read, the privacy statements of each website you visit. Our privacy policy applies only to information collected on our site. Please direct any complaints or comments as to any linked websites directly to that website's administrator or webmaster.
+      %p.greyText  
+      %p.greyText Chesca t/as Ciel (Concessions) Ltd. provides our website to you for your convenience and information. Please understand that we are not providing any warranties to you, and your use of our website is strictly on an "as is" basis. We shall not be liable for any damages or losses whatsoever from your use of our website, even if you inform us in advance of the possibility of such damages or losses. These terms and all aspects of your use of our website shall be governed under the laws of the United Kingdom, without regard to its conflicts of law principles. Your use of our website signifies your agreement to the personal jurisdiction of, and venue in, such courts.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText  
+      %p.darkgreyBold
+        %A{:NAME => "Privacy Policy"} Privacy Policy
+      %p.greyText This Privacy Policy governs the manner in which Chesca t/as Ciel (Concessions) Ltd. collects, uses, maintains and discloses information collected from users (each, a "User") of the www.chescadirect.co.uk website ("Site"). This privacy policy applies to the Site and all products and services offered by Chesca t/as Ciel (Concessions) Ltd..
+      %p.greyText1  
+      %p.greyText Personal identification information
+      %p.greyText We may collect personal identification information from Users in a variety of ways, including, but not limited to, when Users visit our site, place an order, subscribe to the newsletter, and in connection with other activities, services, features or resources we make available on our Site. Users may be asked for, as appropriate, name, email address, mailing address, phone number, credit card information. Users may, however, visit our Site anonymously. We will collect personal identification information from Users only if they voluntarily submit such information to us. Users can always refuse to supply personally identification information, except that it may prevent them from engaging in certain Site related activities.
+      %p.greyText1  
+      %p.greyText Non-personal identification information
+      %p.greyText We may collect non-personal identification information about Users whenever they interact with our Site. Non-personal identification information may include the browser name, the type of computer and technical information about Users means of connection to our Site, such as the operating system and the Internet service providers utilized and other similar information.
+      %p.greyText1  
+      %p.greyText Web browser cookies
+      %p.greyText Our Site may use "cookies" to enhance User experience. User's web browser places cookies on their hard drive for record-keeping purposes and sometimes to track information about them. User may choose to set their web browser to refuse cookies, or to alert you when cookies are being sent. If they do so, note that some parts of the Site may not function properly.
+      %p.greyText1  
+      %p.greyText How we use collected information
+      %p.greyText Chesca t/as Ciel (Concessions) Ltd. collects and uses Users personal information for the following purposes:
+      %p.greyText
+        \- To improve our Site
+        %br/
+        We continually strive to improve our website offerings based on the information and feedback we receive from you.
+        %br/
+        \- To improve customer service
+        %br/
+        Your information helps us to more effectively respond to your customer service requests and support needs.
+        %br/
+        \- To process transactions
+        %br/
+        We may use the information Users provide about themselves when placing an order only to provide service to that order. We do not share this information with outside parties except to the extent necessary to provide the service.
+        %br/
+        \- To administer a content, promotion, survey or other Site feature
+        %br/
+        To send Users information they agreed to receive about topics we think will be of interest to them.
+        %br/
+        \- To send periodic emails
+      %p.greyText
+        %br/
+        The email address Users provide for order processing, will only be used to send them information and updates pertaining to their order. It may also be used to respond to their inquiries, and/or other requests or questions. If User decides to opt-in to our mailing list, they will receive emails that may include company news, updates, related product or service information, etc. If at any time the User would like to unsubscribe from receiving future emails, we include detailed unsubscribe instructions at the bottom of each email or User may contact us via our Site.
+      %p.greyText1  
+      %p.greyText How we protect your information
+      %p.greyText We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site.
+      %p.greyText Sensitive and private data exchange between the Site and its Users happens over a SSL secured communication channel and is encrypted and protected with digital signatures.
+      %p.greyText1  
+      %p.greyText Sharing your personal information
+      %p.greyText We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers for the purposes outlined above.We may use third party service providers to help us operate our business and the Site or administer activities on our behalf, such as sending out newsletters or surveys. We may share your information with these third parties for those limited purposes provided that you have given us your permission.
+      %p.greyText1  
+      %p.greyText Third party websites
+      %p.greyText Users may find advertising or other content on our Site that link to the sites and services of our partners, suppliers, advertisers, sponsors, licensors and other third parties. We do not control the content or links that appear on these sites and are not responsible for the practices employed by websites linked to or from our Site. In addition, these sites or services, including their content and links, may be constantly changing. These sites and services may have their own privacy policies and customer service policies. Browsing and interaction on any other website, including websites which have a link to our Site, is subject to that website's own terms and policies.
+      %p.greyText1  
+      %p.greyText Changes to this privacy policy
+      %p.greyText Chesca t/as Ciel (Concessions) Ltd. has the discretion to update this privacy policy at any time. When we do, we will revise the updated date at the bottom of this page. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this privacy policy periodically and become aware of modifications.
+      %p.greyText1  
+      %p.greyText Your acceptance of these terms
+      %p.greyText By using this Site, you signify your acceptance of this policy. If you do not agree to this policy, please do not use our Site. Your continued use of the Site following the posting of changes to this policy will be deemed your acceptance of those changes.
+      %p.greyText1  
+      %p.greyText Contacting us
+      %p.greyText
+        If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:
+        %br/
+        Chesca t/as Ciel (Concessions) Ltd.
+        %br/
+        www.chescadirect.co.uk
+        %br/
+        192 Hornsey Road
+        %br/
+        London N7 7LN
+        %br/
+        020 7609 3434
+        %br/
+        info@chesca1424.co.uk
+      %p.greyText This document was last updated on February 22, 2012
+      %p.greyText  
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText  
+      %p.darkgreyBold
+        %A{:NAME => "Web Security"} Web Security
+      %p.greyText In an effort to provide the highest level of protection to our customers and provide a safe and secure online shopping experience, our website is tested daily for vulnerabilities or malicious content using McAfee SECURE. This service helps to protect against hackers, adware, spyware, browser exploits, spammers, phishing attacks and online scams.
+      %p.greyText  
+      %p.greyText In addition, our site uses a VeriSign Secured SSL Certificate to establish a private, encrypted communication channel to secure data transmission of your personal information when completing an order with eileenfisher.com. The SSL Certificate enables a 128-bit or 256-bit SSL encryption of sensitive information such as your credit card number. Eileenfisher.com uses the most powerful SSL encryption commercially available today enabling every site visitor to experience the strongest SSL encryption available to them.
+      %p.greyText  
+      %p.greyText
+        Even though an SSL Certificate is capable of 128-bit or 256-bit encryption, certain older browsers and operating systems still cannot connect at this level. Without a Server-Gated Cryptography (SGC) certificate on the Web server, Web browsers and operating systems that do not support 128-bit strong encryption will receive only 40- or 56-bit encryption. Users with the following browser versions and operating systems will temporarily step-up to 128-bit SSL encryption:
+        %br/
+      %p.greyText  
+      %p.greyText
+        Internet Explorer export browser versions from 3.02 but before version 5.5
+        %br/
+        Netscape export browser versions after 4.02 and up through 4.72
+        %br/
+        Windows 2000 systems shipped prior to March 2001 that have not downloaded
+        %br/
+        Microsoft's High Encryption Pack or Service Pack 2 and that use Internet Explorer
+        %br/
+        (Internet Explorer browser versions prior to 3.02 and Netscape browser versions prior to 4.02 are not capable of 128-bit encryption with any SSL Certificate.)
+      %p.greyText The SSL certificate also authenticates that the web browser is connecting to our server. You can click on the VeriSign Secured seal to verify that Eileen Fisher, Inc is the owner or operator of the website located at www.eileenfisher.com. In addition, this certificate provides a private key that allows us decipher the encrypted information allowing for a secure e-commerce experience.
+      %p.greyText  
+      %p.greyText VeriSign is the leading SSL provider of SGC-enabled SSL Certificates, enabling 128- or 256-bit encryption for over 99.9% of Internet users.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText  
+- elsif params[:id] == 'COMPANY INFORMATION'
+  -content_for :mcRight do
+    #mcRight2
+      %p.bold  
+      %p.darkGreyLargeFont COMPANY INFORMATION
+      %p.darkgreyBold Store Locator
+      %p.bold  
+      %p.greyText
+        The
+        %a{:href => "CDFinalMockA_StoreLocator_B.html"} Store Locator
+        is designed to help you find the closest store near you that carries CHESCA product.
+      %p.greyText
+        %A.smallGreyText{:HREF => "#menu"}
+          (CLICK TO GO BACK TO MENU)
+      %p.greyText  
+      %p.darkgreyBold About Chesca
+      %p.darkgrey  
+      %p.greyText
+        Click
+        %a{:href => "CDFinalMockA_CompanyPage.html"} here
+        to find out more about Chesca.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey  
+- elsif params[:id] == "Frequently Asked Questions"
+  - content_for :mcRight do
+    #mcRight2
+      %p.greyText  
+      %p.darkGreyLargeFont Frequently Asked Questions
+      %p.bold  
+      %p.darkgrey We want your Chesca experience to be simple, easy and enjoyable! Below are answers to questions people ask us most frequently. If you have a question we have not addressed-or a thought you would like to share-please tell us.
+      %p.darkgrey  
+      %p.darkgrey Q:	I am looking for a particular item not offered on your website. Can you help me in locating it?
+      %p.darkgrey
+        %span.greyText A: We have a Personal Shopping Service that can help you find the pieces you are looking for. Contact them by email, info@chesca1424.co.uk or call +44 020 76093434.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey
+        %br/
+        Q:	What is your online return policy?
+      %p.darkgrey
+        %span.greyText A: If you are not absolutely delighted with your Chesca pieces, we make it easy for you to return them. We accept returns and exchanges at our Chesca retail locations. You may also ship your return with a carrier that can provide tracking and insurance. Chesca cannot replace packages lost during a return shipment if proof of tracking is unavailable. For more information about returning an order, click here.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey
+        %br/
+        Q:	How do I know which size is right for me?
+      %p.darkgrey
+        %span.greyText
+          A: To find your size,
+          = succeed "." do
+            %a.darkgrey{:href => "CDFinalMockA_SizeChart.html"}
+              %strong click here
+          We also provide our inseam and skirt/dress length information in the product description of each garment offered online.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey
+        %br/
+        Q:	Can I place an order online and have it shipped outside of the UK?
+      %p.greyText A: If you are located in the UK and would like to have an order shipped to an international recipient you can do so by shopping at www.chescadirect.co.uk and using the "Rest of the World" selection or call +44 020 76093434.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey
+        %br/
+        Q:	Can I change my shipping information after I have placed an order?
+      %p.darkgrey
+        %span.greyText A: We are sorry that shipping information cannot be changed once you submit your order. We are committed to processing orders very quickly, and once an order begins the fulfillment process we are unable to modify it. We apologize for any inconvenience, and we hope that in the majority of cases our faster processing times work to your advantage.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey
+        %br/
+        Q:	Why are items sometimes out of stock?
+      %p.darkgrey
+        %span.greyText A: Every effort is made to maintain the availability of items shown on our website, but due to popularity and supply levels, some products may not always be available. If an item that you have ordered is no longer available we are committed to communicating this to you as promptly as possible.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.darkgrey
+        %br/
+        Q:	I do not live near a Chesca store. How can I order from you?
+      %p.darkgrey
+        %span.greyText A: You can place an order from our website or through our Personal Shopping Team. To see which pieces are available for purchase online, click the Shop by Item or Shop Our Outfits buttons in the top navigation. To connect with our Personal Shopping Team, please call
+      %p.darkgrey
+        %span.greyText +44 020 76093434.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.red  
+      %p.12font  
+      %p.12font  
+      %p  
+- elsif params[:id] == 'RETURNS'
+  -content_for :mcRight do
+    #mcRight2
+      %p.bold  
+      %p.darkGreyLargeFont RETURNS
+      %p.greyText  
+      %p.darkgreyBold
+        %A{:NAME => "Return Policy"} Return Policy
+      %p.greyText If you're not absolutely delighted with your Chesca purchase, we make it easy for you to return it.
+      %p.greyText We accept unworn merchandise with the receipt and original tags attached within 14 days of purchase. Refunds will be issued in the same tender as the purchase. Please note, processing of online returns may take up to five business days. Depending on your credit card company, the credit should appear on your statement within two billing cycles.
+      %p.greyText  
+      %p.greyText Your return should include the paypal packing slip. If you do not have the packing slip, provide the following information with your return: name, address, email address, phone number and order number, if available. Please be sure to ship the package with a carrier that can provide tracking and insurance. Chesca cannot replace packages lost during return shipment if proof of tracking is not available.
+      %p.greyText  
+      %p.greyText Merchandise returned after 14 days will be issued a Chesca Gift Card in the amount of the current selling price.
+      %p.greyText  
+      %p.greyText We regret that postage incurred is not refundable.
+      %p.greyText  
+      %p.greyText Contact us on our "Contact Us" page for more information.
+      %p  
+      %p.greyText
+        Please send returns to:
+        %br/
+        Chesca
+      %p.greyText 192 Hornsey Road
+      %p.greyText London N7 7 Ln
+      %p.greyText  
+      %p.greyText Damaged or Defective Items:
+      %p.greyText If your merchandise was damaged in transit, save the original packaging and contact our Customer Service Department before returning. The Customer Service Team may be reached at +44 020 76093434 via email at info@chesca1424.co.uk.
+      %p.greyText  
+      %p.greyText
+        You may also return items to a Chesca Retail Store. Please visit our
+        %a.darkgrey{:href => "CDFinalMockA_StoreLocator_B.html"} Store Locator
+        page or call +44 020 76093434. Refunds will be issued in the same tender as the purchase.
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+      %p.greyText  
+      %p.greyText
+        %A.darkgreyBold{:NAME => "Exchanges & Price Adjustments"}
+          Exchanges & Price Adjustments
+      %p.greyText Coming Soon.
+      %p.greyText  
+      %p.greyText
+        %a.smallGreyText{:href => "#menu"} (CLICK TO GO BACK TO MENU)
+- else
+  - content_for :mcRight do
+    #mcRight2
+    %p.bold
+      %p.darkGreyLargeFont
+        %br
+        %br
+        %br
+      %p.darkGreyLargeFont
+        %span.gold Have a question?
+        %br/
+        %strong
+          Click to find your answers.
+      %p.darkGreyLargeFont
+        %p.darkGreyLargeFont
+
+
+

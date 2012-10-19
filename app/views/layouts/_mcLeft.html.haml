@@ -1,0 +1,20 @@
+%p.bold
+  = link_to 'LOOKS WE LOVE', looks_path, :class =>  'black'
+%p.greyText
+= render :partial => 'layouts/look_menu'
+%p.normal
+  %br/
+%p.bold
+  %a.black BOUTIQUE
+%p.greyText
+= render :partial => 'layouts/boutique_menu'
+%p.normal
+  %br/
+%p.bold
+  %a.black SHOP BY CATEGORY
+%p.greyText
+= render :partial => 'layouts/category_menu'
+%p.normal
+  %br/
+= link_to_pages
+

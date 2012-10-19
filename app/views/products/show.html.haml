@@ -1,0 +1,118 @@
+- if @product
+  .product
+    .images
+      
+      = render :partial => 'admin/products/imagezoom'
+
+    .info
+      %h2{:class => 'mistral'}= @product.name
+      %p.code
+        Product code:
+        - if params[:c].nil?
+          = "#{@product.code}#{@product.colors.first.id}" rescue ""
+        - else
+          = "#{@product.code}#{Color.find(params[:c]).id}"
+      %p.description= @product.description
+      %br
+      - if !@product.composition.blank?
+        %p.composition
+          Composition:
+          = @product.composition
+      %br
+      %p
+        %b
+          show in
+          = @product.colors.name.upcase rescue ''
+        %br
+        - @product.colors.uniq.each do |c|
+          -link_to product_path(@product,:c => c.id) do
+            =image_tag c.image.url(:square), :alt =>c.name
+        %br
+          %b SIZING CHART:
+          %span
+            = @product.measurement
+      .fb_button_chesca
+        = facebook_like(product_url(@product))
+      %br
+      - if !@product.washing_instructions.blank?
+        %p.washing-instructions
+          Washing instructions:
+          %span= @product.washing_instructions    
+          
+      .price
+        - if @product.reduced_price?
+          %span.old-price= number_to_currency(@product.old_price, :precision => 2, :unit => '&pound;')
+        %b= number_to_currency(@product.price, :precision => 2, :unit => '&pound;')
+      - if @product.available
+        - form_for(@new_cart_item) do |f|
+          = f.hidden_field(:product_id, :value => @product.id)
+          .size-qty
+            = text_field 'cart_item', 'quantity',:size=> '1', :class =>'form_product', :value => '1'
+            = label :cart_item, :quantity, "Qty&nbsp&nbsp"
+            = collection_select 'cart_item', 'size', @product.sizes.uniq, :id, :name, {:prompt => 'Select Size'}, {:class => 'form_product'}
+            = collection_select 'cart_item', 'color', @product.colors.uniq, :id,:name, {:prompt => 'Select Color'},{:class => 'form_product'}
+            %br
+            %br
+            .button_form
+              %button{ :type => 'submit',:class =>'form_product_button_1'} ADD TO BASKET
+              
+      - else
+        %span.unavailable OUT OF STOCK
+      %br  
+        = render :partial => 'products/sendformtabs', :object => @product             
+  - if !@product.complete_outfits.empty? 
+    %br
+    %br
+    %br
+    %br
+    %br
+    #complete
+      &nbsp &nbsp Complete the look    
+      .related-products
+        - @product.complete_outfits.each do |outfit|
+          - link_to product_path(outfit), :class => 'related-product' do
+            = image_tag main_image_for_product(outfit, :tiny), :alt => outfit.name, :title => outfit.name
+
+:javascript
+  jQuery(window).load(function(){
+      jQuery("#nivoslider-577").nivoSlider({
+          effect:"fade",
+          slices:15,
+          boxCols:8,
+          boxRows:4,
+          animSpeed:200,
+          pauseTime:3000,
+          startSlide:0,
+          directionNav:true,
+          directionNavHide:true,
+          controlNav:true,
+          controlNavThumbs:true,
+          controlNavThumbsFromRel:true,
+          keyboardNav:true,
+          pauseOnHover:true,
+          manualAdvance:true
+      });
+  });
+  jQuery(window).load(function(){
+    var x = jQuery(".realted1");
+    x.live("click", function(){
+      var like = jQuery("#like")
+      var complete = jQuery("#complete")
+      like.show();
+      complete.hide();
+    });
+  });
+  jQuery(window).load(function(){
+    var x = jQuery(".realted2");
+    x.live("click", function(){
+      var like = jQuery("#like")
+      var complete = jQuery("#complete")
+      like.hide();
+      complete.show();
+    });
+  });
+
+- content_for :slider_product do
+  = javascript_include_tag 'slider-product'
+  = stylesheet_link_tag 'slider-product'
+

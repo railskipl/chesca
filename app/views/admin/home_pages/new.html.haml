@@ -1,0 +1,4 @@
+%h1 New Home Page
+- form_for(@home_page, :url=> admin_home_pages_path) do |f|
+  =render :partial => 'admin/home_pages/form', :object => f
+=link_to 'back', admin_home_pages_path

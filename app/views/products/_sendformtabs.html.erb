@@ -1,0 +1,62 @@
+	
+	<div id="container">
+		<ul class="menu">
+			<li id="news" class="active">Send to a friend</li>
+			<li id="tutorials">Delivery info</li>
+			<li id="links">Return Policy</li>
+		</ul>
+		<span class="clear"></span>
+		<div class="content news">
+			<% form_for :mailer, :url=>{:controller=>"products", :action=>"send_to_a_friend"} do |f| %>
+		<table width="100%" border="0" cellspacing="10" cellpadding="0">
+  
+  <tr>
+    <td align="left" valign="middle">Your name:</td>
+    <td align="left" valign="top"><label>
+      <%= f.text_field :name, :class => "text_field" %>
+    </label></td>
+  </tr>
+  <tr>
+    <td align="left" valign="middle">Your e-mail:</td>
+    <td align="left" valign="top"> <%= f.text_field :email, :class => "text_field" %></td>
+  </tr>
+  <tr>
+    <td align="left" valign="middle">Friend's e-mail:</td>
+    <td align="left" valign="top"> <%= f.text_field :friends_email, :class => "text_field" %></td>
+  </tr>
+  <%= f.hidden_field :product_id, :value => @product.id %>
+  <tr>
+    <td colspan="2" align="left" valign="middle">
+	
+	<div style="width:250px; height:auto; float:left">The email addresses are not shared and not used for advertising</div>
+	<div style="width:50px; height:auto; float:right"><%= f.submit :send, :class => "sendbutton" %>
+	</div>
+	</td>
+    </tr>
+ 
+</table>
+<% end %>
+
+
+		</div>
+		<div class="content tutorials">
+<table width="100%" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td><img src="/images/delivery.jpg" alt="" /></td>
+    <td>Standard delivery within 10-14 working days <%= number_to_currency(@product.price, :precision => 2, :unit => '&pound;') %> </td>
+  </tr>
+</table>
+
+		</div>
+		<div class="content links">
+			<table width="100%" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td><img src="/images/return.jpg" alt="" width="88" height="73" /></td>
+    <td>If any item is unsatisfactory please return within 7 days for a full refund of the garment, together with the Paypal Packing Slip.
+We regret that postage incurred is not refundable.
+Contact us on our contact page for more information.  </td>
+  </tr>
+</table>
+		</div>
+	</div>
+</body>

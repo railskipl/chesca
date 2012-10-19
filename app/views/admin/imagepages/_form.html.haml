@@ -1,0 +1,10 @@
+= form.error_messages
+%p
+  = form.label :name
+  %br/
+  = form.text_field :name
+%p
+  = form.label :image
+  %br/
+  = form.file_field :image
+%p= form.submit

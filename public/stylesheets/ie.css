@@ -1,0 +1,13 @@
+.product-small .product-name {
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
+
+.product .images #thumbnails-wrapper {
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
+  .product .images #thumbnails-wrapper .thumbnails {
+    padding: 4px 4px 4px 0;
+    margin: 0;
+    background: white; }
+    .product .images #thumbnails-wrapper .thumbnails .left, .product .images #thumbnails-wrapper .thumbnails .right {
+      display: none; }

@@ -1,0 +1,31 @@
+=image_tag "line_03.jpg", :height => "21", :width => "258"
+%span.bold{:style => 'color: #999999; font-size: 14px;' ,:align => 'center'} LOOKS WE LOVE
+=image_tag "line_03.jpg", :height => "21", :width => "258"
+%table{:border => "0", :width => "783"}
+  - color_1 = '#CCCCCC'
+  - color_2 = '#DFDFDF'
+  - @looks.each do |o|
+    %tr
+      %td{:bgcolor => color_1, :width => "285"}
+        %div{:align => "left"}
+          %p{:align => "center"}
+            - unless o.image.url.include? 'missing'
+              =image_tag o.image.url(:looks)
+      %td{:bgcolor => color_2, :width => "488"}
+        .blackLarge= o.title
+        = o.content.html_safe
+        %br
+        .addthis_toolbox.addthis_default_style
+          %a.addthis_button_facebook_like{"fb:like:layout" => "button_count"}
+          %a.addthis_button_tweet
+          %a.addthis_button_google_plusone{"g:plusone:size" => "medium"}
+          %a.addthis_counter.addthis_pill_style
+        %script{:src => "http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f4678045ece37cd", :type => "text/javascript"}
+        %br
+      - if color_1.nil?
+        - color_1 = '#CCCCCC'
+        - color_2 = '#DFDFDF'
+      - else
+        - color_1 =color_2 = nil
+= render :partial => 'left'
+

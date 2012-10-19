@@ -1,0 +1,11 @@
+
+= render :partial => 'left'
+#posts-wrapper
+  %h2 Fashion news
+  - @posts.each do |post|
+    .post
+      %h3.date-and-title= link_to "#{post.created_on} &ndash; #{post.title}", post_path(post)
+      .content= post.content
+      %br
+= will_paginate @posts, :previous_label => 'PREV', :next_label => 'NEXT'
+

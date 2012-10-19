@@ -1,0 +1,20 @@
+%h1 Looks We Love
+%table.data
+  %tr
+    %th Title
+    %th Image
+    %th Posted on
+    %th Active
+    %th Actions
+  - @looks.each do |look|
+    %tr
+      %td= link_to look.title, admin_look_path(look)
+      %td= image_tag look.image.url(:tiny) rescue ''
+      %td= look.created_on
+      %td= look.active
+      %td
+        = link_to 'Edit', edit_admin_look_path(look)
+        = link_to 'Delete', admin_look_path(look), :method => :delete, :confirm => 'Are you sure?'
+= link_to 'New Looks We Love Post', new_admin_look_path(:type => '3'), :class => 'new-link'
+
+

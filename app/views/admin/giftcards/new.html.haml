@@ -1,0 +1,5 @@
+%h1 New color
+- form_for(@giftcard, :url => admin_giftcards_path) do |f|
+  = f.error_messages
+  = render(:partial => 'admin/giftcard/form', :object => f)
+  = f.submit

@@ -1,0 +1,11 @@
+<ul>
+<% for dikhava in tree_look.children %>
+ <% if !dikhava.nil? %>
+  <li><%= link_to dikhava.name, look_path(dikhava), :class=> 'greyText'%></li>
+ <% end %>
+ <% end %>
+</ul>
+ <% unless tree_look.children.empty? %>
+  <%= render(:partial => "layouts/tree_look", :collection => tree_look.children)%>
+<% end %>
+

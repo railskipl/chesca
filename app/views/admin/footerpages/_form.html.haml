@@ -1,0 +1,19 @@
+- form_for [:admin, @footerpage], :html => {:multipart => true} do |f|
+  %table.form
+    %tr
+      %th= f.label :image
+      %td= f.file_field :image
+    %tr
+      %th= f.label :name
+      %td= f.text_field :name
+    %tr
+      %th{ :colspan => 2 }= f.label :content
+    %tr
+      %td{ :colspan => 2 }= f.text_area :content
+
+  = f.submit 'Submit Footer'
+- content_for :bottom do
+  = javascript_include_tag 'ckeditor/ckeditor'
+  :javascript
+    CKEDITOR.replace('footerpage[content]');
+

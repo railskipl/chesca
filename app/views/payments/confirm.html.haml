@@ -1,0 +1,57 @@
+#payments-wrapper
+  %p Please Confirm your Payment Details:
+
+  %table
+    %tr
+      %th.right Name:
+      %td.left= @name
+    %tr
+      %th.right Company:
+      %td.left= @address['company']
+    %tr
+      %th.right Address 1:
+      %td.left= @address['address1']
+    %tr
+      %th.right Address 2:
+      %td.left= @address['address2']
+    %tr
+      %th.right City:
+      %td.left= @address['city']
+    %tr
+      %th.right State:
+      %td.left= @address['state']
+    %tr
+      %th.right Country:
+      %td.left= @address['country']
+    %tr
+      %th.right Zip/Post Code:
+      %td.left= @address['zip']
+  %br
+  %p Please confirm your order:
+  %table{:width => '773px', :border => '1px'}
+    %tr
+      %th{:align => 'center'} PRODUCT
+      %th{:align => 'center'} CODE
+      %th{:align => 'center'} SIZE
+      %th{:align => 'center'} COLOR
+      %th{:align => 'center'} PRICE
+      %th{:align => 'center'} QUANTITY
+    - current_cart.cart_items.each do |item|
+      %tr{:class => 'greyText'}
+        %td{:align => 'center'}= item.product_name
+        %td{:align => 'center'}= item.product_code
+        %td{:align => 'center'}= item.size
+        %td{:align => 'center'}= item.color
+        %td{:align => 'center'}= item.product_price
+        %td{:align => 'center'}= item.quantity
+  - form_tag(complete_payment_path) do
+    = hidden_field_tag :token, params[:token]
+    = hidden_field_tag :buyer, @name
+    = hidden_field_tag :payer_id, params[:PayerID]
+    = hidden_field_tag :buyer_email, @email_address
+    %button#complete-payment{ :type => 'submit' }CLICK TO COMPLETE PAYMENT
+
+- content_for :bottom do
+  :javascript
+    #{tracking_email_kissmetrics(@email_address)}
+  =stylesheet_link_tag 'confirmation'

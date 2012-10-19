@@ -1,0 +1,10 @@
+= link_to 'Back to Looks We Love', admin_looks_path
+
+#posts-wrapper
+  .post
+    %h3.date-and-title== #{@look.created_on} &ndash; #{@look.title}
+    %br
+    %br
+    = image_tag @look.image.url(:editor)
+    .content= @look.content
+

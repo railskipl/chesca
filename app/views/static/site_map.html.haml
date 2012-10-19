@@ -1,0 +1,112 @@
+#mcRight2
+  %p
+  %p.largeText Site Map
+  %p.darkgrey
+  %table{:border => "0", :width => "877"}
+    %tr
+      %td{:bgcolor => "#666666", :width => "225"}
+        %span.whiteText How to contact us
+      %td{:bgcolor => "#666666", :width => "225", :height => "24"}
+        %span.whiteText
+          = link_to 'Our Company', our_company_path, :class => 'whiteText'
+      %td.whiteText{:bgcolor => "#666666", :width => "225"}
+        = link_to 'Customer Care', ask_us_path(:id=> 'SHIPPING'), :class => 'whiteText'
+      %td.whiteText{:bgcolor => "#666666", :width => "225"}  Shopping Online
+    %tr
+      %td.greyText{:bgcolor => "#FFFFFF"}
+        Email:
+        %a.darkgrey{:href => "mailto:info@chesca1424.co.uk"} info@chesca1424.co.uk
+      %td.greyText
+        %a.greyText{:href => our_company_path} Who We Are
+      %td.greyText
+        %a.greyText{:href => ask_us_path(:id=> 'SHIPPING')} Shipping info
+      %td.greyText
+        %a.greyText{:href => ask_us_path(:id=> 'SHIPPING')} Secure Ordering
+    %tr
+      %td.greyText Phone: +44 020 7609 3434
+      %td.greyText
+        %a.greyText{:href => our_company_path} Meet Jacqui
+      %td.greyText
+        %a.greyText{:href => ask_us_path(:id=> 'ORDERING')} Order Cancellation
+      %td.greyText
+        %a.greyText{:href => ""} Back to Homepage
+    %tr
+      %td.greyText Mail: 192 Hornsey Road
+      %td.greyText
+        %a.greyText{:href => our_company_path} Our Mission
+      %td.greyText
+        %a.greyText{:href => ask_us_path(:id=> 'ORDERING')} Personal Shopper
+      %td.greyText
+        %a.greyText{:href => ask_us_path(:id=> 'ORDERING')} Promotional Codes
+    %tr
+      %td.greyText London, UK N7 7Ln
+      %td.greyText
+        %a.greyText{:href => our_company_path} Careers
+      %td.greyText
+        %a.greyText{:href => ask_us_path(:id=> 'RETURNS')} Returns
+      %td.greyText
+    %tr
+      %td.bold
+        %a.greyText{:href => locations_path} Store Locations
+      %td.greyText
+      %td.greyText
+        %a.greyText{:href => ""} Gift Cards
+      %td
+    %tr
+      %td
+      %td
+      %td.greyText
+        %a.greyText{:href => sizing_chart_path} Size Charts
+      %td
+    %tr
+      %td
+        %br
+    %tr.whiteText
+      %td.whiteText{:bgcolor => "#666666"}
+        %a.whiteText{:href => ""}  Shop Looks
+      %td.whiteText{:bgcolor => "#666666"}
+        %a.whiteText{:href => ""}  Shop By Item
+      %td.whiteText{:bgcolor => "#666666"}  Boutique
+      %td{:bgcolor => "#666666"}
+        %a.whiteText{:href => designers_path} Designer Index
+    %tr
+      %td.greyText{:valign => 'top'}
+        - @looks.each do |look|
+          %p= link_to look.name, look_path(look), :class=> 'greyText'
+      %td.greyText{:valign => 'top'}
+        - @categories.each do |category|
+          %p= link_to category.name, department_path(category), :class=> 'greyText'
+      %td.greyText{:valign => 'top'}
+        - @boutiques.each do |boutique|
+          %p= link_to boutique.name, style_path(boutique), :class=> 'greyText'
+      %td.greyText{:valign => 'top'}
+        - @designers.each do |designer|
+          %p= link_to designer.name, designer_path(designer), :class=> 'greyText'
+    %tr
+      %td
+        %br
+    %tr
+      %td.whiteText{:bgcolor => "#666666", :height => "24"}
+        %a.whiteText{:href => media_path} In the Media
+      %td.whiteText{:bgcolor => "#666666"}
+        %a.whiteText{:href => privacy_policy_path} Legal
+      %td.whiteText{:bgcolor => "#666666"}  Social Media
+      %td
+    %tr
+      %td.greyText{:valign => 'top'}
+        %p= link_to 'Advertising', advertising_media_path, :class => 'greyText'
+        %p= link_to 'As Seen In', as_seen_in_media_path, :class => 'greyText'
+        %p= link_to 'Events', events_media_path, :class => 'greyText'
+        %p= link_to 'Press', press_media_path, :class => 'greyText'
+        %p= link_to 'Videos', videos_media_path, :class => 'greyText'
+      %td.greyText{:valign => 'top'}
+        %p= link_to 'Privacy Policy', privacy_policy_path, :class =>  'greyText'
+        %p= link_to 'Terms & Conditions', privacy_policy_path, :class =>  'greyText'
+      %td.greyText{:valign => 'top'}
+        Chesca on YouTube
+        Chesca on Facebook
+        Chesca on Twitter
+      %td
+    %tr
+      %td
+        %br

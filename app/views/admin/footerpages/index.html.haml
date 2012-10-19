@@ -1,0 +1,18 @@
+%h1 Footer Pages
+%table.data
+  %tr
+    %th Title
+    %th Image
+    %th Posted on
+    %th Actions
+  - @footerpages.each do |footerpage|
+    %tr
+      %td= link_to footerpage.name, admin_footerpage_path(footerpage)
+      %td= image_tag footerpage.image.url(:tiny) rescue ''
+      %td= footerpage.created_on
+      %td
+        = link_to 'Edit', edit_admin_footerpage_path(footerpage)
+        = link_to 'Delete', admin_footerpage_path(footerpage), :method => :delete, :confirm => 'Are you sure?'
+= link_to 'New Footer Page', new_admin_footerpage_path, :class => 'new-link'
+
+

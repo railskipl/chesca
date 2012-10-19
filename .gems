@@ -1,0 +1,15 @@
+rails --version 2.3.8
+thoughtbot-shoulda
+haml
+fastercsv
+will_paginate --version 2.3.11
+searchlogic --version 2.4.27
+backports 
+ruby-debug
+nokogiri
+paperclip --version 2.3
+mysql
+cocaine
+aws-s3
+aws-sdk
+

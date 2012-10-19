@@ -1,0 +1,4 @@
+#posts-wrapper
+  .post
+    %h3.date-and-title== #{@news_feed.created_at} &ndash; #{@news_feed.active ? "active" : "inactive"}
+    .content= @news_feed.text

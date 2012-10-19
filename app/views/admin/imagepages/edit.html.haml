@@ -1,0 +1,7 @@
+%h1 Editing Image
+- form_for ([:admin, @imagepage]), :html => {:multipart => true} do |f|
+  = render :partial => 'form', :object => f
+%p
+  = link_to "Show", admin_imagepage_path(@imagepage)
+  |
+  \#{link_to "View All", admin_imagepages_path}

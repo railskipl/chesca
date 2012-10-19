@@ -1,0 +1,13 @@
+<div class="product" style="background-image: url('<%= product.main_image ? product.main_image.image.url(:small_fixed) : '/images/no-pic.png' %>')">
+  <div class="options">
+    <%= link_to('More Info', product) %>
+    <% form_for(@new_cart_item) do |f| %>
+      <%= f.hidden_field(:product_id, :value => product.id) %>
+      <%= f.hidden_field(:quantity, :value => 1) %>
+      <a href="#" onclick="Element.up(this, 'form').submit()">Add to Cart</a>
+    <% end %>
+  </div>
+  <div class="name"><%= h(product.name) %></div>
+  <div class="price"><%= number_to_currency(product.price, :unit => '&pound;') %></div>
+</div>
+

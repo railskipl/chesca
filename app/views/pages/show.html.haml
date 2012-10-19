@@ -1,0 +1,28 @@
+#product-heading
+  - unless @page.image.url(:large).include?("missing")
+    %div{:style=>"width:795;height:160px;"}
+      = image_tag @page.image.url(:large), :alt => @page.name
+#products-small
+  - @page.products.each do |product|
+    - link_to(product_path(product), :class => 'product-small') do
+      = image_tag main_image_for_product(product, :small), :alt => product.name
+      .product-name
+        %span= product.name
+        %span.price
+          = "(#{number_to_currency(product.price, :precision => 2, :unit => '&pound;')})"
+
+- content_for :bottom do
+  = javascript_include_tag 'phase'
+
+  :javascript
+    if($('products-small')) {
+      $('products-small').childElements().each(function(product) {
+        product.observe('mouseover', function(event) {
+          phaseIn(product.down('.product-name'));
+        });
+        product.observe('mouseout', function(event) {
+          phaseOut(product.down('.product-name'));
+        });
+      });
+    }
+

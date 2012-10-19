@@ -1,0 +1,126 @@
+#product_price {
+  float: right;
+  padding: 5px 10px;
+  background: #EEEEEE;
+  border-bottom: 1px solid #DDDDDD;
+  color: #888888;
+  font-family: georgia, serif;
+  font-size: 30px;
+  text-shadow: 1px 1px 1px #AAAAAA;
+}
+
+#product_description {
+}
+
+#add_to_cart_options {
+  position: relative;
+  clear: both;
+  margin: 20px auto 0 auto;
+  width: 428px;
+  height: 71px;
+  padding-left: 72px;
+  background: url('/images/add-to-cart-bg.png');
+}
+  
+  #add_to_cart_options .sizes,
+  #add_to_cart_options .quantity {
+    position: absolute;
+    left: 80px;
+  }
+
+    #add_to_cart_options .sizes .title,
+    #add_to_cart_options .quantity .title {
+      float: left;
+      color: white;
+      margin-right: 5px;
+    }
+
+    #add_to_cart_options .sizes .choice,
+    #add_to_cart_options .quantity .choice {
+      float: left;
+      padding: 2px 5px;
+      margin: 0 3px;
+      background: #5C5F68;
+      font-size: 11px;
+      color: #27282C;
+      cursor: pointer;
+      border-right: 1px solid #393B41;
+      border-bottom: 1px solid #393B41;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+    }
+
+      #add_to_cart_options .sizes .choice.selected,
+      #add_to_cart_options .quantity .choice.selected {
+        background: #B9BFD1;
+      }
+
+  #add_to_cart_options .sizes {
+    top: 12px;
+  }
+
+  #add_to_cart_options .quantity {
+    bottom: 12px;
+  }
+  
+  #add_to_cart_button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    width: 100px;
+    height: 28px;
+    background: transparent url('/images/add-to-cart-button.png');
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+  }
+
+#slideshow_container {
+  position: relative;
+  clear: both;
+  height: 300px;
+  margin-top: 20px;
+}
+
+  #slideshow_container .slideglide_slider img {
+    margin: 0 5px;
+  }
+
+  #slideshow_container .controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 22px;
+    z-index: 100;
+  }
+
+    #slideshow_container .controls .back,
+    #slideshow_container .controls .forward {
+      position: absolute;
+      top: 0;
+      height: 22px;
+      width: 22px;
+      background: url('/images/slideshow-controls.png');
+      cursor: pointer;
+    }
+
+    #slideshow_container .controls .back {
+      left: 0;
+    }
+
+      #slideshow_container .controls .back:hover {
+        background-position: left bottom;
+      }
+
+    #slideshow_container .controls .forward {
+      right: 0;
+      background-position: right top;
+    }
+
+      #slideshow_container .controls .forward:hover {
+        background-position: right bottom;
+      }

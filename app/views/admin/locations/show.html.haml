@@ -1,0 +1,7 @@
+= link_to 'Back to Vouchers', admin_vouchers_path
+
+#posts-wrapper
+  .voucher
+    %h3.date-and-title== #{@voucher.created_at.to_s(:short)} &ndash; #{@voucher.code}
+    .content= "Percentage #{show_percentage(@voucher.percent)}"
+

@@ -1,0 +1,46 @@
+%h1 Top 100 products
+
+%table#top100{ :cellpadding => 0, :cellspacing => 0 }
+  - count = 1
+  - @products.group_by(&:department).each do |department, products|
+    %thead
+      %tr
+        %th{ :colspan => 5 }
+          - if department.nil?
+            Other
+          - else
+            = department.name
+    %tbody
+      - products.each do |product|
+        %tr
+          %td.count== #{count}.
+          %td.name= product.name
+          %td.views== #{product.page_hits} views
+          %td= link_to 'edit', edit_admin_product_path(product)
+          %td= link_to 'view', product_path(product)
+        - count = count + 1
+
+- content_for :bottom do
+  :javascript
+    $('top100').observe('click', function(event) {
+      var target = event.element();
+      if(target.match('th')) {
+        var tbody = target.up('thead').next('tbody');
+
+        if(tbody.rolling)
+          return;
+
+        tbody.rolling = true;
+        if(tbody.visible()) {
+          Effect.BlindUp(tbody, { duration: 0.4, afterFinish: function() {
+            tbody.rolling = false;
+          } });
+        }
+        else {
+          Effect.BlindDown(tbody, { duration: 0.4, afterFinish: function() {
+            tbody.rolling = false;
+          } });
+        }
+      }
+    });
+

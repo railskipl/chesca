@@ -1,0 +1,29 @@
+#product-heading
+  - if(%w[products departments].include?(controller_name))
+    %span.topfilters sort by:
+    =link_to "Highest Price",url_for(:sort_by=>"price",:order=>"DESC"), :class => 'topfilters'
+    =link_to "Lowest Price",url_for(:sort_by=>"price",:order=>"ASC"), :class => 'topfilters'
+    =link_to "Newest",url_for(:sort_by=>nil), :class => 'topfilters'
+  - else
+    %span.topfilters filter by:
+    - Department.all.each do |dep|
+      =link_to dep.name+"(#{Product.count_by_dep_and_style(dep.id,params[:id].to_i,session[:admin] ? true : false)})",url_for(:department=>dep.id), :class => 'topfilters'
+#products-small
+  -if !@products.nil?
+    - @products.each do |product|
+      - if product.visible == true
+        - link_to(product_path(product), :class => 'product-small') do
+          .image
+            = image_tag main_image_for_product(product, :large), :alt => product.name, :size => '185x247'
+          .product_color
+            - product.colors.uniq.each do |color|
+              = image_tag color.image.url(:square), :class => 'color'
+          .product_name
+            %p
+              %b= product.name
+            %p
+            .price
+              = "#{number_to_currency(product.price, :precision => 2, :unit => '&pound;')}"
+
+= will_paginate @products, :previous_label => 'PREV', :next_label => 'NEXT'
+

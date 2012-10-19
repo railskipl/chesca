@@ -1,0 +1,30 @@
+<h1>Sizes</h1>
+
+<table class="data">
+  <tr>
+    <th>Name</th>
+    <th>Edit</th>
+  </tr>
+  <% for size in @sizes -%>
+    <tr>
+      <td><%= size.name %></td>
+      <td>
+        <%= link_to('Edit', edit_admin_size_path(size)) %>
+        <%= link_to('Delete', admin_size_path(size), :method => :delete, :confirm => 'Delete size?') %>
+      </td>
+    </tr>
+  <% end -%>
+</table>
+
+<h2>New Size</h2>
+
+<% form_for(@new_size, :url => admin_sizes_path) do |f| %>
+  <table class="form">
+    <tr>
+      <th>Name</th>
+      <td><%= f.text_field(:name) %></td>
+    </tr>
+  </table>
+
+  <%= f.submit('Add') %>
+<% end -%>

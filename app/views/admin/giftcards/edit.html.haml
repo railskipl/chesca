@@ -1,0 +1,5 @@
+%h1 Editing Color
+- form_for(@giftcard, :url => admin_giftcard_path(@giftcard), :method => :put, :html => {:multipart => true}) do |f|
+  = f.error_messages
+  = render(:partial => 'admin/giftcards/form', :object => f)
+  = f.submit

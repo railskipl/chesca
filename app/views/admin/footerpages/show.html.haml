@@ -1,0 +1,10 @@
+= link_to 'Back to Footer Links', admin_footerpages_path
+
+#posts-wrapper
+  .post
+    %h3.date-and-title== #{@footerpage.created_on} &ndash; #{@footerpage.name}
+    %br
+    %br
+    = image_tag @footerpage.image.url(:editor)
+    .content= @footerpage.content
+

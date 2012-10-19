@@ -1,0 +1,24 @@
+- form_for [:admin, @look], :html => {:multipart => true} do |f|
+  %table.form
+    %tr
+      %th= f.label :image
+      %td= f.file_field :image
+    %tr
+      %th= f.label :title
+      %td= f.text_field :title
+    %tr
+      %th{ :colspan => 2 }= f.label :content
+    %tr
+      %td{ :colspan => 2 }= f.text_area :content
+
+    %tr
+      %th= f.label :active
+      %td
+        = f.check_box :active
+        = f.label :yes
+  = f.submit 'Submit Look'
+- content_for :bottom do
+  = javascript_include_tag 'ckeditor/ckeditor'
+  :javascript
+    CKEDITOR.replace('look[content]');
+

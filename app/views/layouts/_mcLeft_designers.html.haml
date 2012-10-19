@@ -1,0 +1,12 @@
+%p.greyText DESIGNERS WE CARRY
+%p
+  %br
+%table{:cellpadding => "0", :cellspacing => "0"}
+  %col{:width => "221"}/
+  - @designers.each do |designer|
+    %tr
+      %td{:width => "221"}
+        %span.greyText
+          = link_to designer.name, designer_path(designer), :class=> 'greyText'
+
+

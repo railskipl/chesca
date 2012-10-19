@@ -1,0 +1,288 @@
+.center
+  :text-align center
+
+a
+  :text-decoration none
+
+img
+  :border none
+
+body
+  :background #dfdfdf url('/images/bg.jpg') repeat-x
+  :font-family arial, sans-serif
+
+#wrapper
+  :background white
+  :width 942px
+  :margin 40px auto
+  .fb
+    :display inline-block
+    :float right
+  #header
+    :position relative
+    :height 118px
+    img, div, ul
+      :position absolute
+    #chesca-logo
+      :top 20px
+      :left 28px
+    #accentuate-the-positive
+      :top 41px
+      :left 249px
+    .cart, .admin-reminder
+      :top 16px
+      :right 63px
+      :color #3e3e3e
+      :font
+        :size 11px
+        :weight bold
+      :text-align right
+      #cart-items
+        :font-size 16px
+      a
+        :color #3e3e3e
+        :text-decoration underline
+    #bag
+      :top 10px
+      :right 12px
+    #search-wrapper
+      :width 252px
+      :height 25px
+      :top 72px
+      :right 14px
+      :overflow hidden
+      :background url('/images/search-bg.png')
+      .text
+        :margin 2px 0 2px 8px
+        :padding 2px 0
+        :border none
+        :background none
+        :width 175px
+        :height 17px
+      .button
+        :background none
+        :border none
+        :position absolute
+        :top 0
+        :right 5px
+        :width 60px
+        :height 25px
+        :line-height 25px
+        :text-align center
+        :color #444
+        :font-size 11px
+        :cursor pointer
+
+  .top-bar
+    #top-links
+      :width 934px
+      :height 32px
+      :bottom 0
+      :padding 0 0 0 8px
+      :margin 0
+      :list-style none
+      :background #3e3e3e
+      :font-size 14px
+      li
+        :display inline
+        :line-height 35px
+        :margin 11px
+        a
+          :padding 5px 10px 7px
+          :color white
+          &:hover
+            :background white
+            :color black
+      #facbook_button
+        :padding 0
+        :float right
+        :margin 0
+        :margin-top 5px
+    .notice
+      :margin 2px 2px 0
+      :padding 4px 0
+      :font-size 15px
+      :background #eaeaea
+      :color #393939
+      :text-align center
+
+  #body
+    #side-bar
+      :float left
+      :background #d8d8d8
+      :margin 2px 0 0 2px
+      :width 139px
+      :height 600px
+      :padding-top 18px
+      :overflow hidden
+      :display inline
+      div
+        :width 126px
+        :height 32px
+        :margin-left -2px
+        :line-height 32px
+        :padding-left 15px
+        :font
+          :size 15px
+          :weight bold
+          :style italic
+        :letter-spacing -1px
+        :color white
+        a
+          :color white
+          :display block
+      .title-black
+        :background url('/images/side-bar-title-black.png')
+      .title-red
+        :background url('/images/side-bar-title-red.png')
+      ul
+        :list-style none
+        :padding 0
+        :margin 10px 0 15px
+        :font-size 14px
+        li
+          :height 25px
+          :line-height 25px
+          a
+            :display block
+            :padding-left 9px
+            :color black
+            &:hover
+              :background white url('/images/side-bar-arrow.png') 125px 6px no-repeat
+              :color black
+            &.selected
+              :background white url('/images/side-bar-arrow.png') 125px 6px no-repeat
+              :color black
+              :font-weight bold
+    #content
+      :float right
+      :width 796px
+      :position relative
+      :min-height 528px
+      :margin 2px 3px 0 0
+      :display inline
+
+
+
+  #footer
+    :position relative
+    :clear both
+    :height 100px
+    span
+      :font-weight bold
+    .bars
+      :height 20px
+      :padding-top 6px
+      div
+        :font-size 13px
+        :text-align center
+        :color white
+        /
+          :margin 0 2px
+        :float left
+        :display inline
+        :height 20px
+        :line-height 20px
+        :background #3e3e3e
+        a
+          :color white
+      #free-delivery
+        :width 210px
+        :text-align left
+        :padding-left 34px
+      #customer-service
+        :width 330px
+        :text-align right
+        .contact
+          :font-size 20px
+      #get-the-newsletter
+        :width 250px
+      #return-policy
+        :width 80px
+        :text-align left
+        :padding-left 34px
+    p
+      :clear both
+      :margin 0
+      :padding 5px 10px 5px
+      :font-size 12px
+      :position relative
+      .links
+        :display none
+        :color #555
+        a
+          :color #555
+          :margin 0 2px
+      #copy
+        :font-weight normal
+        :color #919191
+        :margin-left 2px
+        a
+          :color #919191
+      #credit-cards
+        :position absolute
+        :top 8px
+        :right 1px
+    #pages
+      :width 100%
+      :float left
+      :padding 0
+      :margin 0 0 0 10px
+      :list-style none
+      li
+        :display inline-block
+        :float left
+        :color black
+        :font-size 9px
+        :margin 2px
+        a
+          :color black
+          :font-size 9px
+      li#facbook_button
+        :display inline-block
+        :float right
+        :color black
+        :font-size 9px
+        :margin 2px
+
+.pagination
+  :clear both
+  :margin 6px
+  :padding 3px
+  :text-align center
+  :border 1px solid #bababa
+  span, a
+    :display inline-block
+    :width 25px
+    :height 23px
+    :line-height 23px
+    :text-align center
+    :color white
+    :font-size 13px
+    :background url('/images/button-small.png')
+  a
+    &:hover
+      :background url('/images/button-small-active.png')
+  .current
+    :background url('/images/button-small-active.png')
+  .disabled
+    :display none
+  .prev_page, .next_page
+    :width 58px
+    :background url('/images/button-large.png')
+    &:hover
+      :background url('/images/button-large-active.png')
+.news_slider
+  :width 100%
+  :height 30px
+  :text-align center
+  .news_slide
+    :overflow hidden
+    :margin 0px
+    :padding 0px
+    :display inline-block
+    :text-align center
+    :height 20px
+    :color #3E3E3E
+    :font-size 12px
+    :font-weight bold

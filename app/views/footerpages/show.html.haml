@@ -1,0 +1,13 @@
+
+%br
+%br
+#posts-wrapper
+  .post
+    %h3.date-and-title== #{@footerpage.name}
+    %br
+    %br
+    = image_tag @footerpage.image.url(:editor)
+    %br
+    %br
+    .content= @footerpage.content
+

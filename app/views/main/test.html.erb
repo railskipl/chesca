@@ -1,0 +1,236 @@
+<div class="sizing-chart-wrapper">
+<img alt="View-sizing-chart" id="view-sizing-chart" src="/images/view-sizing-chart.png">
+<img style="display: none;" alt="Chart-size" class="sizing-chart sizing-chart-knitwear-and-jersey-tops" id="sizing-chart" src="/images/advertising_03.jpg">
+</div>
+
+<table class="form">
+  <tr>
+    <th>
+      <%= form.label :designers %>
+    </th>
+    <td>
+      <%= form.select :designer_id,@designers.collect{|p| [p.name,p.id]}, :include_blank =>true %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :name %>
+    </th>
+    <td>
+      <%= form.text_field :name %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :code %>
+    </th>
+    <td>
+      <%= form.text_field :code %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :price %>
+    </th>
+    <td>
+      <%= form.text_field :price %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :old_price %>
+    </th>
+    <td>
+      <%= form.text_field :old_price %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :stock_level %>
+    </th>
+    <td>
+      <%= form.text_field :stock_level %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :visible %>
+    </th>
+    <td>
+      <%= form.check_box :visible %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :available %>
+    </th>
+    <td>
+      <%= form.check_box :available %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :composition %>
+    </th>
+    <td>
+      <%= form.text_field :composition %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :washing_instrucions %>
+    </th>
+    <td>
+      <%= form.text_field :washing_instructions %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :Measurements %>
+    </th>
+    <td>
+      <%= form.file_field :photo %>
+    </td>
+  </tr>
+  <tr>
+    <th :colspan => "2">
+      <%= form.label :description %>
+    </th>
+  </tr>
+  <tr>
+    <td :colspan => "2">
+      <%= form.text_area :description %>
+    </td>
+  </tr>
+  <% if @product %>
+    <tr>
+      <th :colspan => "2">
+        <label>You may also Like</label>
+        <br>
+          <% @all_other_products.group_by(&:department).each do |department, products| %>
+            <div class="department_products">
+              <span class="department_name">
+                <% if department.nil? %>
+                  Other
+                <% else %>
+                  <%= department.name %>
+              </span>
+              <br>
+                <% products.each do |product| %>
+                  <%= form.check_box 'product[complete_outfit_ids][]', product.id, @product.complete_outfits.include?(product), :value => product.id.to_i %>
+                  <%= product.name %>
+              </br>
+            </div>
+        </br>
+      </th>
+    </tr>
+    <tr>
+      <td :colspan => "2">
+        <div class="products_by_department">
+          <% @all_other_products.group_by(&:department).each do |department, products| %>
+            <div class="department_products">
+              <span class="department_name">
+                <% if department.nil? %>
+                  Other
+                <% else %>
+                  <%= department.name %>
+              </span>
+              <br>
+                <% products.each do |product| %>
+                  <%= check_box_tag 'product[complete_outfit_ids][]', product.id, @product.complete_outfits.include?(product), :value => product.id %>
+                  <%= product.name %>
+                  <br>
+                  </br>
+              </br>
+            </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th :colspan => "2">
+        <label>Complete the look</label>
+      </th>
+    </tr>
+    <tr>
+      <td :colspan => "2">
+        <div class="products_by_department">
+          <% @all_other_products.group_by(&:department).each do |department, products| %>
+            <div class="department_products">
+              <span class="department_name">
+                <% if department.nil? %>
+                  Other
+                <% else %>
+                  <%= department.name %>
+              </span>
+              <br>
+                <% products.each do |product| %>
+                  <%= check_box_tag 'product[complete_outfit_ids][]', product.id, @product.complete_outfits.include?(product), :value => product.id %>
+                  <%= product.name %>
+                  <br>
+                  </br>
+              </br>
+            </div>
+        </div>
+      </td>
+    </tr>
+  <% if !@sizes.empty? && !@colors.empty? %>
+    <tr>
+      <th>
+        <b>Colors, Sizes & Stock level</b>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <div class="products_by_department">
+          <table class="form">
+            <tr>
+              <th>
+                <b>Sizes\Colors</b>
+              </th>
+              <% @colors.each do |c| %>
+                <th>
+                  <%= image_tag c.image.url(:square), :alt => c.name %>
+                </th>
+            </tr>
+            <% @sizes.each do |s| %>
+              <tr>
+                <td>
+                  <%= s.name %>
+                </td>
+                <% @colors.each do |c| %>
+                  <% stock = ProductSize.find_by_color_id_and_size_id_and_product_id(c.id,s.id,@product.id).stock_level rescue stock = '' %>
+                  <td><%= text_field_tag "size_stock[#{s.id}][#{c.id}]", stock, :size => '5' %></td>
+              </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <b>Add Images</b>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <div class="products_by_department">
+          <% unless @product.product_sizes.empty? %>
+            <table>
+              <tr>
+                <th>Size</th>
+                <th>color</th>
+                <th>
+                </th>
+              </tr>
+              <% @product.product_sizes.each do |color_size| %>
+                <tr>
+                  <td><%= h color_size.size.name %></td>
+                  <td :style => 'text_align: center;'><%= image_tag color_size.color.image.url(:square), :alt => color_size.color.name %></td>
+                  <td><%= link_to 'Add images',addimages_admin_products_path(:locals => {:product => @product.id, :color => color_size.color_id, :size => color_size.size_id}) %></td>
+                </tr>
+            </table>
+          <% else %>
+            Add Sizes & Colors
+        </div>
+      </td>
+    </tr>
+</table>

@@ -1,0 +1,98 @@
+#cart-items-wrapper
+  :padding 18px 0 0 16px
+  :color #393939
+
+  h2
+    :margin 0 0 18px 16px
+    :font-size 23px
+    span
+      :font
+        :size 16px
+        :weight normal
+      :color #666
+
+  .cart-item
+    :position relative
+    :height 70px
+    :margin-right 10px
+    :line-height 65px
+    :font-size 13px
+
+    a
+      :color #267bcc
+      &:hover
+        :text-decoration underline
+
+    img
+      :vertical-align middle
+      :margin-right 15px
+
+    span
+      :position absolute
+      :top 0
+      :display inline-block
+      :width 70px
+      :text-align center
+    .price
+      :right 210px
+    .quantity
+      :right 150px
+      :width 60px
+    .subtotal
+      :right 80px
+      :font-weight bold
+    .remove
+      :right 5px
+
+    &.odd
+    &.even
+      :background #eee
+
+  .voucher-discount
+    :padding-left 75px
+    :background #FFF0FE
+    :color #400D3C
+    :border 1px solid #A2419C
+      :left none
+      :right none
+
+  #cart-total
+    :position relative
+    :width 770px
+    :height 70px
+    :line-height 65px
+    :font
+      :size 13px
+      :weight bold
+    span
+      :position absolute
+      :display inline-block
+      :width 70px
+      :text-align center
+    .total
+      :right 210px
+    .equals
+      :width 60px
+      :right 150px
+    .value
+      :right 80px
+
+  #paypal-checkout
+    :width 770px
+    :text-align center
+
+  #voucher
+    :width 500px
+    :margin 0 auto
+      :bottom 20px
+    :background #FFF0FE
+    :color #400D3C
+    :font-size 13px
+    :text-align center
+    :border 1px solid #A2419C
+      :left none
+      :right none
+    :padding 20px
+
+    form
+      :display inline

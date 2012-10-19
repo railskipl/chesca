@@ -1,0 +1,38 @@
+<% unless @product.product_sizes.empty? %>
+       <% if params[:c].nil? %>
+         <% color = @product.colors.first %>
+       <% else %>
+               <%  color = Color.find(params[:c]) %>
+       <% end %> 
+               <%  product_color = ProductSize.find_all_by_color_id_and_product_id(color.id,@product.id) %>
+                 <%  unless product_color.nil? %>
+                   <%= images = [] %>
+                   <%  product_color.each do |pc| %>
+                     <% images += pc.product_images %>
+                   <% end %>
+                   <%  unless images.empty? %>
+                       
+                        <% s=1 %>            
+                        <% images.each do |pc_image|%>
+                        <% url_large = pc_image.image.url(:large) %>  
+                        <% url_square = pc_image.image.url(:square) %>  
+                        
+                       <% if s==1 %>                       
+                	   <a href=<%= url_large %> class = 'cloud-zoom' id='zoom1' rel="adjustX: 10, adjustY:-4">
+                		<img src=<%= url_large %> alt='' border="0" width=300, height=500/>
+                	   </a>
+                	   <% end %>
+			
+				<div style="float:left; position:relative; top:-6px; left:10px"> 
+	  			<ul class="thumb">
+	  			<li> 
+    				<a href='<%= url_large %>' class='cloud-zoom-gallery' title='Thumbnail 1' rel="useZoom: 'zoom1', smallImage: '<%= url_large %>' ">
+    				<img src=<%= url_square %> alt = "Thumbnail 1"/></a>
+    			</li>
+    			</ul>
+    			</div>
+				     <% s= s+1 %>
+				  <% end %>
+		      <% end %>                
+		   <% end %>		   
+       <% end%>

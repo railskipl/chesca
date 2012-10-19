@@ -1,0 +1,13 @@
+-unless object.nil?
+  %table{:border => "0", :width => "787"}
+    %tr
+      %td.bold{:width => "261"}
+        %div{:align => "center"}= object.title
+    %tr
+      %td{:bgcolor => "#EFEFEF", :width => "261"}
+        %div{:align => "center"}
+          =image_tag object.media.url, :alt => object.title
+    %tr
+      %td.greyText{:bgcolor => "#EFEFEF"}
+        %div{:align => "center"}= object.content.html_safe
+

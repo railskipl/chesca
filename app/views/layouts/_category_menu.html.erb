@@ -1,0 +1,16 @@
+	<% Department.roots.each do |style| %>
+	  <%= link_to  style.name, department_path(style),  :class=> "#{style.id}-#{style.name.parameterize}" == params[:id] ? 'Highlightext' : 'greyText'%><br />	
+	  	   <% for c in style.children %>	
+	       <% if ("#{style.id}-#{style.name.parameterize}" == params[:id]) || ("#{style.id}-#{style.name.parameterize}" == params[:root])  %>
+		       &nbsp;&nbsp;<%= link_to c.name, department_path(c , :root => "#{c.root.id}-#{c.root.name.parameterize}"),  :class=> "#{c.id}-#{c.name.parameterize}" == params[:id] ? 'Highlightext' : 'greyText' %><br />     
+		     <% if ("#{c.id}-#{c.name.parameterize}" == params[:id]) || "#{c.parent.id}-#{c.parent.name.parameterize}" == params[:parent]%> 
+		         <% for tashan in c.children %> 			            
+			           &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to tashan.name, department_path(tashan, :root => "#{tashan.root.id}-#{tashan.root.name.parameterize}", :parent => "#{c.parent.id}-#{c.parent.name.parameterize}"),  :class=> "#{tashan.id}-#{tashan.name.parameterize}" == params[:id] ? 'Highlightext' : 'greyText' %><br />
+			      <% end %>  
+			              
+			     <% end %>
+			      
+			 <% end %>							
+		  <% end %>
+	 <% end %>
+

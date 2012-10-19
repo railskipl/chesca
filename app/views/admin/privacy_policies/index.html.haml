@@ -1,0 +1,17 @@
+%h1 Listing Privacy Policy Pages
+%table.data
+  %tr
+    %th Name
+    %th Content
+    %th Active
+    %th{:colspan => '2'}
+  - for privacy_policy in @privacy_policies
+    %tr
+      %td= h privacy_policy.name
+      %td= h privacy_policy.content
+      %td= h privacy_policy.active
+      %td= link_to 'Show', admin_privacy_policy_path(privacy_policy)
+      %td= link_to 'Edit', edit_admin_privacy_policy_path(privacy_policy)
+      %td= link_to 'Delete', admin_privacy_policy_path(privacy_policy), :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Privacy Policy", new_admin_privacy_policy_path

@@ -1,0 +1,4 @@
+- unless @privacy_policy.nil?
+  = @privacy_policy.content.html_safe
+-content_for :editable_css do
+  = stylesheet_link_tag 'style_editable'

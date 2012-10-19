@@ -1,0 +1,13 @@
+<p>
+  <b>Title:</b>
+  <%=h @company_page.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%=h @company_page.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_company_page_path(@company_page) %> |
+<%= link_to 'Back', admin_company_pages_path %>

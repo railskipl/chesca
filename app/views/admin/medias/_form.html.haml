@@ -1,0 +1,34 @@
+=form.error_messages
+- unless @media.icon
+  %p
+    = form.label :title
+    %br/
+    = form.text_field :title
+%p
+  = form.label :media
+  %br/
+  = form.file_field :media
+- unless @media.icon
+  %p
+    = form.label :Content
+    %br/
+    = form.text_area :content
+%p
+  = form.label :type_media
+  %br/
+  = form.select :type_media, options_for_select(types,@media.type_media)
+%p
+  = form.label :active
+  %br/
+  = form.check_box :active
+  = form.label :yes
+  = form.hidden_field :icon
+%p
+  = form.submit 'Save'
+- unless @media.icon
+  - content_for :bottom do
+    = javascript_include_tag 'ckeditor/ckeditor'
+    :javascript
+      CKEDITOR.replace('media[content]');
+
+

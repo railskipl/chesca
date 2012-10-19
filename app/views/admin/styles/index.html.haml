@@ -1,0 +1,26 @@
+%h1 Boutiques
+%table.data
+  %tr
+    %th Name
+    %th #Products
+    %th Keywords
+    %th Description
+    %th{:colspan => "3"} Options
+  - for style in @styles
+    -if style.parent.nil?
+      %tr
+        %td= style.name
+        %td{:style => 'text-align: center;'}= Product.find_all_by_style_id(style.id).size.to_s
+        %td= style.keywords
+        %td= style.description
+        %td= link_to 'Add Sub-Folder', new_admin_style_path(:id => style.id)
+        %td= link_to('Edit', edit_admin_style_path(style))
+        %td= link_to('Delete', admin_style_path(style), :method => :delete, :confirm => 'Delete style?')
+      -if !style.children.empty?
+        - level=1
+        = render :partial => 'tree_boutique', :locals => {:cate => style, :level => level}
+
+%h2 New Boutique
+- form_for(@new_style, :url => admin_styles_path) do |f|
+  = render(:partial => 'admin/styles/form', :object => f)
+  = f.submit

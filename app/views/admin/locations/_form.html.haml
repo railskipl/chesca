@@ -1,0 +1,45 @@
+- if @address
+  - form_for  @address, :url => url_to_location_real(@address), :html => {:multipart => true} do |f|
+    = f.error_messages
+
+    %table.form
+      %tr
+        %th= f.label 'Name'
+        %td= f.text_field :name
+      %tr
+        %th= f.label 'Info'
+        %td= f.text_area :info
+      %tr
+        %th= f.label 'Url'
+        %td= f.text_field :url
+      %tr
+        %th= f.label 'Image'
+        %td= f.file_field :image
+      %tr
+        %th= f.label "Area"
+        %th= f.select :location_id, Location.all.map{|location| [location.name, location.id]}
+      %tr
+        %th= f.label 'Retail?'
+        %td
+          =f.radio_button :retail,true
+          yes
+          %br
+          =f.radio_button :retail,false
+          no
+
+
+    = f.submit 'Submit'
+
+- if @location
+  %h1 Or create new Area
+
+  - form_for @location, :url => url_to_location_real(@location) do |f|
+    = f.error_messages
+
+    %table.form
+      %tr
+        %th= f.label 'Name'
+        %td= f.text_field :name
+
+    = f.submit 'Submit'
+

@@ -1,0 +1,6 @@
+<h1>New Product</h1>
+
+<% form_for(@product, :url => admin_products_path, :html => {:multipart => true}) do |f| -%>
+  <%= render(:partial => 'admin/products/form', :object => f) %>
+  <%= f.submit %>
+<% end -%>

@@ -1,0 +1,5 @@
+%h1 Editing home_page
+- form_for ([:admin,@home_page]) do |f|
+  =render :partial => 'admin/home_pages/form', :object => f
+= link_to 'Show', admin_home_page_path(@home_page) |
+= link_to 'Back', admin_home_pages_path

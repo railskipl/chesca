@@ -1,0 +1,9 @@
+%p.bold
+  = link_to 'COMPANY PAGE', our_company_path, :class => 'darkgrey'
+%br
+  - @links.each do |link|
+    %p.greyText
+      =link_to link, nil, :class => 'greyText'
+
+
+

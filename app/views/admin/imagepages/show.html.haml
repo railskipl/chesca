@@ -1,0 +1,11 @@
+%p
+  %strong name:
+  = h @imagepage.name
+%p
+  %strong Image file:
+  = image_tag @imagepage.image.url rescue ''
+%p
+  = link_to "Edit", edit_admin_imagepage_path(@imagepage)
+  |
+  \#{link_to "Destroy", admin_imagepage_path(@imagepage), :confirm => 'Are you sure?', :method => :delete} |
+  \#{link_to "View All", admin_imagepages_path}
