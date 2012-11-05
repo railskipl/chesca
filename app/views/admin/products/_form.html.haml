@@ -147,7 +147,7 @@
               - @product.product_sizes.each do |color_size|
                 %tr
                   %td= h color_size.size.name
-                  %td{:style => 'text_align: center;'}= image_tag color_size.color.image.url(:square), :alt => color_size.color.name
+                  %td{:style => 'text_align: center;'}= image_tag color_size.color.image.url(:square), :alt => color_size.color.name rescue nil
                   %td= link_to 'Add images',addimages_admin_products_path(:locals => {:product => @product.id, :color => color_size.color_id, :size => color_size.size_id})
 
 
