@@ -1,7 +1,7 @@
 class LooksController < ApplicationController
   inherit_resources
   actions :index, :show
-
+  
   def archived_looks
     @looks = Look.active.all(:order => 'created_at DESC')
   end

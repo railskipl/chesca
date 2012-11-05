@@ -12,6 +12,7 @@ class Admin::ProductsController < Admin::AdminController
       # redirect_to display_order_admin_products_url
     # end
   end
+  
   def sort
     params[:products].each_with_index do |id, index|
       Product.update_all(['position=?', index+1], ['id=?', id])
@@ -85,12 +86,12 @@ class Admin::ProductsController < Admin::AdminController
     @sizes = Size.all    
     @designers = Designer.all
     @all_other_products = products_scope.all - [resource]
+
     # params_to_sizes
     edit!
   end
 
   def create
-    
    @product=Product.new(params[:product])
    if @product.save
      p = @product.id
@@ -111,14 +112,26 @@ class Admin::ProductsController < Admin::AdminController
      render action "new"
     end
   end
-  
+
   def update
     
     # params[:product][:related_product_ids]||=[]
       # params[:product][:product_look_ids]||=[]
      # params[:product][:product_size_ids] ||
       # params[:product][:complete_outfit_ids]||
+      
     params_to_sizes
+    @product = Product.find_by_id(params[:id])
+    if !@product.related_product_colors.present?
+      params[:related_product_color][:product_image_ids].each do |image_creation|
+        RelatedProductColor.create(:product_id => params[:id], :product_image_id => image_creation)
+      end
+    else
+      @product.related_product_colors.destroy_all
+      params[:related_product_color][:product_image_ids].each do |image_creation|
+        RelatedProductColor.create(:product_id => params[:id], :product_image_id => image_creation)
+      end
+    end
     update! { admin_products_url }
   end
   

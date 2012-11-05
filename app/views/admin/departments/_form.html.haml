@@ -8,7 +8,20 @@
     %td
       = form.text_field :description
   %tr
+    %th= form.label :toptext, "Banner HTML"
+    %td
+      = form.text_area :toptext
+  %tr
+    %th= form.label :bottomtext, "Bottom HTML"
+    %td
+      = form.text_area :bottomtext
+  %tr
     %th= form.label :keywords, "Keywords (SEO)"
     %td
       = form.text_field :keywords
       = hidden_field_tag :parent_id,@parent_id
+- content_for :bottom do
+  = javascript_include_tag 'ckeditor/ckeditor'
+  :javascript
+    CKEDITOR.replace('department[toptext]');
+    CKEDITOR.replace('department[bottomtext]')

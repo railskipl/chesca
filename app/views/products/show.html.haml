@@ -18,6 +18,11 @@
         %p.composition
           Composition:
           = @product.composition
+      - if !@product.washing_instructions.blank?
+        %p.washing-instructions
+          Washing Instructions:
+          %span= @product.washing_instructions    
+   
       %br
       %p
         %b
@@ -25,20 +30,15 @@
           = @product.colors.name.upcase rescue ''
         %br
         - @product.colors.uniq.each do |c|
-          -link_to product_path(@product,:c => c.id) do
-            =image_tag c.image.url(:square), :alt =>c.name
+          =image_tag c.image.url(:square), :alt =>c.name
         %br
-          %b SIZING CHART:
+          %b FIT CHART:
           %span
             = @product.measurement
       .fb_button_chesca
         = facebook_like(product_url(@product))
       %br
-      - if !@product.washing_instructions.blank?
-        %p.washing-instructions
-          Washing instructions:
-          %span= @product.washing_instructions    
-          
+               
       .price
         - if @product.reduced_price?
           %span.old-price= number_to_currency(@product.old_price, :precision => 2, :unit => '&pound;')
@@ -47,10 +47,19 @@
         - form_for(@new_cart_item) do |f|
           = f.hidden_field(:product_id, :value => @product.id)
           .size-qty
+          %br
             = text_field 'cart_item', 'quantity',:size=> '1', :class =>'form_product', :value => '1'
             = label :cart_item, :quantity, "Qty&nbsp&nbsp"
-            = collection_select 'cart_item', 'size', @product.sizes.uniq, :id, :name, {:prompt => 'Select Size'}, {:class => 'form_product'}
-            = collection_select 'cart_item', 'color', @product.colors.uniq, :id,:name, {:prompt => 'Select Color'},{:class => 'form_product'}
+            = collection_select 'cart_item', 'size', @product.sizes.uniq, :id, :name, {:class => 'form_product'}
+            Size&nbsp&nbsp
+            - if params[:c].nil?
+              = f.hidden_field (:color, :value => @product.colors.first.id) rescue nil
+              = image_tag @product.colors.first.image.url(:square) rescue nil
+              Color&nbsp&nbsp
+            - else
+              = f.hidden_field(:color, :value => Color.find(params[:c]).id) rescue nil
+              = image_tag Color.find(params[:c]).image.url(:square) rescue nil
+              Color&nbsp&nbsp
             %br
             %br
             .button_form
@@ -58,21 +67,29 @@
               
       - else
         %span.unavailable OUT OF STOCK
+      %br
       %br  
-        = render :partial => 'products/sendformtabs', :object => @product             
+        = render :partial => 'products/sendformtabs', :object => @product
+  .realted_product_names
+    - if !@product.related_products.empty?
+      %span.realted1 You may also like...
+            
+  - if !@product.related_product_colors.empty?
+    #like
+      .related-products
+        - @product.related_product_colors.each do |color_product|
+          - link_to product_path(color_product.product, :c => color_product.product_image.product_size.color_id), :class => 'related-product' do
+            = image_tag color_product.product_image.image.url(:tiny)
+          -# link_to product_path(related_product), :class => 'related-product' do
+            =# image_tag main_image_for_product(related_product, :tiny), :alt => related_product.name, :title => related_product.name             
   - if !@product.complete_outfits.empty? 
-    %br
-    %br
-    %br
-    %br
-    %br
     #complete
       &nbsp &nbsp Complete the look    
       .related-products
         - @product.complete_outfits.each do |outfit|
           - link_to product_path(outfit), :class => 'related-product' do
             = image_tag main_image_for_product(outfit, :tiny), :alt => outfit.name, :title => outfit.name
-
+           
 :javascript
   jQuery(window).load(function(){
       jQuery("#nivoslider-577").nivoSlider({

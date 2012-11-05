@@ -102,13 +102,15 @@
                 = number_to_currency(current_cart.discount, :unit => '&pound;')
               - unless current_cart.voucher.nil?
                 %span.link
-                  =link_to 'disjoin', :controller => 'cart_items', :action => 'disjoin_voucher'
+                  =link_to(image_tag('close.jpeg', :width => '20px', :alt => "Disjoin Voucher"), disjoin_voucher_cart_item_path(current_cart))
               %br
               - unless current_cart.giftcard.nil?
                 %span.total GIFTCARD
                 %span.value
                   \-
                   = number_to_currency(current_cart.giftcard.value, :unit => '&pound;')
+                %span.link
+                  =link_to(image_tag('close.jpeg', :width => '20px', :alt => "Remove Giftcard"), remove_giftcard_cart_item_path(current_cart))
               %br
               %span.total TOTAL
               %span.value= number_to_currency(current_cart.total, :unit => '&pound;')

@@ -6,7 +6,7 @@ class ProductImage < ActiveRecord::Base
   before_save :make_main_image_unique
   #after_save :check
   belongs_to :product_size
-
+  has_many :related_product_colors
 
 private
   def check
@@ -19,7 +19,6 @@ private
   # Make this the main image if there's no other main image for the same product
   def check_if_main_image
     self.main_image = self.class.count(:conditions => {:main_image => true, :product_id => product_id}).zero?
-
     # Since callbacks can cancel saving, return true to prevent it
     true
   end

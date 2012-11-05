@@ -5,7 +5,7 @@
   %br
   - @looks.each do |look|
     .post
-      %h3.date-and-title== #{look.created_on} &ndash; #{look.title}
+      %h3.title== #{look.title}
       %br    
       = image_tag look.image.url(:looks)
       = look.content

@@ -81,20 +81,13 @@
     %tr
       %td{:colspan => "2"}
         .products_by_department
-          - @all_other_products.group_by(&:department).each do |department, products,products_products|
-            .department_products
-              %span.department_name
-                - if department.nil?
-                  Other
-                - else
-                  = department.name
-                  
+          - unless @product.colors.empty?
+            - @product.colors.each do |color_product|
+              - ProductSize.find_all_by_color_id_and_product_id(color_product.id,@product.id).each do |prodsize|
+                - prodsize.product_images.each do |image_me|
+                  = check_box_tag "related_product_color[product_image_ids][]", image_me.id, @product.related_product_colors.include?(image_me), :value => image_me.id, :checked => true ? @product.related_product_colors.find_by_product_image_id(image_me.id).present? : false
+                  = image_tag image_me.image.url(:square)
               %br
-                - products.each do |product|
-                  = check_box_tag 'product[related_product_ids][]', product.id, @product.related_products.include?(product), :value => product.id
-                  = product.name
-                  
-                  %br
     %tr
       %th{:colspan => "2"}
         %label Complete the look

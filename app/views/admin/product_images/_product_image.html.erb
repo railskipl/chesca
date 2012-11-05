@@ -3,4 +3,4 @@
   <div class="options">
     <%= link_to_remote('Delete Image', :url => admin_product_image_path(product_image), :method => :delete, :confirm => "Delete image?", :complete => "Element.remove('#{dom_id(product_image)}')") %>
   </div>
-<% end -%>
+<% end -%>														

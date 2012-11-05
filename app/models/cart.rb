@@ -19,11 +19,11 @@ class Cart < ActiveRecord::Base
     self.selected_delivery_option= :free_UK if free_delivery? and delivery_options.nil?
   end
   
-
   # Total (without discounts)
   def gross_total
     cart_items.all.sum(&:subtotal)
   end
+  
   def checks_valid_gift_card_code(code)
     # if self.giftcard.exists?
       # false
@@ -38,6 +38,7 @@ class Cart < ActiveRecord::Base
          end
     # end
   end
+  
     # Gift Card Value Select.
   def discount
     voucher ? voucher.apply(gross_total) : 0
@@ -46,9 +47,11 @@ class Cart < ActiveRecord::Base
   def delivery_charges
     delivery_option[:price].to_f rescue 0
   end
+  
   def delivery_charges_in_cents
     (delivery_charges * 100)#delivery_option[:price] rescue 0
   end
+  
   def discount_in_cents
     (discount * 100).to_i
   end
@@ -93,6 +96,7 @@ class Cart < ActiveRecord::Base
         :description => 'Voucher'
       }
     end
+    
     if has_valid_delivery_option? and delivery_charges!=0
       details << {
         :name => "Delivery Charges",

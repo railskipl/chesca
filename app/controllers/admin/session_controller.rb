@@ -4,6 +4,7 @@ class Admin::SessionController < Admin::AdminController
   layout 'application'
 
   def new
+    
   end
 
   def create
@@ -20,4 +21,5 @@ class Admin::SessionController < Admin::AdminController
     session[:admin] = nil
     redirect_to(root_url)
   end
+  
 end

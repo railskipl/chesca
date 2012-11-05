@@ -1,11 +1,12 @@
 class CartItemsController < ApplicationController
+ 
   def index
     if current_cart.free_delivery? and params[:set_d].nil? #and not current_cart.has_valid_delivery_option?
       current_cart.selected_delivery_option = :free_UK
       current_cart.save
     elsif !current_cart.has_valid_delivery_option?
       current_cart.selected_delivery_option= nil
-       current_cart.save
+      current_cart.save
     end
   end
 
@@ -33,12 +34,12 @@ class CartItemsController < ApplicationController
             redirect_to(:back)
           end
         else
-          flash[:error] = 'choise another combination'
+          flash[:error] = 'Sorry this combination of Size & Colour is Not Available'
           @product= Product.find params[:cart_item][:product_id]
           redirect_to product_path(@product)
         end
       else
-        flash[:error] = 'choise another combination'
+        flash[:error] = 'Sorry this combination of Size & Colour is Not Available'
         @product= Product.find params[:cart_item][:product_id]
         redirect_to product_path(@product)
       end
@@ -61,6 +62,7 @@ class CartItemsController < ApplicationController
     flash[:notice] = 'The selected item was successfully removed from your cart.'
     redirect_to(cart_items_url,:set_d=>0)
   end
+
   def add_voucher
     if current_cart.voucher.nil?
       @voucher = Voucher.date_active.find_by_code(params[:code])
@@ -70,6 +72,7 @@ class CartItemsController < ApplicationController
 
     render :action => :index,:set_d=>0
   end
+
   def gift_card_entry
    if current_cart.checks_valid_gift_card_code(params[:code])
      flash[:notice] = 'The selected Giftcard was successfully redeemed from your cart.'
@@ -78,12 +81,19 @@ class CartItemsController < ApplicationController
    end
     render :action => :index,:set_d=>0
   end
+
   def disjoin_voucher
     current_cart.voucher = nil
     current_cart.save
     render :action => :index
   end
 
+  def remove_giftcard
+    current_cart.giftcard = nil
+    current_cart.save
+    render :action => :index 
+  end
+  
   def select_delivery_option
     current_cart.selected_delivery_option= params[:delivery_option].blank? ? nil : params[:delivery_option].to_sym
     current_cart.save

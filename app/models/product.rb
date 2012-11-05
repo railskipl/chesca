@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
   #validates_presence_of :departments_id, :departments_name
   belongs_to :department #new name is Shop by category
   belongs_to :style #new name is Boutique
-
+  has_many :related_product_colors
   #has_many :product_images, :dependent => :destroy
   has_one :main_image, :class_name => 'ProductImage', :conditions => {:main_image => true}
   
@@ -49,6 +49,7 @@ class Product < ActiveRecord::Base
     args.each { |arg| options.merge!(arg) }
     paginate options
   end
+  
   def self.new_arrivals(page)
     with_exclusive_scope(:find => { :order => 'created_at DESC' }) do
       fetch_page page, :total_entries => 32
@@ -100,6 +101,7 @@ protected
   def remove_inverse(product)
     product.related_products.delete(self) if product.related_products.include?(self)
   end
+  
   def add_inverse_outfit(product)
     product.complete_outfits << self unless product.complete_outfits.include?(self)
   end

@@ -21,16 +21,20 @@ class ApplicationController < ActionController::Base
   def products_scope
     admin? ? Product : Product.visible
   end
+  
   protected
+  
   def create_cookie
     unless  params[:source].nil?
       cookies['source'] = { :value => params[:source], :expires => 32.days.from_now}
       @render_cookie = true
     end
   end
+  
   def valid_name?(name)
     name.match(/^[a-záéíóúàèìòùñçâêîôûäëïöü' ]+$/i)
   end
+  
   def valid_email_address?(email_address)
     email_address.match(/^[a-z0-9_\-.]+?@[a-z0-9][a-z0-9\-.]+[a-z0-9]\.[a-z]{2,4}$/)
   end
@@ -51,6 +55,7 @@ class ApplicationController < ActionController::Base
       Cart.new
     end
   end
+  
   def persist_session_cart
     if @current_cart && !@current_cart.new_record?
       session[:cart_id] = @current_cart.id

@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
  #A map.connect '/admin/product/:id/delete', :controller=>'admin/products', :action=>'destroy'
  # map.connect '/admin/product/:id/edit', :controller=>'admin/products', :action=>'edit'
-  map.resources :cart_items, :as => 'cart', :member => {:add_voucher => :post, :gift_card_entry => :post, :select_delivery_option => :post, :disjoin_voucher => :get}
+  map.resources :cart_items, :as => 'cart', :member => {:add_voucher => :post, :gift_card_entry => :post, :select_delivery_option => :post, :disjoin_voucher => :get, :remove_giftcard => :get}
 
   map.resource :admin, :controller => 'admin/panel', :only => :show
 

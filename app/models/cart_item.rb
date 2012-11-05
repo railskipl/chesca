@@ -24,8 +24,7 @@ class CartItem < ActiveRecord::Base
   def human_size
     "Size #{size}"
   end
-  
-  
+    
   #def product_price_in_cents(discount = 0)
   #  ((product_price * ((100 - discount)/100.0)) * 100).to_i
   #end
@@ -44,4 +43,5 @@ private
       return false
     end
   end
+  
 end

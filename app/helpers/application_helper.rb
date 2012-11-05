@@ -3,6 +3,7 @@ module ApplicationHelper
   def google_analytics
     render :partial => 'layouts/google_analytics', :locals => { :tracking_code => ENV['GOOGLE_ANALYTICS_TRACKING_CODE'] } if ENV['GOOGLE_ANALYTICS_TRACKING_CODE']
   end
+  
   def csrf_meta_tag
     if protect_against_forgery?
       out = %(<meta name="csrf-param" content="%s"/>\n)
@@ -11,6 +12,7 @@ module ApplicationHelper
               Rack::Utils.escape_html(form_authenticity_token) ]
     end
   end
+  
   def url_to_location_real(location)
     if location.new_record?
       admin_locations_path
@@ -43,10 +45,6 @@ module ApplicationHelper
     ) + javascript_tag( script.join("") )
   end
   
-    
-
-
-
   def facebook_like(url_share="", action = "recommend")
     return "" if(@facebook_rendered)
     @facebook_rendered = true
@@ -100,5 +98,7 @@ module ApplicationHelper
   def tracking_email_kissmetrics(email)
     "_kmq.push(['identify', '#{email}']);"
   end
+  
 end
+
 
