@@ -27,6 +27,6 @@
             .price
               = "#{number_to_currency(product.price, :precision => 2, :unit => '&pound;')}"
 %div
-  = Department.find_by_id(params[:id]).toptext
+  =# Department.find_by_id(params[:id]).bottomtext
 = will_paginate @products, :previous_label => 'PREV', :next_label => 'NEXT'
 
