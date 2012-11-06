@@ -121,7 +121,7 @@ class Admin::ProductsController < Admin::AdminController
       # params[:product][:complete_outfit_ids]||
       
     params_to_sizes
-    @product = Product.find_by_id(params[:id])
+    @product = Product.find_by_id(params[:id].to_i)
     if !@product.related_product_colors.present?
       params[:related_product_color][:product_image_ids].each do |image_creation|
         RelatedProductColor.create(:product_id => params[:id], :product_image_id => image_creation)
