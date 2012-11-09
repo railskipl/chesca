@@ -1,3 +1,18 @@
+= javascript_include_tag('jquery-1.7.1.min')
+%script
+  $(document).ready(function()
+  {
+  
+  $("#check_uncheck").click(function()
+  {
+  
+  var checked_status = this.checked;
+  $("input[type='checkbox']").each(function()
+  {
+  this.checked = checked_status;
+  });
+  });
+  });
 - form_for [:admin,@voucher], :html => {:multipart => true} do |f|
   = f.error_messages
 
@@ -11,7 +26,6 @@
     %tr
       %th= f.label 'Amount off'
       %td= f.text_field :amount_off
-
     %tr
       %th= f.label 'Start date Promotion'
       %td= f.date_select :start_date_promotion, :include_blank => true
@@ -21,6 +35,9 @@
     %tr
       %th{:colspan => "2"}
         %label Products
+        %br
+        = check_box_tag (nil, nil, nil, :checked => true, :id => "check_uncheck")
+        %label Select All
     %tr
       %td{:colspan => "2"}
         .products_by_department
@@ -34,7 +51,7 @@
                   = department.name
                 %br
               -products.each do |product|
-                = check_box_tag 'products_voucher[product_ids][]', product.id, products.include?(product), :class=>"",:id=>"product_#{product.id}"
+                = check_box_tag 'products_voucher[product_ids][]', product.id, products.include?(product), :class => "", :id=>"product_#{product.id}"
                 = label_tag "product_#{product.id}", product.name
                 %br
   = f.submit 'Submit'

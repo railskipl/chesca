@@ -14,5 +14,7 @@
             %p
             .price
               = "#{number_to_currency(product.price, :precision => 2, :unit => '&pound;')}"
+            
+%div{:style => "width:100%; float:left" }
+  = Department.find_by_id(params[:id].to_i).bottomtext
 = will_paginate @products, :previous_label => 'PREV', :next_label => 'NEXT'
-

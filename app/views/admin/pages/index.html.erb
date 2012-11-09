@@ -7,6 +7,7 @@
 <table class="data" id="pages">
   <tr>
     <th>Name</th>
+    <th>Image</th>
     <th>Created On</th>
     <th style="width:10%;">Edit</th>
   </tr>
@@ -15,11 +16,14 @@
     <tr>
       <td>
         <%#= page.name #inplace_edit_field({:url=>in_place_edit_admin_pages_path(:id=>page.id,:field=>'name'),:content=>{:element=>'span',:text=>page.name,:id=>"page_#{page.id}"},:ajax=>{:highlightColor=> 'transparent',:highlightEndColor=>'transparent'}})  %>
-        <%= page.name %>
+        <center><%= page.name %></center>
       </td>
       
+      <td>
+        <center><%= image_tag page.image.url(:square) %></center>
+      </td>
       
-      <td><%= page.created_at.strftime("%d %b %Y") -%></td>
+      <td><center><%= page.created_at.strftime("%d %b %Y") -%></center></td>
       <td>
         <%= link_to('Edit', edit_admin_page_path(page)) %>
         <%= link_to('Delete', admin_page_path(page), :method => :delete, :confirm => 'Delete page?') %>

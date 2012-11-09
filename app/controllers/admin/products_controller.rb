@@ -167,7 +167,6 @@ class Admin::ProductsController < Admin::AdminController
             if ps
               ps.stock_level = css[1].to_i
             else
-           
              ps = ProductSize.create({:product_id => p, :size_id=> s[0], :stock_level=>css[1].to_i, :color_id => css[0]})
             end
             ps.save

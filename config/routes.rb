@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.resources :vouchers
   map.root :controller => 'main'
 
-  map.resources :products, :only => [:index, :show]
+  map.resources :products, :only => [:index, :show, :sales]
   map.resources :pages, :only => [:show]
   map.resources :departments, :only => [:index, :show]
   map.resources :styles, :only => [:index, :show]
