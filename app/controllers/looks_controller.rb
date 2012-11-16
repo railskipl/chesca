@@ -12,6 +12,9 @@ class LooksController < ApplicationController
     @looks = Look.paginate(:order => 'created_at DESC',:page=>page,:per_page=>per_page)
     index!
   end
-
+  
+  def show
+    @look = Look.find(params[:id])
+  end
 end
 

@@ -6,10 +6,10 @@
   - @looks.each do |look|
     .post
       %h3.title== #{look.title}
-      %br    
-      = image_tag look.image.url(:looks)
+      %br
+      - if !look.image_file_name.nil?    
+        = image_tag look.image.url(:looks)
       = look.content
       %br
       %br
 = will_paginate @looks, :previous_label => 'PREV', :next_label => 'NEXT'
-

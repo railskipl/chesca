@@ -1,0 +1,13 @@
+
+= render :partial => 'left'
+#posts-wrapper
+  %h2 LOOKS WE LOVE
+  %br
+  .post
+    %h3.title== #{@look.title}
+    %br
+    - if !@look.image_file_name.nil?    
+      = image_tag @look.image.url(:looks)
+    = @look.content
+    %br
+    %br

@@ -5,7 +5,8 @@
       %strong Looks We Love
   %br/
   %p.greyText
-    %a.greyText{:href => archived_looks_looks_path} Looks  
+    - Look.all.each do |look|
+      %b= link_to look.title, look_path(look), :class => (params[:id].to_i == look.id ? 'Highlightext' : 'greyText')
   %p.bold
 - content_for :editable_css do
   =stylesheet_link_tag 'style_editable'

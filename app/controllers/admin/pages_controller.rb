@@ -17,3 +17,4 @@ class Admin::PagesController < Admin::AdminController
     @all_products = Product.all
   end
 end
+  

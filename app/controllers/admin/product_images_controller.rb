@@ -18,7 +18,7 @@ class Admin::ProductImagesController < Admin::AdminController
     end
     flash[:notice] = nil
   end
-
+   
   def destroy
     resource.destroy
     head(:ok)
