@@ -176,7 +176,11 @@
         %p
           %br
         #upFooter
-          = link_to image_tag('ChescaDirectMock_e_09.jpg'), new_user_path
+          = link_to 'Signup for new arrivals and promotions | Join our mailing list', new_user_path, :class => 'Signuptext'
+          #left_social
+            = link_to image_tag("/images/facebook_logo_small.png"), "https://www.facebook.com/ChescaClothing"
+            = link_to image_tag("/images/twitter16.gif"), " https://twitter.com/chescafashion"
+        
         .addthis_toolbox.addthis_default_style
           %a.addthis_button_facebook_like
           %a.addthis_button_tweet

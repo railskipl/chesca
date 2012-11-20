@@ -5,7 +5,7 @@
       %strong Looks We Love
   %br/
   %p.greyText
-    - Look.all.each do |look|
+    - Look.all(:order => 'created_at DESC').each do |look|
       %b= link_to look.title, look_path(look), :class => (params[:id].to_i == look.id ? 'Highlightext' : 'greyText')
       %br/
   %p.bold

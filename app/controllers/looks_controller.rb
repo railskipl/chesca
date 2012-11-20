@@ -5,7 +5,7 @@ class LooksController < ApplicationController
   def archived_looks
     @looks = Look.active.all(:order => 'created_at DESC')
   end
-
+   
   def index
     page = params[:page] || 1
     per_page = 1
