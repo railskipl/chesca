@@ -8,7 +8,7 @@ class CartItem < ActiveRecord::Base
   before_create :check_already_existing
 
   attr_protected :product_name, :product_price, :product_code
-
+  
   def subtotal
     product_price * quantity
   end

@@ -49,31 +49,33 @@
             %tr
               %th{:colspan => '3'}COMPLETE THE LOOK
             %tr
-            - for ymal in item.product.complete_outfits[0..2]
-              %td
-                .product_table
-                  .image_table
-                    - link_to product_path(ymal) do
-                      = image_tag main_image_for_product(ymal, :tiny), :alt => ymal.name
-                  .color
-                    Color:
-                    = ymal.colors.first.name rescue ""
-                  .name
-                    =link_to ymal.name, product_path(ymal)
-                  .price
-                    = number_to_currency(ymal.price, :unit => '&pound;')
-                  - form_for(CartItem.new) do |f|
-                    = f.hidden_field(:product_id, :value => ymal.id)
-                    .size-qty
-                      = collection_select 'cart_item', 'size', ymal.sizes.uniq, :id, :name, {:prompt => 'Select Size'}, {:class => 'form_product'}
-                      = collection_select 'cart_item', 'color', ymal.colors.uniq, :id,:name, {:prompt => 'Select Color'},{:class => 'form_product'}
-                    %br
-                    .size-qty
-                      Enter Quantity
-                      = text_field 'cart_item', 'quantity',:size=> '0.1', :class =>'form_product', :value => '1'
-                      
-                    .button_form                  
-                      %button{ :type => 'submit',:class =>'form_product_button_1', :style => "margin:17px 0 15px 10px !important;"} ADD TO BAG
+            - current_cart.cart_items.find(:all, :select => "DISTINCT(product_id)").each do |item_oufit|
+              - for ymal in item_oufit.product.complete_outfits[0..1]
+                - if current_cart.product_is_not_repeted(ymal) && ymal.available
+                  %td
+                    .product_table
+                      .image_table
+                        - link_to product_path(ymal) do
+                          = image_tag main_image_for_product(ymal, :tiny), :alt => ymal.name
+                      .color
+                        Color:
+                        = ymal.colors.first.name rescue ""
+                      .name
+                        =link_to ymal.name, product_path(ymal)
+                      .price
+                        = number_to_currency(ymal.price, :unit => '&pound;')
+                      - form_for(CartItem.new) do |f|
+                        = f.hidden_field(:product_id, :value => ymal.id)
+                        .size-qty
+                          = collection_select 'cart_item', 'size', ymal.sizes.uniq, :id, :name, {:prompt => 'Select Size'}, {:class => 'form_product'}
+                          = collection_select 'cart_item', 'color', ymal.colors.uniq, :id,:name, {:prompt => 'Select Color'},{:class => 'form_product'}
+                        %br
+                        .size-qty
+                          Enter Quantity
+                          = text_field 'cart_item', 'quantity',:size=> '0.1', :class =>'form_product', :value => '1'
+                          
+                        .button_form                  
+                          %button{ :type => 'submit',:class =>'form_product_button_1', :style => "margin:17px 0 15px 10px !important;"} ADD TO BAG
              
         .content_right
           #first_box

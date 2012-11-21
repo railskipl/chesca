@@ -14,7 +14,18 @@ class Cart < ActiveRecord::Base
     {:id=>:austratia, :description => "Rest of World",:price=> ENV['austratia'].to_f,:unit=>"Euro"}#15,
 
   ]
-
+  
+  
+  def product_is_not_repeted(prod)
+   self.cart_items.each do |i|
+      if i.product_id == prod.id
+        false
+        break
+      else
+        true
+      end
+    end
+  end
   def before_save
     self.selected_delivery_option= :free_UK if free_delivery? and delivery_options.nil?
   end

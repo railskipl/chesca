@@ -3,6 +3,7 @@ class Admin::ProductsController < Admin::AdminController
   inherit_resources
   actions :all, :except => :show
   before_filter :fetch_departments_and_styles, :only => [:index, :new, :edit]
+  
   def display_order
     @products = products_scope.all(:order => "position")
     
@@ -76,7 +77,6 @@ class Admin::ProductsController < Admin::AdminController
     @designers = Designer.all
     @product_sizes = ProductSize.all
     @all_other_products = products_scope.all
-    
     new!
   end
   

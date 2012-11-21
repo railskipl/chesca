@@ -27,26 +27,27 @@ class CartItemsController < ApplicationController
           current_cart.save!
           if @cart_item.save || @cart_item.errors.empty?
             flash[:notice] = 'The selected product was successfully added to your cart.'
-            @product= Product.find params[:cart_item][:product_id]
-            redirect_to product_path(@product)
+            # @product= Product.find params[:cart_item][:product_id]
+            # redirect_to product_path(@product)
+            redirect_to cart_items_path
           else
             flash[:error] = 'Something went bad.'
             redirect_to(:back)
           end
         else
           flash[:error] = 'Sorry this combination of Size & Colour is Not Available'
-          @product= Product.find params[:cart_item][:product_id]
-          redirect_to product_path(@product)
+          # @product= Product.find params[:cart_item][:product_id]
+          redirect_to cart_items_path
         end
       else
         flash[:error] = 'Sorry this combination of Size & Colour is Not Available'
-        @product= Product.find params[:cart_item][:product_id]
-        redirect_to product_path(@product)
+        # @product= Product.find params[:cart_item][:product_id]
+        redirect_to cart_items_path
       end
     else
       flash[:error] = 'Choise an color and size'
-      @product= Product.find params[:cart_item][:product_id]
-      redirect_to product_path(@product)
+      # @product= Product.find params[:cart_item][:product_id]
+      redirect_to cart_items_path
     end
   end
  
