@@ -815,7 +815,7 @@ font-size: 20px; }
     #cart-items-wrapper #cart-total .value {
       right: 67px; }
     #cart-items-wrapper #cart-total .link {
-      right: 4px; }
+            float: right; }
   #cart-items-wrapper #voucher {
     margin: 5px auto;
     background: #CCCCCC;
