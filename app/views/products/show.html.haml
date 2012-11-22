@@ -32,7 +32,8 @@
         - @product.colors.uniq.each do |c|
           =image_tag c.image.url(:square), :alt =>c.name
         %br
-          %b FIT CHART:
+        %p.composition
+          Fit Chart:
           %span
             = @product.measurement
       .fb_button_chesca
