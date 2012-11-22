@@ -67,10 +67,13 @@ class CartItemsController < ApplicationController
   def add_voucher
     if current_cart.voucher.nil?
       @voucher = Voucher.date_active.find_by_code(params[:code])
-      current_cart.voucher = @voucher
-      current_cart.save
+      if current_cart.total >= @voucher.amount_off
+        current_cart.voucher = @voucher
+        current_cart.save
+       else
+         flash[:error] = "You need to purchase a minimum of #{@voucher.amount_off}£ to use this Voucher."
+       end
     end
-
     render :action => :index,:set_d=>0
   end
 

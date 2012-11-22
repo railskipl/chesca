@@ -20,6 +20,7 @@ class Voucher < ActiveRecord::Base
   def description
     "#{percent}% Discount"
   end
+  
   def self.all_vouchers
     self.with_exclusive_scope{find(:all)}
   end
