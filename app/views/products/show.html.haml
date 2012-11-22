@@ -13,7 +13,7 @@
         - else
           = "#{@product.code}#{Color.find(params[:c]).id}"
       %p.description= @product.description
-      %br
+      
       - if !@product.composition.blank?
         %p.composition
           Composition:
@@ -23,12 +23,12 @@
           Washing Instructions:
           %span= @product.washing_instructions    
    
-      %br
+      
       %p
         %b
           show in
           = @product.colors.name.upcase rescue ''
-        %br
+        
         - @product.colors.uniq.each do |c|
           =image_tag c.image.url(:square), :alt =>c.name
         %br
@@ -37,7 +37,7 @@
             = @product.measurement
       .fb_button_chesca
         = facebook_like(product_url(@product))
-      %br
+      
                
       .price
         - if @product.reduced_price?
@@ -69,7 +69,6 @@
       - else
         %span.unavailable OUT OF STOCK
       %br
-      %br  
         = render :partial => 'products/sendformtabs', :object => @product
   .realted_product_names
     - if !@product.related_products.empty?

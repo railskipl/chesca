@@ -325,8 +325,9 @@ body,td,th {
   margin-top: 5px;
 }
 .product {
+  height: auto;
+  overflow: hidden;
   padding: 14px 13px 0 12px;
-  height: 550px;
 }
 .product .fb_button_chesca {
   margin: 10px 0;
@@ -614,11 +615,11 @@ body,td,th {
   font-weight: bold;
 }
 .related-products .related-product {
-  width: 89px;
-  height: 125px;
-  display: inline-block;
-  margin: 0 8px;
-  border: 1px solid #d9d9d9;
+    border: 1px solid rgb(217, 217, 217);
+    display: inline-block;
+    height: 120px;
+    margin: 0 8px 0 0;
+    width: 89px;
 }
 .related-products .related-product img {
   display: block;
