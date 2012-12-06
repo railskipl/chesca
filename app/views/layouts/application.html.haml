@@ -61,8 +61,8 @@
 
             .cart
               YOU HAVE
-              %span#cart-items= current_cart.cart_items_count
-              = (current_cart.cart_items_count == 1) ? 'ITEM' : 'ITEMS'
+              %span#cart-items=  @cart_count = (current_cart.cart_items_count == 0) ? 0 : current_cart.cart_items.map{|cartQ| cartQ.quantity}.inject(:+)
+              = (@cart_count == 1) ? 'ITEM' : 'ITEMS'
               IN YOUR CART
               %br
               = link_to 'VIEW BASKET', cart_items_path, :id => 'checkout'
@@ -188,6 +188,8 @@
         #lowerFooter
           - attr = {:class => 'greyText'}
           %p{:class => 'greyText'}
+            = link_to 'Ask Us', ask_us_path, attr
+            |
             - Footerpage.all.each do |footer|
               = link_to footer.name, footerpage_path(footer) , attr
               |

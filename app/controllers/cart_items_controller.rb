@@ -14,9 +14,9 @@ class CartItemsController < ApplicationController
     params[:cart_item][:size] = Size.find(params[:cart_item][:size]).name rescue params[:cart_item][:size]
     params[:cart_item][:color] = Color.find(params[:cart_item][:color]).name rescue params[:cart_item][:color]
     if params[:cart_item][:quantity].empty?
-      params[:cart_item][:quantity] =1
+      params[:cart_item][:quantity] = 1
     else
-      params[:cart_item][:quantity]  = params[:cart_item][:quantity].to_i rescue params[:cart_item][:quantity] = 1
+      params[:cart_item][:quantity] = params[:cart_item][:quantity].to_i rescue params[:cart_item][:quantity] = 1
     end
     @cart_item = current_cart.cart_items.build(params[:cart_item])
     if  current_cart.valid?

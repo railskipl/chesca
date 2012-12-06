@@ -30,7 +30,8 @@
           = @product.colors.name.upcase rescue ''
         
         - @product.colors.uniq.each do |c|
-          =image_tag c.image.url(:square), :alt =>c.name
+          -link_to product_path(@product,:c => c.id) do
+            =image_tag c.image.url(:square), :alt =>c.name
         %br
         %p.composition
           Fit Chart:
