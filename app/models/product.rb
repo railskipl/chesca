@@ -29,7 +29,7 @@ class Product < ActiveRecord::Base
   has_many :product_outfits, :foreign_key => 'product_id', :class_name => 'ProductOutfit'
   has_many :outfits, :through => :product_outfits
 
-  default_scope :order => 'products.display_order ASC, products.created_at DESC'
+  default_scope :order => 'products.created_at DESC, products.position ASC'
 
   named_scope :visible, :conditions => { :visible => true }
   named_scope :sales, :conditions => "price < old_price"

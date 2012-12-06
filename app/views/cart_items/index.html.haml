@@ -4,7 +4,8 @@
       .left
         %h2
           Review your Shopping Bag:
-          %span== (#{current_cart.cart_items_count} #{(current_cart.cart_items_count == 1) ? 'item' : 'items'})
+          - @a = current_cart.cart_items.map{|cartQ| cartQ.quantity}.inject(:+)
+          %span== (#{@a} #{(@a == 1) ? 'item' : 'items'})
       .right
 
     - if current_cart.cart_items_count.zero?

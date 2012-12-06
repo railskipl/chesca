@@ -32,7 +32,6 @@ class CartItem < ActiveRecord::Base
 private
 
   def copy_product_properties
-    puts "*****************1111111111111111111111111111111111"
     self.product_name = product.name
     self.product_code = "#{product.code}#{Color.find_by_name(self.color).id}" 
     self.product_price = product.price
@@ -40,16 +39,9 @@ private
 
   def check_already_existing
     if existing_cart_item = cart.cart_items.find(:first, :conditions => {:product_id => product_id, :size => size, :color => self.color})
-      puts quantity
-      puts "*****************************************************"
-      puts existing_cart_item.quantity
       existing_cart_item.update_attribute(:quantity, existing_cart_item.quantity + quantity)
-      puts quantity
-      puts "#####################################################"
-      puts existing_cart_item.quantity
       return false
     end
-    
   end
   
 end

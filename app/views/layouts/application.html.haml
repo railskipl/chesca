@@ -71,7 +71,7 @@
               - unless @feeds.empty?
                 - @feeds.each do |nf|
                   =image_tag nf.media.url(:normal), :size => '250x55', :style => 'display: none;'
-              -else
+              - else
                 =image_tag 'banner.jpg', :size => '250x55'
         #adds
           -#.news_slider

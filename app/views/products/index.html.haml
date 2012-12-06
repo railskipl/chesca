@@ -1,5 +1,7 @@
 #products-small
   -if !@products.nil?
+    - if (params[:controller] == "departments")
+      = Department.find(params[:id].to_i).toptext
     - @products.each do |product|
       - if product.visible == true
         - link_to(product_path(product), :class => 'product-small') do
@@ -14,5 +16,7 @@
             %p
             .price
               = "#{number_to_currency(product.price, :precision => 2, :unit => '&pound;')}"
+    - if (params[:controller] == "departments")
+      = Department.find(params[:id].to_i).bottomtext
 = will_paginate @products, :previous_label => 'PREV', :next_label => 'NEXT'
 
