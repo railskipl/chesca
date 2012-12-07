@@ -1,8 +1,8 @@
 - form_for [:admin, @footerpage], :html => {:multipart => true} do |f|
   %table.form
-    %tr
-      %th= f.label :image
-      %td= f.file_field :image
+    -#%tr
+      -#%th= f.label :image
+      -#%td= f.file_field :image
     %tr
       %th= f.label :name
       %td= f.text_field :name

@@ -76,8 +76,8 @@
         #adds
           -#.news_slider
             -# active_news_feeds.each_with_index do |feed,i|
-              %p{:id=>"feed-#{i+1}",:class=>"news_slide",:style=>"display:none;"}
-                = feed
+              -#%p{:id=>"feed-#{i+1}",:class=>"news_slide",:style=>"display:none;"}
+                -#= feed
             -#.fb{:style => "display:none"}= facebook_like(root_url, "like")
           -#.top-bar
             %ul#top-links

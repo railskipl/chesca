@@ -14,3 +14,7 @@
       %td{ :colspan => 2 }= f.check_box :active
 
   = f.submit 'Submit post'
+- content_for :bottom do
+  = javascript_include_tag 'ckeditor/ckeditor'
+  :javascript
+    CKEDITOR.replace('news_feed[text]')
