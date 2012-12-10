@@ -12,6 +12,8 @@ class Admin::ProductImagesController < Admin::AdminController
   end
 
   def create
+    @product_image = ProductImage.new(params[:product_image])
+    #puts "************************************************#{@product_image}"
     create! do |success, failure|
       success.html { render }
       failure.html { head(:bad_request) }
