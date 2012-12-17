@@ -6,7 +6,7 @@ class ProductImage < ActiveRecord::Base
   before_save :make_main_image_unique
   #after_save :check
   belongs_to :product_size
-  has_many :related_product_colors
+  #has_many :related_product_colors
 
 private
   def check

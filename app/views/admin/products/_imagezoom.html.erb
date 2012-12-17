@@ -1,15 +1,12 @@
-<% unless @product.product_sizes.empty? %>
-       <% if params[:c].nil? %>
+<% unless @product.product_images.empty? %>
+       
          <% color = @product.colors.first %>
-       <% else %>
-               <%  color = Color.find(params[:c]) %>
-       <% end %> 
-               <%  product_color = ProductSize.find_all_by_color_id_and_product_id(color.id,@product.id) %>
+               <%  product_color = @product.product_images.all %>
                  <%  unless product_color.nil? %>
-                   <%= images = [] %>
-                   <%  product_color.each do |pc| %>
-                     <% images += pc.product_images %>
-                   <% end %>
+                   <% images = product_color %>
+                   <%#  product_color.each do |pc| %>
+                     <%# images += pc.product_images %>
+                   <%# end %>
                    <%  unless images.empty? %>
                        
                         <% s=1 %>            

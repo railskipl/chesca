@@ -2,7 +2,7 @@ class ProductSize < ActiveRecord::Base
   belongs_to :product
   belongs_to :size
   belongs_to :color
-  has_many :product_images
+  #has_many :product_images, :dependent => :destroy
 
   #validates_numericality_of :stock_level,:allow_nil => true, :allow_blank => true
 

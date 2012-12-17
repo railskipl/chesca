@@ -95,15 +95,16 @@ class Admin::ProductsController < Admin::AdminController
    @product=Product.new(params[:product])
    if @product.save
      p = @product.id
+     unless params[:size].nil?
       params[:size_stock].each do |s|
-        params[:size_stock][s[0]].each do |css|
-        
-            ps = ProductSize.create({:product_id => p, :size_id=> s[0], :stock_level=>css[1].to_i, :color_id => css[0]})
-           
+        params[:size][:ids].each do |check|
+          if s[0] == check
+            ps = ProductSize.create({:product_id => p, :size_id=> s[0], :stock_level=> (s[1].empty? ? 50 : s[1]), :color_id => params[:color][:id]})
             ps.save
+          end
         end
       end
-   
+     end
      redirect_to { admin_products_url }
      # set_flash_message!(:notice, 'Product was successfully created.')
      # redirect_to resource_url rescue nil
@@ -122,18 +123,6 @@ class Admin::ProductsController < Admin::AdminController
       
     params_to_sizes
     @product = Product.find_by_id(params[:id].to_i)
-    if !@product.related_product_colors.present?
-      if params[:related_product_color]
-        params[:related_product_color][:product_image_ids].each do |image_creation|
-          RelatedProductColor.create(:product_id => params[:id], :product_image_id => image_creation)
-        end
-      end
-    else
-      @product.related_product_colors.destroy_all
-      params[:related_product_color][:product_image_ids].each do |image_creation|
-        RelatedProductColor.create(:product_id => params[:id], :product_image_id => image_creation)
-      end
-    end
     update! { admin_products_url }
   end
   
@@ -143,12 +132,12 @@ class Admin::ProductsController < Admin::AdminController
     # params_to_sizes
     product.save
     product.reload
-   render :text=> product.price and return
+   render :text => product.price and return
   end
   #antiguo
   def addimages
     @new_product_image = ProductImage.new
-    @product_size = ProductSize.find(:first, :conditions => ["color_id = ? AND product_id = ? AND size_id = ?",params[:locals][:color],params[:locals][:product],params[:locals][:size]] )
+    @product= Product.find(params[:locals][:product])
   end
   
   def addimagessave
@@ -163,26 +152,32 @@ class Admin::ProductsController < Admin::AdminController
     p = Product.find(params[:id]).id #rescue p = nil
     if p
       params[:size_stock].each do |s|
-        params[:size_stock][s[0]].each do |css|
-          unless css[1].empty?
-            ps = ProductSize.find_by_color_id_and_size_id_and_product_id(css[0],s[0], p)
-            if ps
-              ps.stock_level = css[1].to_i
-            else
-             ps = ProductSize.create({:product_id => p, :size_id=> s[0], :stock_level=>css[1].to_i, :color_id => css[0]})
-            end
-            ps.save
-          else
-            ps = ProductSize.find_by_color_id_and_size_id(css[0],s[0])
-            if ps
-              if !ps.product_images.empty?
-                ps.stock_level= 0
+        unless params[:size].nil?
+          params[:size][:ids].each do |check|
+            if s[0] == check
+                ps = ProductSize.find_by_size_id_and_product_id(s[0], p)
+                if ps
+                  ps.stock_level = s[1]
+                  ps.color_id = params[:color][:id]
+                else
+                 ps = ProductSize.create({:product_id => p, :size_id=> s[0], :stock_level=>(s[1].empty? ? 50 : s[1]), :color_id => params[:color][:id]})
+                end
                 ps.save
-              else
-                ps.destroy
+            end
+              (Size.all.map{|id| id.id.to_s} - params[:size][:ids]).each do |x|
+                px = ProductSize.find_by_size_id_and_product_id(x.to_i, p)
+                unless px.nil?
+                  px.destroy
+                end
+              end
+          end
+          else
+            Size.all.each do |s|
+              x = ProductSize.find_by_size_id_and_product_id(s.id, p)
+              unless x.nil?
+                x.destroy
               end
             end
-          end
         end
       end
     end

@@ -22,7 +22,7 @@
         %span.remove Remove
       - for item in current_cart.cart_items
         %div{ :class => "cart-item #{cycle('odd', 'even')}" }
-          -image = ProductSize.image_main(item.color,item.size,item.product_name)
+          -image = item.product.product_images.first
           - if image
             = link_to image_tag(image.image.url(:square)), product_path(item.product_id)
           - else
@@ -67,9 +67,12 @@
                         = number_to_currency(ymal.price, :unit => '&pound;')
                       - form_for(CartItem.new) do |f|
                         = f.hidden_field(:product_id, :value => ymal.id)
+                        = f.hidden_field(:color, :value => ymal.colors.first.name)
                         .size-qty
                           = collection_select 'cart_item', 'size', ymal.sizes.uniq, :id, :name, {:prompt => 'Select Size'}, {:class => 'form_product'}
-                          = collection_select 'cart_item', 'color', ymal.colors.uniq, :id,:name, {:prompt => 'Select Color'},{:class => 'form_product'}
+                          .form_product
+                            Color:
+                            = ymal.colors.first.name rescue ''
                         %br
                         .size-qty
                           Enter Quantity

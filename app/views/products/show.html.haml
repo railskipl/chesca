@@ -8,10 +8,7 @@
       %h2{:class => 'mistral'}= @product.name
       %p.code
         Product code:
-        - if params[:c].nil?
-          = "#{@product.code}#{@product.colors.first.id}" rescue ""
-        - else
-          = "#{@product.code}#{Color.find(params[:c]).id}"
+        = @product.code rescue ""
       %p.description= @product.description
       
       - if !@product.composition.blank?
@@ -73,15 +70,15 @@
       %br
         = render :partial => 'products/sendformtabs', :object => @product
   .realted_product_names
-    - if !@product.related_products.empty?
-      %span.realted1 You may also like...
+    - if !@product.related_colors.empty?
+      %span.realted1 Product In colors
             
-  - if !@product.related_product_colors.empty?
+  - if !@product.related_colors.empty?
     #like
       .related-products
-        - @product.related_product_colors.each do |color_product|
-          - link_to product_path(color_product.product, :c => color_product.product_image.product_size.color_id), :class => 'related-product' do
-            = image_tag color_product.product_image.image.url(:tiny)
+        - @product.related_colors.each do |color_product|
+          - link_to product_path(color_product), :class => 'related-product' do
+            = image_tag color_product.product_images.first.image.url(:tiny) rescue nil
           -# link_to product_path(related_product), :class => 'related-product' do
             =# image_tag main_image_for_product(related_product, :tiny), :alt => related_product.name, :title => related_product.name             
   - if !@product.complete_outfits.empty? 

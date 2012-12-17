@@ -17,9 +17,9 @@ class Product < ActiveRecord::Base
   #validates_presence_of :departments_id, :departments_name
   belongs_to :department #new name is Shop by category
   belongs_to :style #new name is Boutique
-  has_many :related_product_colors
+  has_and_belongs_to_many :related_colors, :join_table => 'related_product_colors', :association_foreign_key => 'related_color_id',:uniq => true, :class_name => 'Product', :after_add => :add_inverse_color, :after_remove => :remove_inverse_color, :conditions => { :visible => true }
   #has_many :product_images, :dependent => :destroy
-  has_one :main_image, :class_name => 'ProductImage', :conditions => {:main_image => true}
+  has_one :main_image, :class_name => 'ProductImage', :conditions => {:main_image => true} 
   
   has_and_belongs_to_many :related_products,  :join_table => 'products_products',:class_name => 'Product', :association_foreign_key => 'related_product_id',:uniq => true, :after_add => :add_inverse_outfit, :after_remove => :remove_inverse_outfit, :conditions => { :visible => true }
 
@@ -38,7 +38,7 @@ class Product < ActiveRecord::Base
   has_many :product_sizes
   accepts_nested_attributes_for :product_sizes
   has_many :colors, :through => :product_sizes
-  has_many :product_images, :through => :product_sizes
+  has_many :product_images, :dependent => :destroy       #, :through => :product_sizes
 
   has_many :products_voucher
   has_many :vouchers, :through => :products_voucher, :class_name => "Voucher"
@@ -109,5 +109,12 @@ protected
   def remove_inverse_outfit(product)
     product.complete_outfits.delete(self) if product.complete_outfits.include?(self)
   end
-
+  
+  def add_inverse_color(product)
+    product.related_colors << self unless product.related_colors.include?(self)
+  end
+  
+  def remove_inverse_color(product)
+    product.related_colors.delete(self) if product.related_colors.include?(self)
+  end
 end

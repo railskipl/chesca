@@ -1,3 +1,4 @@
+
 %table.form
  
   %tr
@@ -77,17 +78,22 @@
       = form.text_area :description
     %tr
       %th{:colspan => "2"}
-        %label You may like                 
+        %label Other Colors For This Product                 
     %tr
       %td{:colspan => "2"}
         .products_by_department
-          - unless @product.colors.empty?
-            - @product.colors.each do |color_product|
-              - ProductSize.find_all_by_color_id_and_product_id(color_product.id,@product.id).each do |prodsize|
-                - prodsize.product_images.each do |image_me|
-                  = check_box_tag "related_product_color[product_image_ids][]", image_me.id, @product.related_product_colors.include?(image_me), :value => image_me.id, :checked => true ? @product.related_product_colors.find_by_product_image_id(image_me.id).present? : false
-                  = image_tag image_me.image.url(:square)
+          - @all_other_products.group_by(&:department).each do |department, products|
+            .department_products
+              %span.department_name
+                - if department.nil?
+                  Other
+                - else
+                  = department.name
               %br
+                - products.each do |color_product|
+                  = check_box_tag 'product[related_color_ids][]', color_product.id, @product.related_colors.include?(color_product), :value => color_product.id
+                  = color_product.name
+                  %br                            
     %tr
       %th{:colspan => "2"}
         %label Complete the look
@@ -118,18 +124,16 @@
             %tr
            
               %th
-                %b Sizes\Colors
-              - @colors.each do |c|
+                %b Sizes\Color
                 %th
-                  = image_tag c.image.url(:square), :alt => c.name
+                  = select :color, :id, @colors.map{|c| [c.name , c.id]}, :selected => @product.colors.first.nil? ? nil : @product.colors.first.id
             - @sizes.each do |s|
               %tr
                 %td
                   = s.name
-                  
-                - @colors.each do |c|
-                  - stock = ProductSize.find_by_color_id_and_size_id_and_product_id(c.id,s.id,@product.id).stock_level rescue stock = ""
-                  %td= text_field_tag "size_stock[#{s.id}][#{c.id}]", stock, :size => '5'
+                  = check_box_tag 'size[ids][]', s.id, @product.sizes.include?(s), :value => s.id
+                  - stock = ProductSize.find_by_size_id_and_product_id(s.id,@product.id).stock_level rescue stock = ""
+                  %td= text_field_tag "size_stock[#{s.id}]", stock, :size => '5'
                   
     %tr
       %th
@@ -138,17 +142,14 @@
     %tr
       %td
         .products_by_department
-          - unless @product.product_sizes.empty?
+          - unless @product.colors.empty?
             %table
               %tr
-                %th Size
                 %th color
                 %th
-              - @product.product_sizes.each do |color_size|
-                %tr
-                  %td= h color_size.size.name
-                  %td{:style => 'text_align: center;'}= image_tag color_size.color.image.url(:square), :alt => color_size.color.name rescue nil
-                  %td= link_to 'Add images',addimages_admin_products_path(:locals => {:product => @product.id, :color => color_size.color_id, :size => color_size.size_id})
+              %tr
+                %td{:style => 'text_align: center;'}= image_tag @product.colors.first.image.url(:square), :alt => @product.colors.first.name rescue nil
+                %td= link_to 'Add images',addimages_admin_products_path(:locals => {:product => @product.id})
 
 
           - else

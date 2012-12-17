@@ -33,7 +33,7 @@ private
 
   def copy_product_properties
     self.product_name = product.name
-    self.product_code = "#{product.code}#{Color.find_by_name(self.color).id}" 
+    self.product_code = product.code 
     self.product_price = product.price
   end
 
