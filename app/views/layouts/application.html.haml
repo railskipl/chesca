@@ -179,7 +179,7 @@
           = link_to 'Signup for new arrivals and promotions | Join our mailing list', new_user_path, :class => 'Signuptext'
           #left_social
             = link_to image_tag("/images/facebook_logo_small.png"), "https://www.facebook.com/ChescaClothing"
-            = link_to image_tag("/images/twitter16.gif"), " https://twitter.com/chescafashion"
+            = link_to image_tag("/images/twitter16.gif"), "https://twitter.com/chescafashion"
         
         .addthis_toolbox.addthis_default_style
           %a.addthis_button_facebook_like
@@ -191,7 +191,7 @@
             = link_to 'Ask Us', ask_us_path, attr
             |
             - Footerpage.all.each do |footer|
-              = link_to footer.name, footerpage_path(footer) , attr
+              = link_to footer.name, footerpage_path(footer), attr
               |
           %p
             %br/

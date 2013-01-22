@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   named_scope :looks_active, :conditions => {:type_post => 'Archived Looks', :active => true}
 
 
-  has_attached_file :media, :styles => {:editor =>'325x442', :looks =>'375x285', :tiny => '100x100' },
+  has_attached_file :media, :styles => {:editor =>'325x442', :looks =>'375x285', :tiny => '100x100', :pinklook => '223x332' },
   :storage => :s3, :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
   :path => "public/system/product_images/:id/:style/:basename.:extension"
   #validates_attachment_content_type :media, :content_type => ['image/jpeg', 'image/png', 'image/gif']

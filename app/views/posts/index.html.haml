@@ -1,9 +1,25 @@
-= render :partial => 'left'
-#posts-wrapper
-  %h2 Fashion news
-  - @posts.each do |post|
-    .post
-      %h3= link_to "#{post.created_on} &ndash; #{post.title}", post_path(post), {:style => 'color: #434343'}
-      .content= post.content
-      %br
-= will_paginate @posts, :previous_label => 'PREV', :next_label => 'NEXT'
+
+#offer
+  %span{:style => " color:#000"} 10% OFF
+  'GO FOR GOLD' Range - SIMPLY ENTER 'GOGOLD' AT CHECKOUT - Offer Ends 12/08/12 - Shop Now
+.breadcrumb
+  %a{:href => "#"} Fashion News
+.pagetitle FASHION NEWS
+- @posts.each do |post|
+  .line
+  .blog_row
+    %p.black_text= post.created_on
+    = image_tag post.media.url(:pinklook), :class => 'blogimage', :alt => "" rescue nil
+    -# %img.blogimage{:alt => "", :src => "/images/blog_photo.jpg"}/
+    %p.product_heading= post.title
+    %p= post.content.html_safe 
+  #left_social
+    %a{:href => "#"}
+      %img{:alt => "", :src => "/images/gefall.jpg", :style => "position:relative; top:2px;:float:left;margin-left:10px;"}/
+    %a.addthis_button_facebook{:style => "float:left;margin-left:1px;"}
+    %a.addthis_button_tweet{"tweet:size" => "small",:style => "float:left;margin-left:1px;"}
+    %a.addthis_button_google_plusone{"g:plusone:size" => "small",:style => "float:left;margin-left:10px;"}
+    %a.addthis_counter.addthis_pill_style{:style => "float:left;margin-left:1px;"}
+    %script{:src => "http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f4678045ece37cd", :type => "text/javascript"}
+.line
+  = will_paginate @posts, :previous_label => 'PREV', :next_label => 'NEXT',:style => "margin:10px;font-size:14px;"

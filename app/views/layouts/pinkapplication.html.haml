@@ -1,0 +1,104 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=iso-8859-1", "http-equiv" => "Content-Type"}/
+    %title Chesca - Accentuate Your Curves, shop online
+    = stylesheet_link_tag "stylepink", "megamenu", "skitter.styles"
+    %link#woocommerce_frontend_styles-css{:href => "/stylesheets/cart.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    = javascript_include_tag "jquery-1.6.3.min.js","jquery_012.js","jquery_010.js","jquery_009.js", "jquery.easing.1.3.js", "jquery.animate-colors-min.js", "jquery.skitter.js"
+    :javascript
+      jQuery(document).ready(function() {
+      	jQuery(".box_skitter_large").skitter({
+      		animation: "fade", 
+      		dots: true
+      	});
+      });
+    :javascript
+      var yiw_prettyphoto_style = 'pp_default';
+    = javascript_include_tag "global.js", "footercommon.js"
+  %body
+    #wrapper
+      #Header
+        #logo
+          %a{:href => "#"}
+            = link_to image_tag('logo.jpg', :id => 'chesca-logo', :alt => "", :border => "0"), root_url
+        - if admin?
+          .cart
+            You are logged in as admin.
+            %br
+            = link_to('Go to panel', admin_path)
+            |
+            = link_to('Log out &rarr;', admin_session_path, :method => :delete)
+        - else
+          .cart
+            You have
+            %span#cart-items=  @cart_count = (current_cart.cart_items_count == 0) ? 0 : current_cart.cart_items.map{|cartQ| cartQ.quantity}.inject(:+)
+            = (@cart_count == 1) ? 'item' : 'items'
+            in your cart
+            %img#bag{:alt => "", :src => "/images/bag.jpg"}/
+            %a{:href => cart_items_path, :id => 'checkout'} View basket
+        .searchdiv
+          - form_tag products_path, :method => :get do
+            = text_field_tag :search, params[:search], :class => 'searchfield'
+            = submit_tag 'Search', :name => nil, :class => 'pinklink'
+            
+        / nav start
+        #nav
+          %ul#topnav.clearfix
+            %li.navMain.nav2
+              %a.navLink2.nav{:href => "#{looks_path}"} Shop our Looks
+            %li.navMain.nav2
+              %a.navLink2.nav{:href => "#"} Shop by Product
+              .sub{:style => "display: none;"}
+                - Department.roots.each do |style|
+                  %ul.split_navLinks.borderDotted
+                    %span.navHeader= link_to  style.name, department_path(style), :class=> "#{style.id}-#{style.name.parameterize}" == params[:id] ? 'HighlightextPink' : nil
+                    - for c in style.children
+                      %li
+                        = link_to c.name, department_path(c, :root => "#{c.root.id}-#{c.root.name.parameterize}"),  :class=> "#{c.id}-#{c.name.parameterize}" == params[:id] ? 'HighlightextPink' : nil
+                        
+            %li.navMain.nav2
+              %a.navLink2.nav{:href => "#{posts_path}"} Fashion News
+            %li.navMain.nav2
+              %a.navLink2.nav{:href => "#{locations_path}"} Store Locations
+            %li.navMain.nav2
+              %a.navLink2.nav{:href => "#{contact_us_path}"} Contact Us
+        / nav end
+      #maincontent
+        = yield
+      #footer
+        .bars
+          #free-delivery
+            /
+              \&ndash;
+              <a href="#">CLICK FOR MORE INFO</a>
+          #get-the-newsletter
+            /
+              GET THE NEWSLETTER
+        #upFooter
+          - form_for User.new do |f|
+            Sign up for new arrivals and promotions
+            = f.text_field :email, :placeholder => "Enter Email", :class => 'mailfield'
+            = f.submit "", :class => 'gobutton'
+            
+            Or join our mailing list
+            #left_social
+              %a{:href => "https://www.facebook.com/ChescaClothing"}
+                %img{:alt => "", :src => "/images/facebook.jpg"}/
+              %a{:href => "https://twitter.com/chescafashion"}
+                %img{:alt => "", :src => "/images/twitter.jpg"}/
+              %a{:href => "#"}
+                %img{:alt => "", :src => "/images/youtube.jpg"}/
+        #lowerFooter
+          - attr = {:class => 'greyText'}
+          - Footerpage.all.each do |footer|
+            = link_to footer.name, footerpage_path(footer), attr
+            |
+          %a.greyText{:href => "#{sizing_chart_path}"} Sizing Chart
+          |
+          %a.greyText{:href => "#{ask_us_path}"} Ask Us
+          |
+          %a.greyText{:href => "#{site_map_path}"} Site Map
+          |
+          %a.greyText{:href => "#{return_policy_path}"} Shipping & Returns
+          |

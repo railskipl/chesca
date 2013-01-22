@@ -1,53 +1,27 @@
-#locations-wrapper
-  .darkgrey
-    %p
-      Chesca clothes are now available in over 40 locations throughout the United Kingdom and Ireland.
-      %br
-      We are always opening new stores, so keep checking to find new Chesca stockists!
-  %br
-  %table{:border => "0", :width => "676"}
+#offer
+  %span{:style => " color:#000"} 10% OFF
+  'GO FOR GOLD' Range - SIMPLY ENTER 'GOGOLD' AT CHECKOUT - Offer Ends 12/08/12 - Shop Now
+.breadcrumb
+  %a{:href => "#"} Fashion News
+.pagetitle{:style => "width:300px"} STORE LOCATIONS
+.line
+.blog_left
+  .blog_row
+    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur ornare sapien sit amet rhoncus. Nunc iaculis erat eget quam porttitor porttitor. Vestibulum non metus nulla. Morbi nisl metus, fringilla ac scelerisque in, elementum ut arcu. Cras auctor ante vel eros porta in pulvinar lorem fringilla.
     - @areas.each do |area|
-      - area.addresses.all.each do |address|
-        %tr
-          %td{:height => "178", :width => "338"}
-            %p.12font
-              %A{:NAME => address.name}=address.name
-            %p.greyText
-              =ln2br(address.info)
-            - if address.url
-              %p.Gold
-                =link_to 'Click for more information', address.url
-            %p.lightgrey
-              =link_to '(click to go back to the store list)', nil
-          %td{:width => "338"}
-            %div{:align => "left"}
-              -unless address.image.url. == "/images/original/missing.png"
-                = image_tag address.image.url, :height => "133", :width => "200"
 
-- content_for :areas do
-  %p.darkgrey
-    %a.darkgrey{:href => "CDFinalMockA_Stores.html"}
-      %A{:NAME => "store list"} CHESCA STORE LOCATIONS
-  %p.darkgrey Click on each location for more information
-  %p.Gold Chesca Retail locations are highlighted
-  %p
-    %br
-  %p.bold
-  - @areas.each do |area|
-    %p.darkgrey
-      %strong= area.name.upcase
-    - area.addresses.all.each do |location|
-      %p
-      - if location.retail
-        .Gold
-          %p
-            %a.greyText{:href => "#"+location.name}= location.name
-      - else
-        .greyText
-          %a.greyText{:href => "#"+location.name}= location.name
-
-    %p
-      %br
-
-
-
+      %span.product_heading= area.name
+      .locationdiv
+        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        %p Suspendisse tristique nulla in tortor vulputate bibendum.
+        %p Praesent rutrum diam non dui pellentesque vel feugiat leo blandit.
+        %p Pellentesque a dui eget nisl tempus tincidunt.
+        %p In vitae leo urna, non aliquam metus.
+        %p Donec vitae purus sed lorem ultricies consectetur.
+        %p In varius urna non diam ultricies imperdiet.
+        %p Donec tempus mauris non velit tincidunt nec commodo orci mollis.
+        %p Nam sit amet turpis nulla, eget gravida nisi.
+      .line
+  
+.blog_map
+  %img{:alt => "", :src => "/images/map.jpg"}/

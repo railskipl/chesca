@@ -1,6 +1,15 @@
 class StaticController < ApplicationController
+  layout :layout_by_resource
   attr_reader :locations, :sizing_chart
-
+  
+  
+  def layout_by_resource
+    if params[:action] == 'locations'
+      "pinkapplication"
+    else
+      "application"
+    end
+  end
   def returns
     if request.post?
       if validate_mailer_params(params[:mailer])
@@ -26,6 +35,7 @@ class StaticController < ApplicationController
   def locations
     @areas = Location.all(:include => :addresses)
   end
+  
   def site_map
     @looks = Look.parent_look
     @categories = Department.parent_category

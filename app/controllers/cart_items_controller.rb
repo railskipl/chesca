@@ -29,7 +29,12 @@ class CartItemsController < ApplicationController
             flash[:notice] = 'The selected product was successfully added to your cart.'
             # @product= Product.find params[:cart_item][:product_id]
             # redirect_to product_path(@product)
+            if params[:dept]
+            session[:return_to] ||= request.referer
+            redirect_to session[:return_to]
+            else
             redirect_to cart_items_path
+            end
           else
             flash[:error] = 'Something went bad.'
             redirect_to(:back)

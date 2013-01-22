@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  layout "pinkapplication"
   inherit_resources
   actions :show
   before_filter :build_new_cart_item, :only => [:index, :show]

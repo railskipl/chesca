@@ -926,3 +926,8 @@ font-weight: normal !important;
 .order_pagination a.prevnext{
 font-weight: bold;
 }
+
+.social{
+    float: left;
+    margin-left: 10px;
+}

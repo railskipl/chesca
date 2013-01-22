@@ -1,5 +1,8 @@
 class DepartmentsController < ApplicationController
+  layout "pinkapplication"
   before_filter :build_meta, :only => [:index, :show]
+    before_filter :build_new_cart_item, :only => [:index, :show]
+
   include DepartmentsHelper
   def show
     params[:page] ||= 1
@@ -21,5 +24,10 @@ class DepartmentsController < ApplicationController
     @meta_title = resource.name
     @fb_meta[:title] = resource.name
   end
+
+  def build_new_cart_item
+    @new_cart_item = CartItem.new
+  end  
+
 end
 

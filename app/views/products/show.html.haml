@@ -1,134 +1,87 @@
-- if @product
-  .product
-    .images
-      
-      = render :partial => 'admin/products/imagezoom'
-
-    .info
-      %h2{:class => 'mistral'}= @product.name
-      %p.code
-        Product code:
-        = @product.code rescue ""
-      %p.description= @product.description
-      
-      - if !@product.composition.blank?
-        %p.composition
-          Composition:
-          = @product.composition
-      - if !@product.washing_instructions.blank?
-        %p.washing-instructions
-          Washing Instructions:
-          %span= @product.washing_instructions    
-   
-      
-      %p
-        %b
-          show in
-          = @product.colors.name.upcase rescue ''
-        
-        - @product.colors.uniq.each do |c|
-          -link_to product_path(@product,:c => c.id) do
-            =image_tag c.image.url(:square), :alt =>c.name
-        %br
-        %p.composition
-          Measurements:
-          %span
-            = @product.measurement
-      .fb_button_chesca
-        = facebook_like(product_url(@product))
-      
+#wrapper
+  #maincontent
+    #offer
+      %span{:style => " color:#000"} 10% OFF
+      'GO FOR GOLD' Range - SIMPLY ENTER 'GOGOLD' AT CHECKOUT - Offer Ends 12/08/12 - Shop Now
+    .breadcrumb
+      %a{:href => "#"} Shop by Category
+      |
+      %a{:href => "#"}= @product.department.name
+      %span.breadcrumb_current= @product.name
+    .product_wrap
+      .product_gallery
+        %a{:href => "#"}
+          - unless @product.product_images.first.nil?
+            = image_tag main_image_for_product(@product, :large), :alt => @product.name, :style => "opacity: 1;", :height => "180", :width => "151"
+          - else
+            = image_tag('/images/medium/missing.png', :style => "opacity: 1;", :height => "180", :width => "151")
+      .details_wrap
+        %p
+          %span.product_heading= @product.name
+        %p  
+        %p
+          %span.pinkbold Product Code:
+          = @product.code
+        %p
+          %span.pinkbold Composition:
+          - if !@product.composition.blank?
+            = @product.composition
+          - else
+            Not available
+        %p
+          %span.pinkbold Washing Instructions
+          - if !@product.washing_instructions.blank?
+            = @product.washing_instructions
+          - else
+            %span No instructions!
+        .details_row
+          - if @product.available
+            - form_for(@new_cart_item) do |f|
+              = f.hidden_field(:product_id, :value => @product.id)
+              .details_column
+                %span.price2
+                  - if @product.reduced_price?
+                    = number_to_currency(@product.old_price, :precision => 2, :unit => '£')
+                  = number_to_currency(@product.price, :precision => 2, :unit => '£')
+                %label
+                  %br/
+                  %br/
+                  %strong Size:
+                  = collection_select 'cart_item', 'size', @product.sizes.uniq, :id, :name, {}, {:class => 'form_product ', :style => "font-size: 100%;width:50px; padding:5px;"}
+                
+                  = f.hidden_field (:color, :value => @product.colors.first.id) rescue nil
+                  %strong Color:
+                  = image_tag @product.colors.first.image.url(:square) rescue nil
                
-      .price
-        - if @product.reduced_price?
-          %b
-            %del= number_to_currency(@product.old_price, :precision => 2, :unit => '&pound;')
-        %span.old-price= number_to_currency(@product.price, :precision => 2, :unit => '&pound;')
-      - if @product.available
-        - form_for(@new_cart_item) do |f|
-          = f.hidden_field(:product_id, :value => @product.id)
-          .size-qty
-          %br
-            = text_field 'cart_item', 'quantity',:size=> '1', :class =>'form_product', :value => '1'
-            = label :cart_item, :quantity, "Qty&nbsp&nbsp"
-            = collection_select 'cart_item', 'size', @product.sizes.uniq, :id, :name, {:class => 'form_product'}
-            Size&nbsp&nbsp
-            - if params[:c].nil?
-              = f.hidden_field (:color, :value => @product.colors.first.id) rescue nil
-              = image_tag @product.colors.first.image.url(:square) rescue nil
-              Color&nbsp&nbsp
-            - else
-              = f.hidden_field(:color, :value => Color.find(params[:c]).id) rescue nil
-              = image_tag Color.find(params[:c]).image.url(:square) rescue nil
-              Color&nbsp&nbsp
-            %br
-            %br
-            .button_form
-              %button{ :type => 'submit',:class =>'form_product_button_1'} ADD TO BASKET
-              
-      - else
-        %span.unavailable OUT OF STOCK
-      %br
-        = render :partial => 'products/sendformtabs', :object => @product
-  .realted_product_names
-    - if !@product.related_colors.empty?
-      %span.realted1 Product In colors
-            
-  - if !@product.related_colors.empty?
-    #like
-      .related-products
-        - @product.related_colors.each do |color_product|
-          - link_to product_path(color_product), :class => 'related-product' do
-            = image_tag color_product.product_images.first.image.url(:tiny) rescue nil
-          -# link_to product_path(related_product), :class => 'related-product' do
-            =# image_tag main_image_for_product(related_product, :tiny), :alt => related_product.name, :title => related_product.name             
-  - if !@product.complete_outfits.empty? 
-    #complete
-      &nbsp &nbsp Complete the look    
-      .related-products
-        - @product.complete_outfits.each do |outfit|
-          - link_to product_path(outfit), :class => 'related-product' do
-            = image_tag main_image_for_product(outfit, :tiny), :alt => outfit.name, :title => outfit.name
-           
-:javascript
-  jQuery(window).load(function(){
-      jQuery("#nivoslider-577").nivoSlider({
-          effect:"fade",
-          slices:15,
-          boxCols:8,
-          boxRows:4,
-          animSpeed:200,
-          pauseTime:3000,
-          startSlide:0,
-          directionNav:true,
-          directionNavHide:true,
-          controlNav:true,
-          controlNavThumbs:true,
-          controlNavThumbsFromRel:true,
-          keyboardNav:true,
-          pauseOnHover:true,
-          manualAdvance:true
-      });
-  });
-  jQuery(window).load(function(){
-    var x = jQuery(".realted1");
-    x.live("click", function(){
-      var like = jQuery("#like")
-      var complete = jQuery("#complete")
-      like.show();
-      complete.hide();
-    });
-  });
-  jQuery(window).load(function(){
-    var x = jQuery(".realted2");
-    x.live("click", function(){
-      var like = jQuery("#like")
-      var complete = jQuery("#complete")
-      like.hide();
-      complete.show();
-    });
-  });
-
-- content_for :slider_product do
-  = javascript_include_tag 'slider-product'
-  = stylesheet_link_tag 'slider-product'
-
+                %label
+                  %strong Qty:
+                  = text_field 'cart_item', 'quantity',:size=> '1', :class =>'form_product', :value => '1'
+              .details_column2
+                %p.instock INSTOCK
+                %p.instock
+                  \ 
+                %p
+                  %label
+                    %input.addtocart{:name => "Submit", :type => "submit", :value => "ADD TO CART"}/
+        .discription
+          = @product.description
+        %div{:style => "margin: 20px 0 0 0"}
+          %a{:href => "#"}
+            %img{:align => "absmiddle", :alt => "", :border => "0", :src => "/images/rec.jpg"}/
+          %img{:align => "absmiddle", :alt => "", :height => "16", :src => "/images/facebook.jpg", :width => "16"}/
+          Be the first of your friends to recommend this
+    .cl
+      .clheading COMPLETE THE LOOK
+      .cl_strip
+        %a{:href => "#"}
+          - if !@product.related_colors.empty?
+            Product In colors
+          - if !@product.related_colors.empty?
+            - @product.related_colors.each do |color_product|
+              - link_to product_path(color_product), :class => 'related-product' do
+                = image_tag color_product.product_images.first.image.url(:tiny) rescue nil
+          - if !@product.complete_outfits.empty?
+            - @product.complete_outfits.each do |outfit|
+              - link_to product_path(outfit), :class => 'related-product' do
+                %ul.otherproducts
+                  %li= image_tag main_image_for_product(outfit, :tiny), :alt => outfit.name, :title => outfit.name

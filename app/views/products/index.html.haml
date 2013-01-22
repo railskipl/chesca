@@ -1,22 +1,43 @@
-#products-small
-  -if !@products.nil?
-    - if (params[:controller] == "departments")
-      = Department.find(params[:id].to_i).toptext
+#offer
+  %span{:style => "color:#000"} 10% OFF
+  'GO FOR GOLD' Range - SIMPLY ENTER 'GOGOLD' AT CHECKOUT - Offer Ends 12/08/12 - Shop Now
+.breadcrumb
+  %a{:href => "#"} Home
+  / |<span class="breadcrumb_current">Change Password</span>
+.sort
+  =link_to "Highest Price",url_for(:sort_by=>"price",:order=>"DESC")
+  |
+  =link_to "Lowest Price",url_for(:sort_by=>"price",:order=>"ASC")
+  |
+  =link_to "Newest",url_for(:sort_by=>nil)
+.product_wrap
+  %ul.products.ribbon
     - @products.each do |product|
-      - if product.visible == true
-        - link_to(product_path(product), :class => 'product-small') do
-          .image
-            = image_tag main_image_for_product(product, :large), :alt => product.name, :size => '185x247'
-          .product_color
-            - product.colors.uniq.each do |color|
-              = image_tag color.image.url(:square), :class => 'color'
-          .product_name
-            %p
-              %b= product.name
-            %p
-            .price
-              = "#{number_to_currency(product.price, :precision => 2, :unit => '&pound;')}"
-    - if (params[:controller] == "departments")
-      = Department.find(params[:id].to_i).bottomtext
-= will_paginate @products, :previous_label => 'PREV', :next_label => 'NEXT'
+      - form_for(@new_cart_item) do |f|
+        = f.hidden_field(:product_id, :value => product.id)
+        = f.hidden_field(:size, :value => 1)
+        = f.hidden_field(:quantity, :value => 1)
+        = hidden_field_tag(:dept, "dept")
+
+        - if product.visible == true
+          %li.product
+            .thumbnail
+              - link_to(product_path(product), :class => 'product-small') do
+                - unless product.product_images.first.nil?
+                  = image_tag main_image_for_product(product, :large), :alt => product.name, :style => "opacity: 1;", :height => "180", :width => "151"
+                - else
+                  = image_tag('/images/medium/missing.png', :style => "opacity: 1;", :height => "180", :width => "151")
+            .productdiscription
+              = product.name
+              %br
+                %a.price{:href => "#"}
+                  = "#{number_to_currency(product.price, :precision => 2, :unit => '&pound;')}"
+            .buttons{:style => "opacity: 0; visibility: visible; overflow: hidden;top:-305px;"}
+            
+              = f.hidden_field (:color, :value => product.colors.first.id) rescue nil
+              = link_to "View Item", product_path(product)
+              %input.addtocart1{:name => "Submit", :type => "submit", :value => "Add to cart"}
+
+
+
 

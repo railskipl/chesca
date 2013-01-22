@@ -3,40 +3,13 @@ class UsersController < ApplicationController
   # GET /users.xml
  layout 'application'
   def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-      format.csv do
-        Rails.logger.debug request.protocol
-
-        generated_csv = FasterCSV.generate do |csv|
-          csv << ["User ID", "Name", "Email"]
-
-          @users.each do |p|
-            csv << [
-              p.id,
-              p.name,
-              p.email,
-              'Chesca'
-            ]
-          end
-        end
-        send_data generated_csv, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment; filename=users.csv"
-      end
-    end
+    redirect_to root_path
   end
 
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
-    end
+   redirect_to root_path
   end
 
   # GET /users/new
@@ -52,23 +25,28 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    redirect_to root_path
   end
 
   # POST /users
   # POST /users.xml
   def create
-    @user = User.new(params[:user])
-
-    respond_to do |format|
-      if @user.save
-        Mailer.deliver_registration_confirmation(@user)
-        format.html { redirect_to(new_user_path, :notice => 'Thank You For Registering to our mailing list!') }
-        # format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+    if params[:user][:email].present?
+      @user = User.new(params[:user])
+  
+      respond_to do |format|
+        if @user.save
+          Mailer.deliver_registration_confirmation(@user)
+          format.html { redirect_to(root_path, :notice => 'Thank You For Registering to our mailing list!') }
+          # format.xml  { render :xml => @user, :status => :created, :location => @user }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      redirect_to :back
+      flash[:notice] = 'Email Can Not Be Blank.'
     end
   end
 

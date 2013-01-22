@@ -1,4 +1,5 @@
 class MainController < ApplicationController
+  layout "pinkapplication"
   def index
   #  @occasion = Style.find_by_name('Occasion')
   #  @evening = Style.find_by_name('Evening')
