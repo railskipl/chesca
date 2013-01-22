@@ -42,7 +42,7 @@ class CartItemsController < ApplicationController
         else
           flash[:error] = 'Sorry this combination of Size & Colour is Not Available'
           # @product= Product.find params[:cart_item][:product_id]
-          redirect_to cart_items_path
+          redirect_to "/"
         end
       else
         flash[:error] = 'Sorry this combination of Size & Colour is Not Available'
