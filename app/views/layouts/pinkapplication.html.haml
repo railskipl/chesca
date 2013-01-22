@@ -41,13 +41,7 @@
           - form_tag products_path, :method => :get do
             = text_field_tag :search, params[:search], :class => 'searchfield'
             = submit_tag 'Search', :name => nil, :class => 'pinklink'
-        #notice
-        - if !flash.empty?
-          .notice1
-            - flash.each do |key, message|
-              .mess
-                = message
-              %br
+       
         / nav start
         #nav
           %ul#topnav.clearfix
