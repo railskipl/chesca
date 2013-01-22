@@ -50,8 +50,9 @@
                   = collection_select 'cart_item', 'size', @product.sizes.uniq, :id, :name, {}, {:class => 'form_product ', :style => "font-size: 100%;width:50px; padding:5px;"}
                 
                   = f.hidden_field (:color, :value => @product.colors.first.id) rescue nil
-                  %strong Color:
-                  = image_tag @product.colors.first.image.url(:square) rescue nil
+                  - unless @product.colors.blank?
+                    %strong Color:
+                    = image_tag @product.colors.first.image.url(:square) rescue nil
                
                 %label
                   %strong Qty:
