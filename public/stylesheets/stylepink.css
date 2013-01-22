@@ -16,6 +16,20 @@ body{ margin:0; padding:0; font-family:"Lucida Sans Unicode", Arial, Helvetica, 
     width:962px;
 }
 
+.notice1{
+    font-size: 12px;
+     background:#F4E4E4; color:#999999; padding:1px 5px; margin:10px 0 0 5px;
+     position: relative;left: 167px;
+     height: 22px;width: 63%;
+     border: 1px solid;
+     border-color: #A5A4A4;
+     border-radius: 5px 5px 5px 5px;
+}
+.mess{
+    position: relative;left: -88px; top:4px;
+    color: #585555;
+}
+
 
 .cart{
     color:#000;
