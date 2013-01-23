@@ -81,8 +81,8 @@
             - @product.related_colors.each do |color_product|
               - link_to product_path(color_product), :class => 'related-product' do
                 = image_tag color_product.product_images.first.image.url(:tiny) rescue nil
-          - if !@product.complete_outfits.empty?
-            - @product.complete_outfits.each do |outfit|
-              - link_to product_path(outfit), :class => 'related-product' do
+          -# if !@product.complete_outfits.empty?
+            -# @product.complete_outfits.each do |outfit|
+              -# link_to product_path(outfit), :class => 'related-product' do
                 %ul.otherproducts
-                  %li= image_tag main_image_for_product(outfit, :tiny), :alt => outfit.name, :title => outfit.name
+                  %li=# image_tag main_image_for_product(outfit, :tiny), :alt => outfit.name, :title => outfit.name
